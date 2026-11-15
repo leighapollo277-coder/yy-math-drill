@@ -651,6 +651,18 @@
     text-align: center;
     position: relative;
     overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .cd-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(26,86,219,0.12);
+    border-color: #3b82f6;
+  }
+  .cd-card:active {
+    transform: scale(0.97);
   }
   .cd-card.highlight {
     border-color: #3b82f6;
@@ -677,6 +689,24 @@
     font-size: 0.8rem;
     color: var(--text-muted);
     margin-top: 2px;
+  }
+  .cd-click-hint {
+    font-size: 0.75rem;
+    color: var(--primary);
+    font-weight: 700;
+    margin-top: 6px;
+    opacity: 0.9;
+  }
+
+  /* Pulsing highlight for jumped-to cards */
+  .flash-highlight {
+    animation: flashPulse 2s ease;
+  }
+  @keyframes flashPulse {
+    0% { box-shadow: 0 0 0 0 rgba(26,86,219,0.7); border-color: var(--primary); }
+    30% { box-shadow: 0 0 0 8px rgba(26,86,219,0.3); border-color: var(--primary); transform: scale(1.02); }
+    70% { box-shadow: 0 0 0 12px rgba(26,86,219,0.1); border-color: var(--primary); transform: scale(1.01); }
+    100% { box-shadow: 0 2px 6px rgba(0,0,0,0.03); transform: scale(1); }
   }
 
   /* Filter Bar */
@@ -1081,7 +1111,7 @@
     </div>
 
     <!-- SECTION: 提前考核科目 -->
-    <div class="timetable-section cal-group" data-subj="early">
+    <div class="timetable-section cal-group" data-subj="early" id="cal-section-oral">
       <div class="timetable-heading">
         <span>1️⃣ 提前考試科目（第一堂或隨堂進行考核）</span>
         <span style="font-size:0.88rem; font-weight:600; color:var(--text-muted);">19/11 - 04/12</span>
@@ -1129,7 +1159,7 @@
     </div>
 
     <!-- SECTION: 提前筆試科目 -->
-    <div class="timetable-section cal-group" data-subj="early">
+    <div class="timetable-section cal-group" data-subj="early" id="cal-section-written">
       <div class="timetable-heading">
         <span>2️⃣ 提前筆試科目</span>
         <span style="font-size:0.88rem; font-weight:600; color:var(--text-muted);">23/11 - 30/11</span>
@@ -1174,7 +1204,7 @@
       </div>
 
       <!-- Day 1 of Mock Exam -->
-      <div class="exam-card cal-item" data-subj="chinese">
+      <div class="exam-card cal-item" data-subj="chinese" id="cal-item-0712">
         <div class="exam-card-header">
           <span class="exam-date-badge">📅 07/12 (一)</span>
           <span class="exam-subj-title">中文科 · 閱讀及應用 / 中文聆聽</span>
@@ -1234,7 +1264,7 @@
       </div>
 
       <!-- Day 4 of Mock Exam - MATH -->
-      <div class="exam-card cal-item" data-subj="math" style="border-left: 4px solid #1a56db;">
+      <div class="exam-card cal-item" data-subj="math" id="cal-item-1112" style="border-left: 4px solid #1a56db;">
         <div class="exam-card-header">
           <span class="exam-date-badge" style="background:#1a56db; color:#ffffff;">📅 11/12 (五) · 焦點考核</span>
           <span class="exam-subj-title" style="color:var(--primary-dark);">數學科 (中文) / 英數 (Emaths)</span>
@@ -1720,10 +1750,10 @@
     const now = new Date();
 
     const milestones = [
-      { tag: "提前口試 / 唱歌", dateStr: "2026-11-19", label: "19/11", subj: "普通話 / 口試", highlight: false },
-      { tag: "提前筆試", dateStr: "2026-11-23", label: "23/11", subj: "普通話筆試 (1-5課)", highlight: false },
-      { tag: "主模擬考試週", dateStr: "2026-12-07", label: "07/12", subj: "中文 閱讀及應用", highlight: false },
-      { tag: "數學 & 英數大考", dateStr: "2026-12-11", label: "11/12", subj: "數學 (一上A1-B12)", highlight: true }
+      { id: "cal-section-oral", tag: "提前口試 / 唱歌", dateStr: "2026-11-19", label: "19/11", subj: "普通話 / 口試", highlight: false },
+      { id: "cal-section-written", tag: "提前筆試", dateStr: "2026-11-23", label: "23/11", subj: "普通話筆試 (1-5課)", highlight: false },
+      { id: "cal-item-0712", tag: "主模擬考試週", dateStr: "2026-12-07", label: "07/12", subj: "中文 閱讀及應用", highlight: false },
+      { id: "cal-item-1112", tag: "數學 & 英數大考", dateStr: "2026-12-11", label: "11/12", subj: "數學 (一上A1-B12)", highlight: true }
     ];
 
     let html = "";
@@ -1733,15 +1763,35 @@
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
       const daysText = diffDays > 0 ? `倒數 ${diffDays} 天` : (diffDays === 0 ? "今天考試！" : `已完成`);
       html += `
-        <div class="cd-card ${m.highlight ? 'highlight' : ''}">
+        <div class="cd-card ${m.highlight ? 'highlight' : ''}" onclick="jumpToMilestone('${m.id}')" role="button" tabindex="0" title="點擊跳轉至該考核範圍">
           <div class="cd-card-tag">${m.tag}</div>
           <div class="cd-days-num" style="${m.highlight ? 'color:#1e429f;' : ''}">${daysText}</div>
           <div class="cd-target-date">📅 ${m.label}</div>
           <div class="cd-subject">${m.subj}</div>
+          <div class="cd-click-hint">👇 點擊看範圍</div>
         </div>
       `;
     });
     grid.innerHTML = html;
+  }
+
+  // Jump to specific milestone card with flash animation
+  function jumpToMilestone(elementId) {
+    // Reset filters to 'all' so target card is visible
+    const allBtn = document.querySelector('.cal-filter-btn');
+    if (allBtn) {
+      filterCalSubject('all', allBtn);
+    }
+    const targetEl = document.getElementById(elementId);
+    if (targetEl) {
+      targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      targetEl.classList.remove('flash-highlight');
+      void targetEl.offsetWidth; // trigger reflow
+      targetEl.classList.add('flash-highlight');
+      setTimeout(() => {
+        targetEl.classList.remove('flash-highlight');
+      }, 2500);
+    }
   }
 
   // Subject Filter for Calendar View

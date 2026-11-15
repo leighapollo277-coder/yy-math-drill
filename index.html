@@ -526,6 +526,253 @@
     }
   }
 
+  /* ====================================================
+     iPhone X / Mobile Phone (<= 520px) Ergonomics
+     ==================================================== */
+  @media screen and (max-width: 520px) {
+    body {
+      padding: 10px 8px;
+      padding-bottom: max(90px, env(safe-area-inset-bottom) + 70px);
+      padding-left: max(8px, env(safe-area-inset-left));
+      padding-right: max(8px, env(safe-area-inset-right));
+    }
+
+    .toolbar {
+      padding: 12px 14px;
+      gap: 10px;
+    }
+    .school-title {
+      font-size: 1.08rem;
+    }
+    .sub-title {
+      font-size: 0.8rem;
+    }
+    .actions {
+      width: 100%;
+      justify-content: space-between;
+    }
+    .actions button, .actions .timer-pill {
+      flex: 1;
+      min-height: 38px;
+      padding: 6px 10px;
+      font-size: 0.84rem;
+    }
+
+    /* Main Tab Switcher on Mobile */
+    .main-nav-tabs {
+      gap: 6px;
+      padding: 5px;
+      margin-bottom: 12px;
+    }
+    .main-tab-btn {
+      padding: 8px 6px;
+      font-size: 0.88rem;
+      gap: 4px;
+      border-radius: 8px;
+      flex-direction: column;
+      text-align: center;
+      line-height: 1.3;
+    }
+    .tab-badge {
+      font-size: 0.68rem;
+      padding: 1px 6px;
+      border-radius: 8px;
+    }
+
+    /* Calendar Hero on Mobile */
+    .cal-hero-card {
+      padding: 14px 14px;
+      margin-bottom: 14px;
+      border-radius: 10px;
+    }
+    .cal-school-badge {
+      font-size: 0.76rem;
+      padding: 3px 8px;
+    }
+    .cal-hero-title {
+      font-size: 1.15rem;
+      line-height: 1.35;
+    }
+    .cal-hero-sub {
+      font-size: 0.8rem;
+    }
+    .cal-note-box {
+      font-size: 0.8rem;
+      padding: 8px 10px;
+      margin-top: 10px;
+    }
+    .cal-hero-header button {
+      width: 100%;
+      min-height: 40px;
+      margin-top: 6px;
+    }
+
+    /* Compact 2x2 Grid for Countdown on Mobile */
+    .countdown-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .cd-card {
+      padding: 8px 6px;
+      border-radius: 10px;
+    }
+    .cd-card-tag {
+      font-size: 0.72rem;
+    }
+    .cd-days-num {
+      font-size: 1.45rem;
+      margin: 2px 0;
+    }
+    .cd-target-date {
+      font-size: 0.78rem;
+    }
+    .cd-subject {
+      font-size: 0.72rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .cd-click-hint {
+      font-size: 0.68rem;
+      margin-top: 4px;
+    }
+
+    /* Original Notice Card on Mobile */
+    .original-notice-card {
+      margin-bottom: 14px;
+      border-radius: 10px;
+    }
+    .original-notice-header {
+      padding: 10px 12px;
+      gap: 6px;
+    }
+    .original-notice-header > div:first-child {
+      flex: 1;
+    }
+    .original-notice-header div div:first-child {
+      font-size: 0.9rem !important;
+    }
+    .original-notice-header div div:last-child {
+      font-size: 0.75rem !important;
+    }
+    .btn-toggle-notice {
+      padding: 5px 10px;
+      font-size: 0.78rem;
+      flex-shrink: 0;
+    }
+    .original-notice-body > div {
+      padding: 12px 10px !important;
+    }
+    .notice-thumbnail {
+      width: 100% !important;
+    }
+
+    /* Filter Bar on Mobile */
+    .cal-filter-bar {
+      gap: 6px;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+    }
+    .cal-filter-btn {
+      padding: 5px 10px;
+      font-size: 0.78rem;
+      min-height: 32px;
+    }
+
+    /* Timetable Sections & Exam Cards on Mobile */
+    .timetable-heading {
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+    .exam-card {
+      padding: 12px 12px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+    }
+    .exam-date-badge {
+      font-size: 0.8rem;
+      padding: 2px 8px;
+    }
+    .exam-subj-title {
+      font-size: 0.98rem;
+    }
+    .exam-scope-list {
+      font-size: 0.88rem;
+      padding-left: 16px;
+      line-height: 1.5;
+    }
+    .quick-link-btn {
+      width: 100%;
+      justify-content: center;
+      min-height: 38px;
+      font-size: 0.85rem;
+    }
+
+    /* Math Practice UI on Mobile */
+    .day-nav-card {
+      padding: 12px 12px;
+    }
+    .day-chip {
+      min-width: 58px;
+      height: 38px;
+      font-size: 0.82rem;
+      padding: 4px 6px;
+    }
+    .q-prompt {
+      font-size: 1.15rem;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    input[type="number"], select {
+      min-height: 48px;
+      height: 48px;
+      width: 78px;
+      font-size: 1.3rem;
+    }
+    .bottom-bar {
+      flex-direction: column;
+      gap: 8px;
+    }
+    .btn-large {
+      width: 100%;
+      min-height: 48px;
+      font-size: 1rem;
+    }
+    .tablet-floating-bar {
+      padding: 8px 12px;
+      padding-bottom: max(10px, env(safe-area-inset-bottom));
+    }
+    .floating-progress {
+      font-size: 0.85rem;
+    }
+    .tablet-floating-bar button {
+      padding: 6px 10px;
+      font-size: 0.84rem;
+      min-height: 36px;
+    }
+
+    /* Notice Modal on Mobile */
+    .notice-modal-backdrop {
+      padding: 8px;
+    }
+    .notice-modal-content {
+      max-height: 96vh;
+      border-radius: 10px;
+    }
+    .notice-modal-header {
+      padding: 8px 12px;
+      font-size: 0.85rem;
+    }
+    .notice-modal-close {
+      padding: 4px 8px;
+      font-size: 0.85rem;
+    }
+    .notice-modal-img-wrap {
+      padding: 8px;
+    }
+  }
+
   /* Answer Key Page (Print Layout) */
   .answer-key-page {
     display: none;

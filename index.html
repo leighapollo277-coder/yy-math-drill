@@ -532,6 +532,257 @@
   }
 
   /* ====================================================
+     TOP-LEVEL TAB SWITCHER (Drills vs Calendar)
+     ==================================================== */
+  .main-nav-tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 18px;
+    background: var(--card-bg);
+    padding: 8px;
+    border-radius: var(--touch-radius);
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+  }
+  .main-tab-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .main-tab-btn:hover {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+  }
+  .main-tab-btn.active {
+    background: var(--primary);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(26,86,219,0.25);
+  }
+  .tab-badge {
+    background: #f59e0b;
+    color: #ffffff;
+    font-size: 0.78rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 700;
+  }
+  .main-tab-btn.active .tab-badge {
+    background: #ffffff;
+    color: var(--primary-dark);
+  }
+
+  /* View Containers */
+  .drills-view, .calendar-view {
+    display: none;
+  }
+  .drills-view.active, .calendar-view.active {
+    display: block;
+  }
+
+  /* Calendar View Styles */
+  .cal-hero-card {
+    background: linear-gradient(135deg, #1e429f 0%, #1a56db 100%);
+    color: #ffffff;
+    border-radius: var(--touch-radius);
+    padding: 22px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 14px rgba(26,86,219,0.18);
+  }
+  .cal-hero-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .cal-school-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .cal-hero-title {
+    font-size: 1.45rem;
+    font-weight: 800;
+    line-height: 1.3;
+  }
+  .cal-hero-sub {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    margin-top: 6px;
+  }
+  .cal-note-box {
+    background: rgba(255,255,255,0.12);
+    border-left: 4px solid #fbbf24;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    margin-top: 14px;
+    line-height: 1.5;
+  }
+
+  /* Countdown Cards Grid */
+  .countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .cd-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--touch-radius);
+    padding: 14px 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cd-card.highlight {
+    border-color: #3b82f6;
+    background: #f0f7ff;
+  }
+  .cd-card-tag {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+  .cd-days-num {
+    font-size: 1.85rem;
+    font-weight: 900;
+    color: var(--primary);
+    line-height: 1.2;
+    margin: 4px 0;
+  }
+  .cd-target-date {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .cd-subject {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* Filter Bar */
+  .cal-filter-bar {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .cal-filter-btn {
+    flex-shrink: 0;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    cursor: pointer;
+    min-height: 36px;
+  }
+  .cal-filter-btn.active {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+  }
+
+  /* Timetable Cards */
+  .timetable-section {
+    margin-bottom: 24px;
+  }
+  .timetable-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--primary-dark);
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--border);
+  }
+  .exam-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--touch-radius);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+  }
+  .exam-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .exam-date-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    font-weight: 800;
+    font-size: 0.95rem;
+    padding: 4px 12px;
+    border-radius: 8px;
+  }
+  .exam-subj-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--text);
+  }
+  .exam-scope-list {
+    margin-top: 8px;
+    padding-left: 20px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #334155;
+  }
+  .exam-scope-list li {
+    margin-bottom: 4px;
+  }
+  .quick-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #dbeafe;
+    color: #1e40af;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    margin-top: 10px;
+    transition: background 0.15s ease;
+  }
+  .quick-link-btn:hover {
+    background: #bfdbfe;
+  }
+
+  /* ====================================================
      PRINT STYLING (A4 Optimized)
      ==================================================== */
   @media print {
@@ -548,7 +799,17 @@
       margin: 0 !important;
     }
 
-    .toolbar, .day-nav-card, .active-day-banner, .bottom-bar, .score-banner, .btn-print, .actions, .timer-pill, .tablet-floating-bar {
+    .toolbar, .main-nav-tabs, .day-nav-card, .active-day-banner, .bottom-bar, .score-banner, .btn-print, .actions, .timer-pill, .tablet-floating-bar, .cal-filter-bar, .countdown-grid, .quick-link-btn {
+      display: none !important;
+    }
+
+    body.printing-calendar .drills-view {
+      display: none !important;
+    }
+    body.printing-calendar .calendar-view {
+      display: block !important;
+    }
+    body:not(.printing-calendar) .calendar-view {
       display: none !important;
     }
 
@@ -689,8 +950,20 @@
     </div>
   </header>
 
-  <!-- Day Selector Card -->
-  <section class="day-nav-card">
+  <!-- Main Top-Level Tab Switcher -->
+  <nav class="main-nav-tabs">
+    <button class="main-tab-btn active" id="tabBtnDrills" onclick="switchMainTab('drills')">
+      📝 每日數學精練 (Day 1 - 30)
+    </button>
+    <button class="main-tab-btn" id="tabBtnCalendar" onclick="switchMainTab('calendar')">
+      📅 模擬考試日程與範圍 <span class="tab-badge">7/12 - 14/12</span>
+    </button>
+  </nav>
+
+  <!-- VIEW 1: Math Drills -->
+  <main id="drillsView" class="drills-view active">
+    <!-- Day Selector Card -->
+    <section class="day-nav-card">
     <div class="day-nav-header">
       <div class="day-nav-title">
         <span>📅 選擇訓練天數：</span>
@@ -770,6 +1043,237 @@
       </tbody>
     </table>
   </div>
+  </main>
+
+  <!-- VIEW 2: Academic Calendar & Syllabus -->
+  <section id="calendarView" class="calendar-view">
+    <div class="cal-hero-card">
+      <div class="cal-hero-header">
+        <div>
+          <span class="cal-school-badge">🏫 民生書院小學 (Minsheng College Primary School)</span>
+          <h2 class="cal-hero-title">2026–2027 小一上學期模擬考試時間表及範圍</h2>
+          <div class="cal-hero-sub">官方通告存檔 · 經 WhatsApp 群組核實 (Message #169834)</div>
+        </div>
+        <div>
+          <button class="btn-secondary" onclick="printCalendar()" style="background:#ffffff; color:var(--primary-dark); font-weight:800;">
+            🖨️ 列印考試時間表
+          </button>
+        </div>
+      </div>
+      <div class="cal-note-box">
+        📌 <strong>學校評估備註</strong>：是次考試科目不計算成績，只供小一學生適應小學各科目的評估模式。請家長配合時間表協助子女溫習。
+      </div>
+    </div>
+
+    <!-- Real-time Exam Countdown -->
+    <div class="countdown-grid" id="countdownGrid">
+      <!-- Generated via JS -->
+    </div>
+
+    <!-- Subject Filter Bar -->
+    <div class="cal-filter-bar">
+      <button class="cal-filter-btn active" onclick="filterCalSubject('all', this)">全部日程 (All)</button>
+      <button class="cal-filter-btn" onclick="filterCalSubject('math', this)">📗 數學 / 英數</button>
+      <button class="cal-filter-btn" onclick="filterCalSubject('chinese', this)">📘 中文科</button>
+      <button class="cal-filter-btn" onclick="filterCalSubject('english', this)">📕 英文科</button>
+      <button class="cal-filter-btn" onclick="filterCalSubject('humanities', this)">📙 人文科</button>
+      <button class="cal-filter-btn" onclick="filterCalSubject('early', this)">🎙️ 提前考核專科</button>
+    </div>
+
+    <!-- SECTION: 提前考核科目 -->
+    <div class="timetable-section cal-group" data-subj="early">
+      <div class="timetable-heading">
+        <span>1️⃣ 提前考試科目（第一堂或隨堂進行考核）</span>
+        <span style="font-size:0.88rem; font-weight:600; color:var(--text-muted);">19/11 - 04/12</span>
+      </div>
+
+      <div class="exam-card cal-item" data-subj="early chinese">
+        <div class="exam-card-header">
+          <span class="exam-date-badge">📅 19/11 - 04/12</span>
+          <span class="exam-subj-title">普通話口試</span>
+        </div>
+        <ul class="exam-scope-list">
+          <li>第一堂或隨堂進行考核。</li>
+        </ul>
+      </div>
+
+      <div class="exam-card cal-item" data-subj="early english">
+        <div class="exam-card-header">
+          <span class="exam-date-badge">📅 26/11 - 04/12</span>
+          <span class="exam-subj-title">English Speaking</span>
+        </div>
+        <ul class="exam-scope-list">
+          <li>第一堂或隨堂進行考核。</li>
+        </ul>
+      </div>
+
+      <div class="exam-card cal-item" data-subj="early chinese">
+        <div class="exam-card-header">
+          <span class="exam-date-badge">📅 27/11 - 04/12</span>
+          <span class="exam-subj-title">中文說話</span>
+        </div>
+        <ul class="exam-scope-list">
+          <li>第一堂或隨堂進行考核。</li>
+        </ul>
+      </div>
+
+      <div class="exam-card cal-item" data-subj="early music">
+        <div class="exam-card-header">
+          <span class="exam-date-badge">📅 23/11 - 04/12</span>
+          <span class="exam-subj-title">唱歌考試</span>
+        </div>
+        <ul class="exam-scope-list">
+          <li><strong>範圍：</strong>選唱 <strong>P.18《學跳舞》</strong> 或 <strong>P.20《One Little Finger》</strong>。</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION: 提前筆試科目 -->
+    <div class="timetable-section cal-group" data-subj="early">
+      <div class="timetable-heading">
+        <span>2️⃣ 提前筆試科目</span>
+        <span style="font-size:0.88rem; font-weight:600; color:var(--text-muted);">23/11 - 30/11</span>
+      </div>
+
+      <div class="exam-card cal-item" data-subj="early chinese">
+        <div class="exam-card-header">
+          <span class="exam-date-badge">📅 23/11 (一)</span>
+          <span class="exam-subj-title">普通話筆試</span>
+        </div>
+        <ul class="exam-scope-list">
+          <li><strong>範圍：</strong>一上第 1–5 課及粵普對譯。</li>
+        </ul>
+      </div>
+
+      <div class="exam-card cal-item" data-subj="early">
+        <div class="exam-card-header">
+          <span class="exam-date-badge">📅 27/11 (五)</span>
+          <span class="exam-subj-title">聖經</span>
+        </div>
+        <ul class="exam-scope-list">
+          <li><strong>範圍：</strong>一上第 1–7 課。</li>
+        </ul>
+      </div>
+
+      <div class="exam-card cal-item" data-subj="early music">
+        <div class="exam-card-header">
+          <span class="exam-date-badge">📅 30/11 (一)</span>
+          <span class="exam-subj-title">音樂筆試</span>
+        </div>
+        <ul class="exam-scope-list">
+          <li><strong>範圍：</strong>一上第 1–9 課 (P.2–38)。</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION: 模擬考試主日程 -->
+    <div class="timetable-section cal-group" data-subj="main">
+      <div class="timetable-heading">
+        <span>3️⃣ 模擬考試主日程</span>
+        <span style="font-size:0.88rem; font-weight:600; color:var(--text-muted);">07/12 (一) - 14/12 (一)</span>
+      </div>
+
+      <!-- Day 1 of Mock Exam -->
+      <div class="exam-card cal-item" data-subj="chinese">
+        <div class="exam-card-header">
+          <span class="exam-date-badge">📅 07/12 (一)</span>
+          <span class="exam-subj-title">中文科 · 閱讀及應用 / 中文聆聽</span>
+        </div>
+        <ul class="exam-scope-list">
+          <li><strong>閱讀及應用：</strong>
+            <ol style="margin-left:18px; margin-top:4px;">
+              <li>一上第 1 冊第 1, 5, 8 課及第 2 冊第 12, 14 課（共五課）</li>
+              <li>課文詞語練習 P.1, 4–7</li>
+              <li>語文知識練習 P.1, 4–7, 11–12, 23–24, 29, 32–34</li>
+              <li>已有知識</li>
+            </ol>
+          </li>
+          <li style="margin-top:6px;"><strong>中文聆聽：</strong>隨堂進行 (//)</li>
+        </ul>
+      </div>
+
+      <!-- Day 2 of Mock Exam -->
+      <div class="exam-card cal-item" data-subj="english">
+        <div class="exam-card-header">
+          <span class="exam-date-badge">📅 08/12 (二)</span>
+          <span class="exam-subj-title">英文科 · Reading & Usage / Writing</span>
+        </div>
+        <ul class="exam-scope-list">
+          <li><strong>Reading & Usage：</strong>
+            <ol style="margin-left:18px; margin-top:4px;">
+              <li>LH Book 2 Unit 1 (P.6–14), Unit 2 (P.20–28), Unit 3 (P.34–42)</li>
+              <li>SE Ch3, 4, 6, 9 (P.17), 10, 14</li>
+              <li>Comprehension</li>
+            </ol>
+          </li>
+          <li style="margin-top:6px;"><strong>Writing：</strong>
+            <ol style="margin-left:18px; margin-top:4px;">
+              <li>Wr. Task 1–2</li>
+              <li>Wr. Notes 1–8</li>
+            </ol>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Day 3 of Mock Exam -->
+      <div class="exam-card cal-item" data-subj="humanities chinese">
+        <div class="exam-card-header">
+          <span class="exam-date-badge">📅 10/12 (四)</span>
+          <span class="exam-subj-title">人文科 / 中文寫作</span>
+        </div>
+        <ul class="exam-scope-list">
+          <li><strong>人文科：</strong>一上第 1, 2, 3, 5 課</li>
+          <li style="margin-top:6px;"><strong>中文寫作：</strong>
+            <ol style="margin-left:18px; margin-top:4px;">
+              <li>寫作練習二至四</li>
+              <li>寫作工作紙一至三</li>
+              <li>語文知識練習 P.42–46</li>
+            </ol>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Day 4 of Mock Exam - MATH -->
+      <div class="exam-card cal-item" data-subj="math" style="border-left: 4px solid #1a56db;">
+        <div class="exam-card-header">
+          <span class="exam-date-badge" style="background:#1a56db; color:#ffffff;">📅 11/12 (五) · 焦點考核</span>
+          <span class="exam-subj-title" style="color:var(--primary-dark);">數學科 (中文) / 英數 (Emaths)</span>
+        </div>
+        <ul class="exam-scope-list">
+          <li><strong>數學 (中文)：</strong>一上 A 第 1 課至一上 B 第 12 課及已有知識</li>
+          <li style="margin-top:6px;"><strong>英數 (Emaths)：</strong>
+            <ol style="margin-left:18px; margin-top:4px;">
+              <li>Emaths Ex.1–5</li>
+              <li>Previous Knowledge</li>
+            </ol>
+          </li>
+        </ul>
+        <div>
+          <button class="quick-link-btn" onclick="switchMainTab('drills')">
+            🚀 立即前往做 30 天每日數學精練 ▶
+          </button>
+        </div>
+      </div>
+
+      <!-- Day 5 of Mock Exam -->
+      <div class="exam-card cal-item" data-subj="english">
+        <div class="exam-card-header">
+          <span class="exam-date-badge">📅 14/12 (一)</span>
+          <span class="exam-subj-title">英文科 · Readers Quiz / Listening</span>
+        </div>
+        <ul class="exam-scope-list">
+          <li><strong>Readers Quiz：</strong>
+            <ol style="margin-left:18px; margin-top:4px;">
+              <li>The Noisy Day (Content + Vocab)</li>
+              <li>Vocab WS 1</li>
+              <li>Phonics WS 1 & 2 (Short & Long Vowels)</li>
+            </ol>
+          </li>
+          <li style="margin-top:6px;"><strong>Listening：</strong>隨堂進行 (//)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 </div>
 
 <!-- iPad Floating Quick Action Bar -->
@@ -1177,10 +1681,110 @@
     window.print();
   }
 
+  // Main Tab Navigation Switcher
+  function switchMainTab(tab) {
+    const btnDrills = document.getElementById("tabBtnDrills");
+    const btnCal = document.getElementById("tabBtnCalendar");
+    const viewDrills = document.getElementById("drillsView");
+    const viewCal = document.getElementById("calendarView");
+    const floatBar = document.getElementById("tabletFloatingBar");
+    const timerBtn = document.getElementById("timerBtn");
+    const timerDisp = document.getElementById("timerDisplay");
+
+    if (tab === 'calendar') {
+      btnDrills.classList.remove("active");
+      btnCal.classList.add("active");
+      viewDrills.classList.remove("active");
+      viewCal.classList.add("active");
+      if (floatBar) floatBar.style.display = "none";
+      if (timerBtn) timerBtn.style.display = "none";
+      if (timerDisp) timerDisp.style.display = "none";
+      renderCountdowns();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      btnCal.classList.remove("active");
+      btnDrills.classList.add("active");
+      viewCal.classList.remove("active");
+      viewDrills.classList.add("active");
+      if (floatBar) floatBar.style.display = "";
+      if (timerBtn) timerBtn.style.display = "";
+      if (timerDisp) timerDisp.style.display = "";
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  // Exam Countdown Renderer
+  function renderCountdowns() {
+    const grid = document.getElementById("countdownGrid");
+    if (!grid) return;
+    const now = new Date();
+
+    const milestones = [
+      { tag: "提前口試 / 唱歌", dateStr: "2026-11-19", label: "19/11", subj: "普通話 / 口試", highlight: false },
+      { tag: "提前筆試", dateStr: "2026-11-23", label: "23/11", subj: "普通話筆試 (1-5課)", highlight: false },
+      { tag: "主模擬考試週", dateStr: "2026-12-07", label: "07/12", subj: "中文 閱讀及應用", highlight: false },
+      { tag: "數學 & 英數大考", dateStr: "2026-12-11", label: "11/12", subj: "數學 (一上A1-B12)", highlight: true }
+    ];
+
+    let html = "";
+    milestones.forEach(m => {
+      const target = new Date(m.dateStr + "T09:00:00+08:00");
+      const diffTime = target - now;
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      const daysText = diffDays > 0 ? `倒數 ${diffDays} 天` : (diffDays === 0 ? "今天考試！" : `已完成`);
+      html += `
+        <div class="cd-card ${m.highlight ? 'highlight' : ''}">
+          <div class="cd-card-tag">${m.tag}</div>
+          <div class="cd-days-num" style="${m.highlight ? 'color:#1e429f;' : ''}">${daysText}</div>
+          <div class="cd-target-date">📅 ${m.label}</div>
+          <div class="cd-subject">${m.subj}</div>
+        </div>
+      `;
+    });
+    grid.innerHTML = html;
+  }
+
+  // Subject Filter for Calendar View
+  function filterCalSubject(subj, btn) {
+    document.querySelectorAll('.cal-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const items = document.querySelectorAll('.cal-item');
+    const groups = document.querySelectorAll('.cal-group');
+
+    items.forEach(item => {
+      const itemSubjs = item.getAttribute('data-subj') || '';
+      if (subj === 'all' || itemSubjs.includes(subj)) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+
+    groups.forEach(group => {
+      const visibleItems = group.querySelectorAll('.cal-item:not([style*="display: none"])');
+      if (visibleItems.length === 0) {
+        group.style.display = 'none';
+      } else {
+        group.style.display = 'block';
+      }
+    });
+  }
+
+  // Print Calendar Layout
+  function printCalendar() {
+    document.body.classList.add('printing-calendar');
+    window.print();
+    setTimeout(() => {
+      document.body.classList.remove('printing-calendar');
+    }, 1000);
+  }
+
   // Initial Load
   window.addEventListener('DOMContentLoaded', () => {
     renderDayChips();
     selectDay(0); // Start at Day 1
+    renderCountdowns();
   });
 </script>
 </body>

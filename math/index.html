@@ -1193,12 +1193,12 @@
   <details class="math-vault-box">
     <summary class="math-vault-summary">📂 數學評估與綜合練習 PDF（Google Drive 私人教材庫 · 6 份）</summary>
     <ul class="math-vault-list">
-      <li><a href="https://drive.google.com/file/d/1xxzyzgU72HHOI_bqTezOXkCvFSNt7gnk/view" onclick="openDrivePreview(this.href, "P1 Math Assessment"); return false;" class="vault-pdf-link">📄 P1 Math Assessment <span style="font-size:0.82rem; color:var(--text-muted);">網頁內預覽 👁️</span></a></li>
-      <li><a href="https://drive.google.com/file/d/1ctIF3HvazimXivqmWIgj3cnVBc8mqP0a/view" onclick="openDrivePreview(this.href, "P1 數學評估"); return false;" class="vault-pdf-link">📄 P1 數學評估 <span style="font-size:0.82rem; color:var(--text-muted);">網頁內預覽 👁️</span></a></li>
-      <li><a href="https://drive.google.com/file/d/1tu3Jmr55gncH5RZoK1t2AC1QZP-4bZGk/view" onclick="openDrivePreview(this.href, "P1進評1"); return false;" class="vault-pdf-link">📄 P1進評1 <span style="font-size:0.82rem; color:var(--text-muted);">網頁內預覽 👁️</span></a></li>
-      <li><a href="https://drive.google.com/file/d/1_PQM9A68lnMmAGhsn0ZyjP6BGeZLaR3p/view" onclick="openDrivePreview(this.href, "P1 數綜合練習"); return false;" class="vault-pdf-link">📄 P1 數綜合練習 <span style="font-size:0.82rem; color:var(--text-muted);">網頁內預覽 👁️</span></a></li>
-      <li><a href="https://drive.google.com/file/d/1JjRR3CEnS3e15QQLKO1lC88mT8SagdVq/view" onclick="openDrivePreview(this.href, "P1 Emaths"); return false;" class="vault-pdf-link">📄 P1 Emaths <span style="font-size:0.82rem; color:var(--text-muted);">網頁內預覽 👁️</span></a></li>
-      <li><a href="https://drive.google.com/file/d/1lys8pnfkrWVnEAU7TzV7kVSQlgqisp3i/view" onclick="openDrivePreview(this.href, "P1 數綜"); return false;" class="vault-pdf-link">📄 P1 數綜 <span style="font-size:0.82rem; color:var(--text-muted);">網頁內預覽 👁️</span></a></li>
+      <li><button type="button" style="width:100%; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1xxzyzgU72HHOI_bqTezOXkCvFSNt7gnk/view" data-title="P1 Math Assessment" onclick="openDrivePreviewFromEl(this)" class="vault-pdf-link"><span>📄 P1 Math Assessment</span> <span style="font-size:0.82rem; color:var(--text-muted);">網頁內預覽 👁️</span></button></li>
+      <li><button type="button" style="width:100%; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1ctIF3HvazimXivqmWIgj3cnVBc8mqP0a/view" data-title="P1 數學評估" onclick="openDrivePreviewFromEl(this)" class="vault-pdf-link"><span>📄 P1 數學評估</span> <span style="font-size:0.82rem; color:var(--text-muted);">網頁內預覽 👁️</span></button></li>
+      <li><button type="button" style="width:100%; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1tu3Jmr55gncH5RZoK1t2AC1QZP-4bZGk/view" data-title="P1進評1" onclick="openDrivePreviewFromEl(this)" class="vault-pdf-link"><span>📄 P1進評1</span> <span style="font-size:0.82rem; color:var(--text-muted);">網頁內預覽 👁️</span></button></li>
+      <li><button type="button" style="width:100%; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1_PQM9A68lnMmAGhsn0ZyjP6BGeZLaR3p/view" data-title="P1 數綜合練習" onclick="openDrivePreviewFromEl(this)" class="vault-pdf-link"><span>📄 P1 數綜合練習</span> <span style="font-size:0.82rem; color:var(--text-muted);">網頁內預覽 👁️</span></button></li>
+      <li><button type="button" style="width:100%; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1JjRR3CEnS3e15QQLKO1lC88mT8SagdVq/view" data-title="P1 Emaths" onclick="openDrivePreviewFromEl(this)" class="vault-pdf-link"><span>📄 P1 Emaths</span> <span style="font-size:0.82rem; color:var(--text-muted);">網頁內預覽 👁️</span></button></li>
+      <li><button type="button" style="width:100%; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1lys8pnfkrWVnEAU7TzV7kVSQlgqisp3i/view" data-title="P1 數綜" onclick="openDrivePreviewFromEl(this)" class="vault-pdf-link"><span>📄 P1 數綜</span> <span style="font-size:0.82rem; color:var(--text-muted);">網頁內預覽 👁️</span></button></li>
     </ul>
   </details>
 </div>
@@ -1763,6 +1763,9 @@
     document.getElementById("emathsScoreBanner").classList.remove("show");
   }
 
+  function openDrivePreviewFromEl(el) {
+    openDrivePreview(el.getAttribute("data-url"), el.getAttribute("data-title"));
+  }
   function openDrivePreview(viewUrl, title) {
     const previewUrl = viewUrl.replace(/\/view(\?.*)?$/, "/preview");
     document.getElementById("driveModalTitle").innerText = title || "預覽檔案";

@@ -213,9 +213,9 @@
     🔐 <strong>存取提示</strong>：所有試卷存放於私人 Google Drive。請確保 iPad / 手機 Safari 已登入授權的家庭 Google 帳戶，點擊即可在新分頁開啟。
   </div>
   <div class="pdf-list">
-      <a class="pdf-item" href="https://drive.google.com/file/d/1HPw10qsv1b5zxXhLRdtkHAE2vBbGrdfQ/view" onclick="openDrivePreview(this.href, "2024 P1 1st term 聖經考試"); return false;"><span>📄 2024 P1 1st term 聖經考試</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1-hhyUp4m-jTUjMKrtrbDLXn265--c4Ui/view" onclick="openDrivePreview(this.href, "2024 P1 1st term 音樂考試"); return false;"><span>📄 2024 P1 1st term 音樂考試</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1ZYTk1rTa4hcy9bbB3y4fyq-iJMJ15fQt/view" onclick="openDrivePreview(this.href, "2024 P1 1st term 普通話考試"); return false;"><span>📄 2024 P1 1st term 普通話考試</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1HPw10qsv1b5zxXhLRdtkHAE2vBbGrdfQ/view" data-title="2024 P1 1st term 聖經考試" onclick="openDrivePreviewFromEl(this)"><span>📄 2024 P1 1st term 聖經考試</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1-hhyUp4m-jTUjMKrtrbDLXn265--c4Ui/view" data-title="2024 P1 1st term 音樂考試" onclick="openDrivePreviewFromEl(this)"><span>📄 2024 P1 1st term 音樂考試</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1ZYTk1rTa4hcy9bbB3y4fyq-iJMJ15fQt/view" data-title="2024 P1 1st term 普通話考試" onclick="openDrivePreviewFromEl(this)"><span>📄 2024 P1 1st term 普通話考試</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
     </div>
 </div>
 
@@ -234,6 +234,9 @@
 
 <script>
 
+  function openDrivePreviewFromEl(el) {
+    openDrivePreview(el.getAttribute("data-url"), el.getAttribute("data-title"));
+  }
   function openDrivePreview(viewUrl, title) {
     const previewUrl = viewUrl.replace(/\/view(\?.*)?$/, "/preview");
     document.getElementById("driveModalTitle").innerText = title || "預覽檔案";

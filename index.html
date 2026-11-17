@@ -160,6 +160,29 @@
     padding: 6px 14px; border-radius: 8px; font-size: 0.88rem; font-weight: 700; text-decoration: none; margin-top: 8px;
   }
 
+  /* At-a-Glance Compact Timetable */
+  .glance-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    overflow-x: auto;
+  }
+  .glance-title { font-size: 1.04rem; font-weight: 800; color: var(--primary-dark); margin-bottom: 10px; }
+  .glance-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  .glance-table th { text-align: left; padding: 7px 8px; background: #f1f5f9; color: var(--text-muted); font-size: 0.8rem; border-bottom: 1px solid var(--border); }
+  .glance-table td { padding: 8px 8px; border-bottom: 1px solid #f1f5f9; vertical-align: top; }
+  .glance-table tr:last-child td { border-bottom: none; }
+  .glance-table tr.glance-row { cursor: pointer; }
+  .glance-table tr.glance-row:hover { background: #f8fafc; }
+  .glance-date { font-weight: 800; color: var(--primary-dark); white-space: nowrap; width: 1%; }
+  .glance-subj { font-weight: 700; color: var(--text); }
+  .glance-tag { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 1px 6px; border-radius: 6px; background: #eef2ff; color: #1e40af; margin-right: 4px; }
+  .glance-tag.main { background: #dcfce7; color: #166534; }
+  .glance-tag.math { background: #1a56db; color: #ffffff; }
+
   /* Corkboard QR Section */
   .qr-section {
     background: var(--card-bg);
@@ -228,6 +251,30 @@
     </div>
 
     <div class="countdown-grid no-print" id="countdownGrid"></div>
+
+    <!-- At-a-Glance One-View Timetable -->
+    <section class="glance-card">
+      <div class="glance-title">📋 一眼睇晒 · 考試時間總表 (點擊各行可跳至詳細範圍)</div>
+      <table class="glance-table">
+        <thead>
+          <tr><th>日期</th><th>科目</th><th>重點備忘</th></tr>
+        </thead>
+        <tbody>
+          <tr class="glance-row" onclick="jumpToMilestone('cal-section-oral')"><td class="glance-date">19/11–04/12</td><td class="glance-subj"><span class="glance-tag">隨堂</span>普通話口試</td><td>第一堂或隨堂考核</td></tr>
+          <tr class="glance-row" onclick="jumpToMilestone('cal-section-oral')"><td class="glance-date">23/11–04/12</td><td class="glance-subj"><span class="glance-tag">隨堂</span>唱歌考試</td><td>P.18《學跳舞》或 P.20《One Little Finger》</td></tr>
+          <tr class="glance-row" onclick="jumpToMilestone('cal-section-written')"><td class="glance-date">23/11 (一)</td><td class="glance-subj"><span class="glance-tag">筆試</span>普通話</td><td>一上 1–5 課及粵普對譯</td></tr>
+          <tr class="glance-row" onclick="jumpToMilestone('cal-section-oral')"><td class="glance-date">26/11–04/12</td><td class="glance-subj"><span class="glance-tag">隨堂</span>English Speaking</td><td>第一堂或隨堂考核</td></tr>
+          <tr class="glance-row" onclick="jumpToMilestone('cal-section-oral')"><td class="glance-date">27/11–04/12</td><td class="glance-subj"><span class="glance-tag">隨堂</span>中文說話</td><td>第一堂或隨堂考核</td></tr>
+          <tr class="glance-row" onclick="jumpToMilestone('cal-section-written')"><td class="glance-date">27/11 (五)</td><td class="glance-subj"><span class="glance-tag">筆試</span>聖經</td><td>一上 1–7 課</td></tr>
+          <tr class="glance-row" onclick="jumpToMilestone('cal-section-written')"><td class="glance-date">30/11 (一)</td><td class="glance-subj"><span class="glance-tag">筆試</span>音樂</td><td>一上 1–9 課 (P.2–38)</td></tr>
+          <tr class="glance-row" onclick="jumpToMilestone('cal-item-0712')"><td class="glance-date">07/12 (一)</td><td class="glance-subj"><span class="glance-tag main">主考</span>中文閱讀及應用 / 聆聽</td><td>1冊 1,5,8 課 + 2冊 12,14 課</td></tr>
+          <tr class="glance-row" onclick="jumpToMilestone('cal-item-0812')"><td class="glance-date">08/12 (二)</td><td class="glance-subj"><span class="glance-tag main">主考</span>Eng Reading &amp; Usage / Writing</td><td>LH Bk2 U1–3 + SE + Wr. Task/Notes</td></tr>
+          <tr class="glance-row" onclick="jumpToMilestone('cal-item-1012')"><td class="glance-date">10/12 (四)</td><td class="glance-subj"><span class="glance-tag main">主考</span>人文 / 中文寫作</td><td>人文 1,2,3,5 課 + 寫作練習/工作紙</td></tr>
+          <tr class="glance-row" onclick="jumpToMilestone('cal-item-1112')" style="background:#f0f7ff;"><td class="glance-date">11/12 (五)</td><td class="glance-subj"><span class="glance-tag math">焦點</span>數學 (中文) / 英數 (Emaths)</td><td>一上 A1–B12 + Emaths Ex.1–5</td></tr>
+          <tr class="glance-row" onclick="jumpToMilestone('cal-item-1412')"><td class="glance-date">14/12 (一)</td><td class="glance-subj"><span class="glance-tag main">主考</span>Eng Readers Quiz / Listening</td><td>The Noisy Day + Phonics WS 1–2</td></tr>
+        </tbody>
+      </table>
+    </section>
 
     <!-- Math Primary CTA -->
     <a href="math/" class="hero-math-cta no-print">

@@ -106,6 +106,53 @@
     text-align: center;
     color: var(--muted);
   }
+
+  .drive-modal-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.85);
+    z-index: 99999;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  .drive-modal-backdrop.show { display: flex; }
+  .drive-modal-box {
+    background: #ffffff;
+    border-radius: 14px;
+    width: 100%;
+    max-width: 920px;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+  }
+  .drive-modal-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-bottom: 1px solid #e2e8f0;
+    background: #f8fafc;
+    flex-wrap: wrap;
+  }
+  .drive-modal-title { font-weight: 800; font-size: 0.95rem; color: #0f172a; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 55vw; }
+  .drive-modal-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+  .drive-ext-btn {
+    background: #dbeafe; color: #1e40af; padding: 6px 12px; border-radius: 8px;
+    font-size: 0.82rem; font-weight: 800; text-decoration: none;
+  }
+  .drive-close-btn {
+    background: #e2e8f0; color: #0f172a; border: none; border-radius: 8px;
+    padding: 6px 12px; font-size: 0.85rem; font-weight: 800; cursor: pointer;
+  }
+  .drive-modal-frame { flex: 1; width: 100%; border: none; background: #1e293b; }
+
 </style>
 </head>
 <body>
@@ -152,15 +199,49 @@
     🔐 <strong>存取提示</strong>：所有試卷存放於私人 Google Drive。請確保 iPad / 手機 Safari 已登入授權的家庭 Google 帳戶，點擊即可在新分頁開啟。
   </div>
   <div class="pdf-list">
-      <a class="pdf-item" href="https://drive.google.com/file/d/1Ad2U8KvLiKdJ5_npmbV8paprG5llLk-z/view" target="_blank" rel="noopener"><span>📄 P1 Eng Assessment</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1BKQfpQUyjnsDMchmMZ2sOl8PTDxe7RvM/view" target="_blank" rel="noopener"><span>📄 2024 P1 1st term Eng Writing Exam</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1WhBya7Nd7Eq2_Co7ZMDZk6axWwT4MP1m/view" target="_blank" rel="noopener"><span>📄 P1 Direct Eng L8</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1nOkfHIjJNnx3OdnKVarW4nfXfvfORRt5/view" target="_blank" rel="noopener"><span>📄 P1 SE part 2</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1B61lNblC7Wn675ZlYLoNeLMTDvy_I-tX/view" target="_blank" rel="noopener"><span>📄 P2 SE part 1</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1WP3tGPXnB0CYamBkBlMShjxtFH0LAnQN/view" target="_blank" rel="noopener"><span>📄 P1 Dictation</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1IDnacfEnxxllPxctWJKG165xeJzZeQTH/view" target="_blank" rel="noopener"><span>📄 P1 Eng Speaking Notes</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1HL0GMX_xOZLK8jXDJeCgq7o19RKlHyBi/view" target="_blank" rel="noopener"><span>📄 P1 SE</span><span class="pdf-badge">Google Drive ↗</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1Ad2U8KvLiKdJ5_npmbV8paprG5llLk-z/view" onclick="openDrivePreview(this.href, "P1 Eng Assessment"); return false;"><span>📄 P1 Eng Assessment</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1BKQfpQUyjnsDMchmMZ2sOl8PTDxe7RvM/view" onclick="openDrivePreview(this.href, "2024 P1 1st term Eng Writing Exam"); return false;"><span>📄 2024 P1 1st term Eng Writing Exam</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1WhBya7Nd7Eq2_Co7ZMDZk6axWwT4MP1m/view" onclick="openDrivePreview(this.href, "P1 Direct Eng L8"); return false;"><span>📄 P1 Direct Eng L8</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1nOkfHIjJNnx3OdnKVarW4nfXfvfORRt5/view" onclick="openDrivePreview(this.href, "P1 SE part 2"); return false;"><span>📄 P1 SE part 2</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1B61lNblC7Wn675ZlYLoNeLMTDvy_I-tX/view" onclick="openDrivePreview(this.href, "P2 SE part 1"); return false;"><span>📄 P2 SE part 1</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1WP3tGPXnB0CYamBkBlMShjxtFH0LAnQN/view" onclick="openDrivePreview(this.href, "P1 Dictation"); return false;"><span>📄 P1 Dictation</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1IDnacfEnxxllPxctWJKG165xeJzZeQTH/view" onclick="openDrivePreview(this.href, "P1 Eng Speaking Notes"); return false;"><span>📄 P1 Eng Speaking Notes</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1HL0GMX_xOZLK8jXDJeCgq7o19RKlHyBi/view" onclick="openDrivePreview(this.href, "P1 SE"); return false;"><span>📄 P1 SE</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
     </div>
 </div>
+
+<div class="drive-modal-backdrop no-print" id="driveModalBackdrop" onclick="closeDrivePreview()">
+  <div class="drive-modal-box" onclick="event.stopPropagation()">
+    <div class="drive-modal-head">
+      <span class="drive-modal-title" id="driveModalTitle">預覽檔案</span>
+      <div class="drive-modal-actions">
+        <a class="drive-ext-btn" id="driveModalExtLink" href="#" target="_blank" rel="noopener">↗ 在 Drive 開啟</a>
+        <button class="drive-close-btn" onclick="closeDrivePreview()">✕ 關閉</button>
+      </div>
+    </div>
+    <iframe class="drive-modal-frame" id="driveModalFrame" src="about:blank" allow="autoplay"></iframe>
+  </div>
+</div>
+
+<script>
+
+  function openDrivePreview(viewUrl, title) {
+    const previewUrl = viewUrl.replace(/\/view(\?.*)?$/, "/preview");
+    document.getElementById("driveModalTitle").innerText = title || "預覽檔案";
+    document.getElementById("driveModalExtLink").href = viewUrl;
+    document.getElementById("driveModalFrame").src = previewUrl;
+    document.getElementById("driveModalBackdrop").classList.add("show");
+    document.body.style.overflow = "hidden";
+  }
+  function closeDrivePreview() {
+    document.getElementById("driveModalBackdrop").classList.remove("show");
+    document.getElementById("driveModalFrame").src = "about:blank";
+    document.body.style.overflow = "";
+  }
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeDrivePreview();
+  });
+
+</script>
 </body>
 </html>

@@ -895,6 +895,15 @@
     border-color: var(--primary);
     background: var(--primary-light);
   }
+  .drive-modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.85); z-index: 99999; align-items: center; justify-content: center; padding: 12px; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+  .drive-modal-backdrop.show { display: flex; }
+  .drive-modal-box { background: #ffffff; border-radius: 14px; width: 100%; max-width: 920px; height: 90vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.35); }
+  .drive-modal-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid #e2e8f0; background: #f8fafc; flex-wrap: wrap; }
+  .drive-modal-title { font-weight: 800; font-size: 0.95rem; color: #0f172a; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 55vw; }
+  .drive-modal-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+  .drive-ext-btn { background: #dbeafe; color: #1e40af; padding: 6px 12px; border-radius: 8px; font-size: 0.82rem; font-weight: 800; text-decoration: none; }
+  .drive-close-btn { background: #e2e8f0; color: #0f172a; border: none; border-radius: 8px; padding: 6px 12px; font-size: 0.85rem; font-weight: 800; cursor: pointer; }
+  .drive-modal-frame { flex: 1; width: 100%; border: none; background: #1e293b; }
 
   /* ====================================================
      PRINT STYLING (A4 Optimized)
@@ -1184,12 +1193,12 @@
   <details class="math-vault-box">
     <summary class="math-vault-summary">📂 數學評估與綜合練習 PDF（Google Drive 私人教材庫 · 6 份）</summary>
     <ul class="math-vault-list">
-      <li><a href="https://drive.google.com/file/d/1xxzyzgU72HHOI_bqTezOXkCvFSNt7gnk/view" target="_blank" rel="noopener" class="vault-pdf-link">📄 P1 Math Assessment <span style="font-size:0.82rem; color:var(--text-muted);">↗ Google Drive</span></a></li>
-      <li><a href="https://drive.google.com/file/d/1ctIF3HvazimXivqmWIgj3cnVBc8mqP0a/view" target="_blank" rel="noopener" class="vault-pdf-link">📄 P1 數學評估 <span style="font-size:0.82rem; color:var(--text-muted);">↗ Google Drive</span></a></li>
-      <li><a href="https://drive.google.com/file/d/1tu3Jmr55gncH5RZoK1t2AC1QZP-4bZGk/view" target="_blank" rel="noopener" class="vault-pdf-link">📄 P1進評1 <span style="font-size:0.82rem; color:var(--text-muted);">↗ Google Drive</span></a></li>
-      <li><a href="https://drive.google.com/file/d/1_PQM9A68lnMmAGhsn0ZyjP6BGeZLaR3p/view" target="_blank" rel="noopener" class="vault-pdf-link">📄 P1 數綜合練習 <span style="font-size:0.82rem; color:var(--text-muted);">↗ Google Drive</span></a></li>
-      <li><a href="https://drive.google.com/file/d/1JjRR3CEnS3e15QQLKO1lC88mT8SagdVq/view" target="_blank" rel="noopener" class="vault-pdf-link">📄 P1 Emaths <span style="font-size:0.82rem; color:var(--text-muted);">↗ Google Drive</span></a></li>
-      <li><a href="https://drive.google.com/file/d/1lys8pnfkrWVnEAU7TzV7kVSQlgqisp3i/view" target="_blank" rel="noopener" class="vault-pdf-link">📄 P1 數綜 <span style="font-size:0.82rem; color:var(--text-muted);">↗ Google Drive</span></a></li>
+      <li><a href="https://drive.google.com/file/d/1xxzyzgU72HHOI_bqTezOXkCvFSNt7gnk/view" onclick="openDrivePreview(this.href, "P1 Math Assessment"); return false;" class="vault-pdf-link">📄 P1 Math Assessment <span style="font-size:0.82rem; color:var(--text-muted);">網頁內預覽 👁️</span></a></li>
+      <li><a href="https://drive.google.com/file/d/1ctIF3HvazimXivqmWIgj3cnVBc8mqP0a/view" onclick="openDrivePreview(this.href, "P1 數學評估"); return false;" class="vault-pdf-link">📄 P1 數學評估 <span style="font-size:0.82rem; color:var(--text-muted);">網頁內預覽 👁️</span></a></li>
+      <li><a href="https://drive.google.com/file/d/1tu3Jmr55gncH5RZoK1t2AC1QZP-4bZGk/view" onclick="openDrivePreview(this.href, "P1進評1"); return false;" class="vault-pdf-link">📄 P1進評1 <span style="font-size:0.82rem; color:var(--text-muted);">網頁內預覽 👁️</span></a></li>
+      <li><a href="https://drive.google.com/file/d/1_PQM9A68lnMmAGhsn0ZyjP6BGeZLaR3p/view" onclick="openDrivePreview(this.href, "P1 數綜合練習"); return false;" class="vault-pdf-link">📄 P1 數綜合練習 <span style="font-size:0.82rem; color:var(--text-muted);">網頁內預覽 👁️</span></a></li>
+      <li><a href="https://drive.google.com/file/d/1JjRR3CEnS3e15QQLKO1lC88mT8SagdVq/view" onclick="openDrivePreview(this.href, "P1 Emaths"); return false;" class="vault-pdf-link">📄 P1 Emaths <span style="font-size:0.82rem; color:var(--text-muted);">網頁內預覽 👁️</span></a></li>
+      <li><a href="https://drive.google.com/file/d/1lys8pnfkrWVnEAU7TzV7kVSQlgqisp3i/view" onclick="openDrivePreview(this.href, "P1 數綜"); return false;" class="vault-pdf-link">📄 P1 數綜 <span style="font-size:0.82rem; color:var(--text-muted);">網頁內預覽 👁️</span></a></li>
     </ul>
   </details>
 </div>
@@ -1754,11 +1763,40 @@
     document.getElementById("emathsScoreBanner").classList.remove("show");
   }
 
+  function openDrivePreview(viewUrl, title) {
+    const previewUrl = viewUrl.replace(/\/view(\?.*)?$/, "/preview");
+    document.getElementById("driveModalTitle").innerText = title || "預覽檔案";
+    document.getElementById("driveModalExtLink").href = viewUrl;
+    document.getElementById("driveModalFrame").src = previewUrl;
+    document.getElementById("driveModalBackdrop").classList.add("show");
+    document.body.style.overflow = "hidden";
+  }
+  function closeDrivePreview() {
+    document.getElementById("driveModalBackdrop").classList.remove("show");
+    document.getElementById("driveModalFrame").src = "about:blank";
+    document.body.style.overflow = "";
+  }
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeDrivePreview();
+  });
+
   // Initial Load
   window.addEventListener('DOMContentLoaded', () => {
     renderDayChips();
     selectDay(0); // Start at Day 1
   });
 </script>
+<div class="drive-modal-backdrop" id="driveModalBackdrop" onclick="closeDrivePreview()">
+  <div class="drive-modal-box" onclick="event.stopPropagation()">
+    <div class="drive-modal-head">
+      <span class="drive-modal-title" id="driveModalTitle">預覽檔案</span>
+      <div class="drive-modal-actions">
+        <a class="drive-ext-btn" id="driveModalExtLink" href="#" target="_blank" rel="noopener">↗ 在 Drive 開啟</a>
+        <button class="drive-close-btn" onclick="closeDrivePreview()">✕ 關閉</button>
+      </div>
+    </div>
+    <iframe class="drive-modal-frame" id="driveModalFrame" src="about:blank" allow="autoplay"></iframe>
+  </div>
+</div>
 </body>
 </html>

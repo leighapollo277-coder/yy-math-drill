@@ -106,6 +106,53 @@
     text-align: center;
     color: var(--muted);
   }
+
+  .drive-modal-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.85);
+    z-index: 99999;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  .drive-modal-backdrop.show { display: flex; }
+  .drive-modal-box {
+    background: #ffffff;
+    border-radius: 14px;
+    width: 100%;
+    max-width: 920px;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+  }
+  .drive-modal-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-bottom: 1px solid #e2e8f0;
+    background: #f8fafc;
+    flex-wrap: wrap;
+  }
+  .drive-modal-title { font-weight: 800; font-size: 0.95rem; color: #0f172a; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 55vw; }
+  .drive-modal-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+  .drive-ext-btn {
+    background: #dbeafe; color: #1e40af; padding: 6px 12px; border-radius: 8px;
+    font-size: 0.82rem; font-weight: 800; text-decoration: none;
+  }
+  .drive-close-btn {
+    background: #e2e8f0; color: #0f172a; border: none; border-radius: 8px;
+    padding: 6px 12px; font-size: 0.85rem; font-weight: 800; cursor: pointer;
+  }
+  .drive-modal-frame { flex: 1; width: 100%; border: none; background: #1e293b; }
+
 </style>
 </head>
 <body>
@@ -152,28 +199,62 @@
     🔐 <strong>存取提示</strong>：所有試卷存放於私人 Google Drive。請確保 iPad / 手機 Safari 已登入授權的家庭 Google 帳戶，點擊即可在新分頁開啟。
   </div>
   <div class="pdf-list">
-      <a class="pdf-item" href="https://drive.google.com/file/d/1jr2jaNqt2PI3rlisxKuoRMU40c-CCesc/view" target="_blank" rel="noopener"><span>📄 P.1 Chinese Exam</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1zibVH_U6qcRRceyPmhwF2dxcnlvRcern/view" target="_blank" rel="noopener"><span>📄 2024 P1 1st term 中文寫作卷</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1VVqBJIg2JiOjqFbE_wiGjb3384kBAGjG/view" target="_blank" rel="noopener"><span>📄 2022 P1 1st term 中文考試</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1kfb2kYlMquvKkbfIxTBDq4k61bFqyHXU/view" target="_blank" rel="noopener"><span>📄 2024 P1 1st term 中文考試</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1K3-iBS3Zlgfd4ozwrX2geazRZz_ZtE8o/view" target="_blank" rel="noopener"><span>📄 P1 第一課 供詞填充</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1bkAJiNJXn5QJ4G7hVgMP-a0Td4Dz3mHw/view" target="_blank" rel="noopener"><span>📄 P1 第五課供詞填充</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1_7siW83e9kfzi7CYYc8X6-VixDSJXFNV/view" target="_blank" rel="noopener"><span>📄 P1 第八課供詞填充</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1SsB977-x5hKL8Hzi02bBCRVccPc6g4qx/view" target="_blank" rel="noopener"><span>📄 P1 第十二課 供詞填充</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1fvzd809AlbTvGin-__in_DZ0Mpy8GxIM/view" target="_blank" rel="noopener"><span>📄 P1 第十五課 供詞填充</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1eskYPZhsn9VOOv1fP85CmFlTKnBjNooW/view" target="_blank" rel="noopener"><span>📄 量詞填充題</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1cuy-yBA5fgagpVyKM-bx6ie4f61lsaO0/view" target="_blank" rel="noopener"><span>📄 P1 詞練上</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1HPnNDwkVS4cvydKZec4GF5xQV8S55Xg5/view" target="_blank" rel="noopener"><span>📄 P1語練part 3(連答案)</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/12s-36R0oCgWxkJMoYk9-2AxN2M5yWwqV/view" target="_blank" rel="noopener"><span>📄 P1 語練part 2 (連答案)</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1i_QVTdJq9XZAYEN4zDM4dGDG1SlkBEpp/view" target="_blank" rel="noopener"><span>📄 P1 語練1(連答案)</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1_zydnOzK44EFDy2keukj7Jzg3q86F-n_/view" target="_blank" rel="noopener"><span>📄 P1 Direct 中文1st term L2</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/17S_iEHw1fUdeVtJakusC8dw9wshNJZR3/view" target="_blank" rel="noopener"><span>📄 P1 中文默書</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1cbrdLsD4A2rA8Jq5JB0gYHalPzo-zKpC/view" target="_blank" rel="noopener"><span>📄 P1 中文語練</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1dzQIhZSmwEkF0RPiimroAG_6orsu-xBr/view" target="_blank" rel="noopener"><span>📄 練習四</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1EbupSFO3MheXzZwu4NCvb_p-HjBoz17C/view" target="_blank" rel="noopener"><span>📄 練習2</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1Rbsjb1kEd7ETKfSRAXBX7ucsOau4Tmf8/view" target="_blank" rel="noopener"><span>📄 練習三</span><span class="pdf-badge">Google Drive ↗</span></a>
-      <a class="pdf-item" href="https://drive.google.com/file/d/1wkHGC9NF1lnEvA4AE7yNv5XYJDg-Wj5e/view" target="_blank" rel="noopener"><span>📄 練習1</span><span class="pdf-badge">Google Drive ↗</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1jr2jaNqt2PI3rlisxKuoRMU40c-CCesc/view" onclick="openDrivePreview(this.href, "P.1 Chinese Exam"); return false;"><span>📄 P.1 Chinese Exam</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1zibVH_U6qcRRceyPmhwF2dxcnlvRcern/view" onclick="openDrivePreview(this.href, "2024 P1 1st term 中文寫作卷"); return false;"><span>📄 2024 P1 1st term 中文寫作卷</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1VVqBJIg2JiOjqFbE_wiGjb3384kBAGjG/view" onclick="openDrivePreview(this.href, "2022 P1 1st term 中文考試"); return false;"><span>📄 2022 P1 1st term 中文考試</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1kfb2kYlMquvKkbfIxTBDq4k61bFqyHXU/view" onclick="openDrivePreview(this.href, "2024 P1 1st term 中文考試"); return false;"><span>📄 2024 P1 1st term 中文考試</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1K3-iBS3Zlgfd4ozwrX2geazRZz_ZtE8o/view" onclick="openDrivePreview(this.href, "P1 第一課 供詞填充"); return false;"><span>📄 P1 第一課 供詞填充</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1bkAJiNJXn5QJ4G7hVgMP-a0Td4Dz3mHw/view" onclick="openDrivePreview(this.href, "P1 第五課供詞填充"); return false;"><span>📄 P1 第五課供詞填充</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1_7siW83e9kfzi7CYYc8X6-VixDSJXFNV/view" onclick="openDrivePreview(this.href, "P1 第八課供詞填充"); return false;"><span>📄 P1 第八課供詞填充</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1SsB977-x5hKL8Hzi02bBCRVccPc6g4qx/view" onclick="openDrivePreview(this.href, "P1 第十二課 供詞填充"); return false;"><span>📄 P1 第十二課 供詞填充</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1fvzd809AlbTvGin-__in_DZ0Mpy8GxIM/view" onclick="openDrivePreview(this.href, "P1 第十五課 供詞填充"); return false;"><span>📄 P1 第十五課 供詞填充</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1eskYPZhsn9VOOv1fP85CmFlTKnBjNooW/view" onclick="openDrivePreview(this.href, "量詞填充題"); return false;"><span>📄 量詞填充題</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1cuy-yBA5fgagpVyKM-bx6ie4f61lsaO0/view" onclick="openDrivePreview(this.href, "P1 詞練上"); return false;"><span>📄 P1 詞練上</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1HPnNDwkVS4cvydKZec4GF5xQV8S55Xg5/view" onclick="openDrivePreview(this.href, "P1語練part 3(連答案)"); return false;"><span>📄 P1語練part 3(連答案)</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/12s-36R0oCgWxkJMoYk9-2AxN2M5yWwqV/view" onclick="openDrivePreview(this.href, "P1 語練part 2 (連答案)"); return false;"><span>📄 P1 語練part 2 (連答案)</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1i_QVTdJq9XZAYEN4zDM4dGDG1SlkBEpp/view" onclick="openDrivePreview(this.href, "P1 語練1(連答案)"); return false;"><span>📄 P1 語練1(連答案)</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1_zydnOzK44EFDy2keukj7Jzg3q86F-n_/view" onclick="openDrivePreview(this.href, "P1 Direct 中文1st term L2"); return false;"><span>📄 P1 Direct 中文1st term L2</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/17S_iEHw1fUdeVtJakusC8dw9wshNJZR3/view" onclick="openDrivePreview(this.href, "P1 中文默書"); return false;"><span>📄 P1 中文默書</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1cbrdLsD4A2rA8Jq5JB0gYHalPzo-zKpC/view" onclick="openDrivePreview(this.href, "P1 中文語練"); return false;"><span>📄 P1 中文語練</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1dzQIhZSmwEkF0RPiimroAG_6orsu-xBr/view" onclick="openDrivePreview(this.href, "練習四"); return false;"><span>📄 練習四</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1EbupSFO3MheXzZwu4NCvb_p-HjBoz17C/view" onclick="openDrivePreview(this.href, "練習2"); return false;"><span>📄 練習2</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1Rbsjb1kEd7ETKfSRAXBX7ucsOau4Tmf8/view" onclick="openDrivePreview(this.href, "練習三"); return false;"><span>📄 練習三</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
+      <a class="pdf-item" href="https://drive.google.com/file/d/1wkHGC9NF1lnEvA4AE7yNv5XYJDg-Wj5e/view" onclick="openDrivePreview(this.href, "練習1"); return false;"><span>📄 練習1</span><span class="pdf-badge">網頁內預覽 👁️</span></a>
     </div>
 </div>
+
+<div class="drive-modal-backdrop no-print" id="driveModalBackdrop" onclick="closeDrivePreview()">
+  <div class="drive-modal-box" onclick="event.stopPropagation()">
+    <div class="drive-modal-head">
+      <span class="drive-modal-title" id="driveModalTitle">預覽檔案</span>
+      <div class="drive-modal-actions">
+        <a class="drive-ext-btn" id="driveModalExtLink" href="#" target="_blank" rel="noopener">↗ 在 Drive 開啟</a>
+        <button class="drive-close-btn" onclick="closeDrivePreview()">✕ 關閉</button>
+      </div>
+    </div>
+    <iframe class="drive-modal-frame" id="driveModalFrame" src="about:blank" allow="autoplay"></iframe>
+  </div>
+</div>
+
+<script>
+
+  function openDrivePreview(viewUrl, title) {
+    const previewUrl = viewUrl.replace(/\/view(\?.*)?$/, "/preview");
+    document.getElementById("driveModalTitle").innerText = title || "預覽檔案";
+    document.getElementById("driveModalExtLink").href = viewUrl;
+    document.getElementById("driveModalFrame").src = previewUrl;
+    document.getElementById("driveModalBackdrop").classList.add("show");
+    document.body.style.overflow = "hidden";
+  }
+  function closeDrivePreview() {
+    document.getElementById("driveModalBackdrop").classList.remove("show");
+    document.getElementById("driveModalFrame").src = "about:blank";
+    document.body.style.overflow = "";
+  }
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeDrivePreview();
+  });
+
+</script>
 </body>
 </html>

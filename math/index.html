@@ -1,0 +1,1762 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/math.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-title" content="約約數學">
+<title>民生書院小學 · 小一數學每日精練 (Day 1 - Day 30)</title>
+<style>
+  :root {
+    --primary: #1a56db;
+    --primary-light: #eef2ff;
+    --primary-dark: #1e429f;
+    --success: #0e9f6e;
+    --success-bg: #f0fdf4;
+    --error: #e02424;
+    --error-bg: #fef2f2;
+    --bg: #f8fafc;
+    --card-bg: #ffffff;
+    --border: #e2e8f0;
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --touch-radius: 12px;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 16px 14px 120px 14px;
+    touch-action: manipulation;
+  }
+
+  .container {
+    max-width: 840px;
+    margin: 0 auto;
+  }
+
+  /* App Navigation & Action Toolbar */
+  .toolbar {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--touch-radius);
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+  }
+
+  .school-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--primary-dark);
+  }
+
+  .sub-title {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+  }
+
+  button {
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    touch-action: manipulation;
+    transition: background 0.15s ease, transform 0.08s ease;
+  }
+
+  button:active {
+    transform: scale(0.97);
+  }
+
+  .btn-primary {
+    background-color: var(--primary);
+    color: #fff;
+  }
+  .btn-primary:hover {
+    background-color: var(--primary-dark);
+  }
+
+  .btn-secondary {
+    background-color: #f1f5f9;
+    color: #334155;
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:active {
+    background-color: #e2e8f0;
+  }
+
+  .btn-print {
+    background-color: #0d9488;
+    color: #fff;
+  }
+  .btn-print:active {
+    background-color: #0f766e;
+  }
+
+  .timer-pill {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* Day Selector Navigation Bar */
+  .day-nav-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--touch-radius);
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+  }
+
+  .day-nav-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .day-nav-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .day-scroll-container {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .day-chip {
+    flex: 0 0 auto;
+    padding: 8px 16px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border-radius: 20px;
+    background: #f1f5f9;
+    color: #475569;
+    border: 1.5px solid #cbd5e1;
+    min-height: 40px;
+    scroll-snap-align: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .day-chip.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(26,86,219,0.3);
+  }
+
+  .day-chip.completed {
+    border-color: var(--success);
+  }
+  .day-chip.completed::after {
+    content: "✓";
+    font-size: 0.8rem;
+    color: var(--success);
+  }
+  .day-chip.active.completed::after {
+    color: #fff;
+  }
+
+  /* Active Day Header Banner */
+  .active-day-banner {
+    background: linear-gradient(135deg, #1e429f 0%, #2563eb 100%);
+    color: #fff;
+    border-radius: var(--touch-radius);
+    padding: 18px 22px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 6px 16px rgba(37,99,235,0.18);
+  }
+
+  .active-day-title {
+    font-size: 1.4rem;
+    font-weight: 900;
+    letter-spacing: -0.3px;
+  }
+
+  /* Score Dashboard */
+  .score-banner {
+    background: linear-gradient(135deg, #065f46 0%, #059669 100%);
+    color: #fff;
+    border-radius: var(--touch-radius);
+    padding: 20px 24px;
+    margin-bottom: 22px;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 8px 20px rgba(5,150,105,0.2);
+  }
+  .score-banner.show {
+    display: flex;
+    animation: slideDown 0.3s ease-out;
+  }
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .score-val {
+    font-size: 2.3rem;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  /* Worksheet Header */
+  .worksheet-header {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--touch-radius);
+    padding: 16px 20px;
+    margin-bottom: 20px;
+  }
+
+  .header-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 12px;
+    margin-bottom: 10px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    gap: 12px;
+  }
+
+  .header-meta input {
+    border: none;
+    border-bottom: 2px solid var(--primary);
+    padding: 4px 8px;
+    font-size: 1.15rem;
+    outline: none;
+    font-weight: 800;
+    color: var(--primary-dark);
+    width: 110px;
+    text-align: center;
+    background: #f8fafc;
+  }
+
+  /* Section Card Styling */
+  .section-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--touch-radius);
+    padding: 20px 22px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+  }
+
+  .section-heading {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .grid-2col {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: 14px 18px;
+  }
+
+  .question-item {
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 14px 16px;
+    position: relative;
+    transition: all 0.15s ease;
+  }
+
+  .question-item.correct {
+    border-color: var(--success);
+    background-color: var(--success-bg);
+  }
+  .question-item.incorrect {
+    border-color: var(--error);
+    background-color: var(--error-bg);
+  }
+
+  .q-prompt {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .q-num {
+    color: var(--primary);
+    font-size: 1.1rem;
+    font-weight: 800;
+    width: 32px;
+    flex-shrink: 0;
+  }
+
+  /* iPad Touch Inputs */
+  input[type="number"], input[type="text"], select {
+    font-size: 1.35rem;
+    font-weight: 800;
+    text-align: center;
+    min-height: 50px;
+    height: 50px;
+    padding: 4px 10px;
+    border: 2.5px solid #cbd5e1;
+    border-radius: 10px;
+    width: 96px;
+    color: #0f172a;
+    background: #fff;
+    outline: none;
+    touch-action: manipulation;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  input[type="number"]:focus, select:focus, input[type="text"]:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+  }
+
+  select {
+    width: 86px;
+    appearance: none;
+    -webkit-appearance: none;
+    background: #fff url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") no-repeat right 10px center;
+    background-size: 14px;
+    padding-right: 26px;
+  }
+
+  /* Word Problem Specific */
+  .word-problem-card {
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 16px;
+  }
+
+  .wp-prompt {
+    font-size: 1.18rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    line-height: 1.8;
+    color: #1e293b;
+  }
+
+  .wp-working-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    background: #f8fafc;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+
+  .wp-working-row input[type="text"] {
+    width: 170px;
+    text-align: left;
+    padding-left: 12px;
+  }
+
+  .wp-working-box {
+    display: none; /* Only visible in print */
+  }
+
+  /* Explanation Feedback */
+  .hint-box {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: #fffbeb;
+    border-left: 4px solid #f59e0b;
+    font-size: 0.95rem;
+    color: #92400e;
+    border-radius: 0 8px 8px 0;
+    display: none;
+    line-height: 1.6;
+  }
+  .hint-box.show {
+    display: block;
+  }
+
+  .badge-status {
+    font-size: 0.88rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 12px;
+    display: none;
+  }
+  .badge-status.correct {
+    display: inline-block;
+    background: #dcfce7;
+    color: #15803d;
+  }
+  .badge-status.incorrect {
+    display: inline-block;
+    background: #fee2e2;
+    color: #991b1b;
+  }
+
+  /* Bottom Submission Bar */
+  .bottom-bar {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+  }
+  .btn-large {
+    font-size: 1.15rem;
+    padding: 14px 34px;
+    min-height: 52px;
+    border-radius: 12px;
+  }
+
+  /* iPad Floating Action Bar */
+  .tablet-floating-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid #cbd5e1;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
+    padding: 12px 18px;
+    padding-bottom: max(14px, env(safe-area-inset-bottom));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 999;
+  }
+
+  .floating-progress {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #334155;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* iPad mini Portrait optimizations */
+  @media screen and (max-width: 780px) {
+    body {
+      padding: 14px 10px 110px 10px;
+    }
+    .grid-2col {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .q-prompt {
+      font-size: 1.28rem;
+    }
+    input[type="number"], select {
+      min-height: 52px;
+      height: 52px;
+      width: 100px;
+      font-size: 1.45rem;
+    }
+    .wp-working-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .wp-working-row input[type="text"] {
+      width: 100%;
+    }
+  }
+
+  /* ====================================================
+     iPhone X / Mobile Phone (<= 520px) Ergonomics
+     ==================================================== */
+  @media screen and (max-width: 520px) {
+    body {
+      padding: 10px 8px;
+      padding-bottom: max(90px, env(safe-area-inset-bottom) + 70px);
+      padding-left: max(8px, env(safe-area-inset-left));
+      padding-right: max(8px, env(safe-area-inset-right));
+    }
+
+    .toolbar {
+      padding: 12px 14px;
+      gap: 10px;
+    }
+    .school-title {
+      font-size: 1.08rem;
+    }
+    .sub-title {
+      font-size: 0.8rem;
+    }
+    .actions {
+      width: 100%;
+      justify-content: space-between;
+    }
+    .actions button, .actions .timer-pill {
+      flex: 1;
+      min-height: 38px;
+      padding: 6px 10px;
+      font-size: 0.84rem;
+    }
+
+    /* Main Tab Switcher on Mobile */
+    .main-nav-tabs {
+      gap: 6px;
+      padding: 5px;
+      margin-bottom: 12px;
+    }
+    .main-tab-btn {
+      padding: 8px 6px;
+      font-size: 0.88rem;
+      gap: 4px;
+      border-radius: 8px;
+      flex-direction: column;
+      text-align: center;
+      line-height: 1.3;
+    }
+    .tab-badge {
+      font-size: 0.68rem;
+      padding: 1px 6px;
+      border-radius: 8px;
+    }
+
+    /* Calendar Hero on Mobile */
+    .cal-hero-card {
+      padding: 14px 14px;
+      margin-bottom: 14px;
+      border-radius: 10px;
+    }
+    .cal-school-badge {
+      font-size: 0.76rem;
+      padding: 3px 8px;
+    }
+    .cal-hero-title {
+      font-size: 1.15rem;
+      line-height: 1.35;
+    }
+    .cal-hero-sub {
+      font-size: 0.8rem;
+    }
+    .cal-note-box {
+      font-size: 0.8rem;
+      padding: 8px 10px;
+      margin-top: 10px;
+    }
+    .cal-hero-header button {
+      width: 100%;
+      min-height: 40px;
+      margin-top: 6px;
+    }
+
+    /* Compact 2x2 Grid for Countdown on Mobile */
+    .countdown-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .cd-card {
+      padding: 8px 6px;
+      border-radius: 10px;
+    }
+    .cd-card-tag {
+      font-size: 0.72rem;
+    }
+    .cd-days-num {
+      font-size: 1.45rem;
+      margin: 2px 0;
+    }
+    .cd-target-date {
+      font-size: 0.78rem;
+    }
+    .cd-subject {
+      font-size: 0.72rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .cd-click-hint {
+      font-size: 0.68rem;
+      margin-top: 4px;
+    }
+
+    /* Original Notice Card on Mobile */
+    .original-notice-card {
+      margin-bottom: 14px;
+      border-radius: 10px;
+    }
+    .original-notice-header {
+      padding: 10px 12px;
+      gap: 6px;
+    }
+    .original-notice-header > div:first-child {
+      flex: 1;
+    }
+    .original-notice-header div div:first-child {
+      font-size: 0.9rem !important;
+    }
+    .original-notice-header div div:last-child {
+      font-size: 0.75rem !important;
+    }
+    .btn-toggle-notice {
+      padding: 5px 10px;
+      font-size: 0.78rem;
+      flex-shrink: 0;
+    }
+    .original-notice-body > div {
+      padding: 12px 10px !important;
+    }
+    .notice-thumbnail {
+      width: 100% !important;
+    }
+
+    /* Filter Bar on Mobile */
+    .cal-filter-bar {
+      gap: 6px;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+    }
+    .cal-filter-btn {
+      padding: 5px 10px;
+      font-size: 0.78rem;
+      min-height: 32px;
+    }
+
+    /* Timetable Sections & Exam Cards on Mobile */
+    .timetable-heading {
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+    .exam-card {
+      padding: 12px 12px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+    }
+    .exam-date-badge {
+      font-size: 0.8rem;
+      padding: 2px 8px;
+    }
+    .exam-subj-title {
+      font-size: 0.98rem;
+    }
+    .exam-scope-list {
+      font-size: 0.88rem;
+      padding-left: 16px;
+      line-height: 1.5;
+    }
+    .quick-link-btn {
+      width: 100%;
+      justify-content: center;
+      min-height: 38px;
+      font-size: 0.85rem;
+    }
+
+    /* Math Practice UI on Mobile */
+    .day-nav-card {
+      padding: 12px 12px;
+    }
+    .day-chip {
+      min-width: 58px;
+      height: 38px;
+      font-size: 0.82rem;
+      padding: 4px 6px;
+    }
+    .q-prompt {
+      font-size: 1.15rem;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    input[type="number"], select {
+      min-height: 48px;
+      height: 48px;
+      width: 78px;
+      font-size: 1.3rem;
+    }
+    .bottom-bar {
+      flex-direction: column;
+      gap: 8px;
+    }
+    .btn-large {
+      width: 100%;
+      min-height: 48px;
+      font-size: 1rem;
+    }
+    .tablet-floating-bar {
+      padding: 8px 12px;
+      padding-bottom: max(10px, env(safe-area-inset-bottom));
+    }
+    .floating-progress {
+      font-size: 0.85rem;
+    }
+    .tablet-floating-bar button {
+      padding: 6px 10px;
+      font-size: 0.84rem;
+      min-height: 36px;
+    }
+
+    /* Notice Modal on Mobile */
+    .notice-modal-backdrop {
+      padding: 8px;
+    }
+    .notice-modal-content {
+      max-height: 96vh;
+      border-radius: 10px;
+    }
+    .notice-modal-header {
+      padding: 8px 12px;
+      font-size: 0.85rem;
+    }
+    .notice-modal-close {
+      padding: 4px 8px;
+      font-size: 0.85rem;
+    }
+    .notice-modal-img-wrap {
+      padding: 8px;
+    }
+  }
+
+  /* Answer Key Page (Print Layout) */
+  .answer-key-page {
+    display: none;
+  }
+
+  /* ====================================================
+     TOP-LEVEL TAB SWITCHER (Drills vs Calendar)
+     ==================================================== */
+  .main-nav-tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 18px;
+    background: var(--card-bg);
+    padding: 8px;
+    border-radius: var(--touch-radius);
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+  }
+  .main-tab-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .main-tab-btn:hover {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+  }
+  .main-tab-btn.active {
+    background: var(--primary);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(26,86,219,0.25);
+  }
+  .tab-badge {
+    background: #f59e0b;
+    color: #ffffff;
+    font-size: 0.78rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 700;
+  }
+  .main-tab-btn.active .tab-badge {
+    background: #ffffff;
+    color: var(--primary-dark);
+  }
+
+  /* View Containers */
+  .drills-view, .emaths-view {
+    display: none;
+  }
+  .drills-view.active, .emaths-view.active {
+    display: block;
+  }
+
+  .home-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 800;
+    text-decoration: none;
+    margin-bottom: 4px;
+  }
+  .home-back-link:hover {
+    background: #dbeafe;
+  }
+
+  .math-vault-box {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--touch-radius);
+    padding: 14px 18px;
+    margin-top: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+  }
+  .math-vault-summary {
+    font-weight: 800;
+    color: var(--primary-dark);
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  .math-vault-list {
+    list-style: none;
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .vault-pdf-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.94rem;
+  }
+  .vault-pdf-link:hover {
+    border-color: var(--primary);
+    background: var(--primary-light);
+  }
+
+  /* ====================================================
+     PRINT STYLING (A4 Optimized)
+     ==================================================== */
+  @media print {
+    @page {
+      size: A4 portrait;
+      margin: 12mm 15mm 12mm 15mm;
+    }
+
+    body {
+      background: #fff !important;
+      color: #000 !important;
+      font-size: 11pt;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    .toolbar, .main-nav-tabs, .day-nav-card, .active-day-banner, .bottom-bar, .score-banner, .btn-print, .actions, .timer-pill, .tablet-floating-bar, .math-vault-box, .home-back-link {
+      display: none !important;
+    }
+
+    .container {
+      max-width: 100% !important;
+      width: 100% !important;
+      margin: 0 !important;
+    }
+
+    .worksheet-header {
+      border: none !important;
+      border-bottom: 2pt solid #000 !important;
+      border-radius: 0 !important;
+      padding: 0 0 10pt 0 !important;
+      margin-bottom: 16pt !important;
+    }
+
+    .school-title {
+      font-size: 15pt !important;
+      color: #000 !important;
+      text-align: center;
+    }
+    .sub-title {
+      text-align: center;
+      font-size: 10pt !important;
+      color: #333 !important;
+      margin-top: 2pt;
+    }
+
+    .header-meta {
+      border-bottom: 1pt solid #000 !important;
+      margin-top: 10pt;
+      padding-bottom: 6pt;
+    }
+
+    .header-meta input {
+      border-bottom: 1pt solid #000 !important;
+      background: transparent !important;
+    }
+
+    .section-card {
+      border: 1pt solid #4b5563 !important;
+      border-radius: 4pt !important;
+      padding: 12pt !important;
+      margin-bottom: 14pt !important;
+      page-break-inside: avoid;
+    }
+
+    .section-heading {
+      color: #000 !important;
+      border-bottom: 1.5pt solid #000 !important;
+      font-size: 11.5pt !important;
+      padding-bottom: 4pt !important;
+      margin-bottom: 10pt !important;
+    }
+
+    .grid-2col {
+      grid-template-columns: 1fr 1fr !important;
+    }
+
+    .question-item {
+      background: transparent !important;
+      border: 1pt dashed #9ca3af !important;
+      padding: 8pt 10pt !important;
+      page-break-inside: avoid;
+    }
+
+    .q-num {
+      color: #000 !important;
+      font-weight: 700;
+    }
+
+    input[type="number"], select {
+      border: 1pt solid #000 !important;
+      border-radius: 0 !important;
+      width: 70pt !important;
+      height: 22pt !important;
+      min-height: 22pt !important;
+      background: transparent !important;
+      color: transparent !important;
+    }
+
+    .wp-working-row {
+      border: none !important;
+      padding: 0 !important;
+      margin-top: 8pt;
+      background: transparent !important;
+    }
+
+    .wp-working-box {
+      display: block !important;
+      height: 48pt;
+      border: 1pt dashed #9ca3af;
+      margin-bottom: 6pt;
+      position: relative;
+    }
+    .wp-working-box::before {
+      content: "草稿 / 算式欄：";
+      position: absolute;
+      top: 4pt;
+      left: 6pt;
+      font-size: 8pt;
+      color: #6b7280;
+    }
+
+    .hint-box, .badge-status {
+      display: none !important;
+    }
+
+    .answer-key-page.print-enabled {
+      display: block !important;
+      page-break-before: always;
+      padding-top: 20pt;
+    }
+
+    .answer-key-page h2 {
+      text-align: center;
+      margin-bottom: 16pt;
+      border-bottom: 2pt solid #000;
+      padding-bottom: 6pt;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Interactive Navigation Toolbar -->
+  <header class="toolbar">
+    <div>
+      <a href="https://leighapollo277-coder.github.io/yy-math-drill/" class="home-back-link">🏠 主頁</a>
+      <div class="school-title">民生書院小學 · 小一數學每日精練</div>
+      <div class="sub-title">1st Term Curriculum · 一上 A1–B12 及 Emaths Ex. 1–5</div>
+    </div>
+    <div class="actions">
+      <span class="timer-pill" id="timerDisplay">⏱️ 00:00</span>
+      <button class="btn-secondary" onclick="toggleTimer()" id="timerBtn">開始計時</button>
+      <button class="btn-print" onclick="preparePrint()">🖨️ 列印 A4</button>
+    </div>
+  </header>
+
+  <!-- Math Mode Tab Switcher -->
+  <nav class="main-nav-tabs">
+    <button class="main-tab-btn active" id="tabBtnCn" onclick="switchMathMode('cn')">
+      📝 中文數學精練 (Day 1 - 30)
+    </button>
+    <button class="main-tab-btn" id="tabBtnEmaths" onclick="switchMathMode('emaths')">
+      🔤 Emaths Ex. 1–5 <span class="tab-badge">15題</span>
+    </button>
+  </nav>
+
+  <!-- VIEW 1: Math Drills -->
+  <main id="drillsView" class="drills-view active">
+    <!-- Day Selector Card -->
+    <section class="day-nav-card">
+    <div class="day-nav-header">
+      <div class="day-nav-title">
+        <span>📅 選擇訓練天數：</span>
+        <span id="currentDayDisplay" style="color:var(--primary); font-size:1.15rem;">Day 1</span>
+      </div>
+      <div style="display:flex; gap:8px;">
+        <button class="btn-secondary" onclick="navigateDay(-1)" style="min-height:36px; padding:6px 12px; font-size:0.85rem;">◀ 上一天</button>
+        <button class="btn-secondary" onclick="navigateDay(1)" style="min-height:36px; padding:6px 12px; font-size:0.85rem;">下一天 ▶</button>
+      </div>
+    </div>
+    <div class="day-scroll-container" id="dayScrollContainer">
+      <!-- Generated via JS -->
+    </div>
+  </section>
+
+  <!-- Active Day Banner -->
+  <div class="active-day-banner">
+    <div>
+      <div class="active-day-title" id="bannerDayTitle">Day 1 練習</div>
+      <div style="opacity: 0.9; font-size: 0.95rem; margin-top: 4px;" id="bannerDaySubtitle">20以內的加法、減法、比較與應用題</div>
+    </div>
+    <div style="text-align: right;">
+      <span id="dayCompletionStatus" style="background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 0.9rem;">未作答</span>
+    </div>
+  </div>
+
+  <!-- Instant Scoring Banner -->
+  <section class="score-banner" id="scoreBanner">
+    <div>
+      <h3 style="font-size: 1.35rem; font-weight: 800;">🎉 測驗完成！評估報告</h3>
+      <p id="scoreMsg" style="opacity: 0.92; font-size: 1.05rem; margin-top: 6px;">繼續努力，每天堅持18題，數學必定進步！</p>
+    </div>
+    <div style="text-align: right;">
+      <div class="score-val" id="scoreValue">0 / 18</div>
+      <div style="font-size: 0.95rem; opacity: 0.88; font-weight: 700;" id="scorePercent">0%</div>
+    </div>
+  </section>
+
+  <!-- Worksheet Header -->
+  <div class="worksheet-header">
+    <div class="school-title" style="display:none;" id="printSchoolHeader">民生書院小學 · 小一數學每日精練</div>
+    <div class="header-meta">
+      <div>學生姓名：<input type="text" value="約約" id="studentName"></div>
+      <div>練習單元：<span id="printDayLabel" style="color:var(--primary); font-weight:800;">Day 1</span></div>
+      <div>得分：<span id="headerScore">____ / 100 分</span></div>
+    </div>
+    <div style="font-size: 0.92rem; color: var(--text-muted);">
+      💡 <strong>做題貼士</strong>：在 iPad 上作答時，輸入答案後按鍵盤「換行/Next」可自動跳到下一題。全部完成後點擊「核對答案」。
+    </div>
+  </div>
+
+  <!-- Dynamic Question Sections Container -->
+  <div id="questionsContainer">
+    <!-- Rendered dynamically for active Day -->
+  </div>
+
+  <!-- Interactive Submission Bar -->
+  <div class="bottom-bar">
+    <button class="btn-primary btn-large" onclick="checkAnswers()">✨ 核對答案 (Check Answers)</button>
+    <button class="btn-secondary btn-large" onclick="resetForm()">🔄 重新做題</button>
+  </div>
+
+  <!-- Detachable Answer Key Page (Print Layout) -->
+  <div class="answer-key-page" id="answerKeySheet">
+    <h2 id="printAnswerKeyTitle">民生書院小學 · 小一數學每日精練【Day 1 參考答案】</h2>
+    <div style="font-size: 0.95rem; margin-bottom: 12pt;">學生：約約 · 滿分 100 分</div>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 10pt;" border="1">
+      <thead>
+        <tr style="background: #f1f5f9;">
+          <th style="padding: 8pt;">題號</th>
+          <th style="padding: 8pt;">標準答案</th>
+          <th style="padding: 8pt;">解析 / 算式</th>
+        </tr>
+      </thead>
+      <tbody id="answerKeyTableBody">
+        <!-- Rendered dynamically -->
+      </tbody>
+    </table>
+  </div>
+  </main>
+
+  <!-- VIEW 2: Curated Emaths Ex. 1-5 Revision -->
+  <section id="emathsView" class="emaths-view">
+    <div class="active-day-banner" style="background:linear-gradient(135deg, #047857 0%, #059669 100%);">
+      <div>
+        <div class="active-day-title">Emaths Ex. 1–5 Revision</div>
+        <div style="opacity: 0.92; font-size: 0.95rem; margin-top: 4px;">Numbers 1–20, Comparison, Addition, Subtraction &amp; Basic Shapes</div>
+      </div>
+      <div style="text-align: right;">
+        <span id="emathsCompletionStatus" style="background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 0.9rem;">Not Checked</span>
+      </div>
+    </div>
+
+    <section class="score-banner" id="emathsScoreBanner">
+      <div>
+        <h3 style="font-size: 1.35rem; font-weight: 800;">🎉 Emaths Revision Complete!</h3>
+        <p id="emathsScoreMsg" style="opacity: 0.92; font-size: 1.05rem; margin-top: 6px;">Keep practising English math terms!</p>
+      </div>
+      <div style="text-align: right;">
+        <div class="score-val" id="emathsScoreValue">0 / 15</div>
+        <div style="font-size: 0.95rem; opacity: 0.88; font-weight: 700;" id="emathsScorePercent">0%</div>
+      </div>
+    </section>
+
+    <div id="emathsContainer"></div>
+
+    <div class="bottom-bar">
+      <button class="btn-primary btn-large" onclick="checkEmathsAnswers()">✨ Check Emaths Answers</button>
+      <button class="btn-secondary btn-large" onclick="resetEmaths()">🔄 Reset Emaths</button>
+    </div>
+  </section>
+
+  <details class="math-vault-box">
+    <summary class="math-vault-summary">📂 數學評估與綜合練習 PDF（Google Drive 私人教材庫 · 4 份）</summary>
+    <ul class="math-vault-list">
+      <li><a href="https://drive.google.com/file/d/1xxzyzgU72HHOI_bqTezOXkCvFSNt7gnk/view" target="_blank" rel="noopener" class="vault-pdf-link">📄 P1 Math Assessment <span style="font-size:0.82rem; color:var(--text-muted);">↗ Google Drive</span></a></li>
+      <li><a href="https://drive.google.com/file/d/1ctIF3HvazimXivqmWIgj3cnVBc8mqP0a/view" target="_blank" rel="noopener" class="vault-pdf-link">📄 P1 數學評估 <span style="font-size:0.82rem; color:var(--text-muted);">↗ Google Drive</span></a></li>
+      <li><a href="https://drive.google.com/file/d/1tu3Jmr55gncH5RZoK1t2AC1QZP-4bZGk/view" target="_blank" rel="noopener" class="vault-pdf-link">📄 P1進評1 <span style="font-size:0.82rem; color:var(--text-muted);">↗ Google Drive</span></a></li>
+      <li><a href="https://drive.google.com/file/d/1_PQM9A68lnMmAGhsn0ZyjP6BGeZLaR3p/view" target="_blank" rel="noopener" class="vault-pdf-link">📄 P1 數綜合練習 <span style="font-size:0.82rem; color:var(--text-muted);">↗ Google Drive</span></a></li>
+    </ul>
+  </details>
+</div>
+
+<!-- iPad Floating Quick Action Bar -->
+<div class="tablet-floating-bar" id="tabletFloatingBar">
+  <div class="floating-progress" id="floatingProgress">
+    <span>📝 <span id="floatingDayLabel" style="color:var(--primary);">Day 1</span> 已答: <span id="answeredCount" style="color:var(--primary); font-size:1.15rem;">0</span> / 18</span>
+  </div>
+  <div style="display:flex; gap:10px;">
+    <button class="btn-secondary" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="padding:8px 12px; font-size:0.88rem;">🔝 置頂</button>
+    <button class="btn-primary" onclick="checkAnswers()" style="padding:8px 18px; font-size:1rem; box-shadow:0 4px 12px rgba(37,99,235,0.25);">✨ 核對答案</button>
+  </div>
+</div>
+
+<script>
+  const allDays = [{"day": 1, "title": "Day 1", "subtitle": "第 1 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_sub", "prompt": "11 - 6 = ", "ans": 5, "explanation": "11 - 6 = 5"}, {"num": 2, "type": "calc_add", "prompt": "3 + 2 = ", "ans": 5, "explanation": "3 + 2 = 5"}, {"num": 3, "type": "calc_sub", "prompt": "10 - 6 = ", "ans": 4, "explanation": "10 - 6 = 4"}, {"num": 4, "type": "calc_add", "prompt": "15 + 4 = ", "ans": 19, "explanation": "15 + 4 = 19"}, {"num": 5, "type": "calc_add", "prompt": "9 + 7 = ", "ans": 16, "explanation": "9 + 7 = 16"}, {"num": 6, "type": "calc_sub", "prompt": "10 - 5 = ", "ans": 5, "explanation": "10 - 5 = 5"}, {"num": 7, "type": "calc_sub", "prompt": "19 - 15 = ", "ans": 4, "explanation": "19 - 15 = 4"}, {"num": 8, "type": "calc_add", "prompt": "2 + 14 = ", "ans": 16, "explanation": "2 + 14 = 16"}], "section_b": [{"num": 9, "type": "compare", "prompt": "3 + 7 〇 9", "left_expr": "3 + 7", "right_expr": "9", "ans": ">", "explanation": "因為 3 + 7 = 10，而 10 > 9，所以填「>」。"}, {"num": 10, "type": "compare", "prompt": "14 - 8 〇 7", "left_expr": "14 - 8", "right_expr": "7", "ans": "<", "explanation": "因為 14 - 8 = 6，而 6 < 7，所以填「<」。"}, {"num": 11, "type": "blank_add", "prompt": "8 + (   ) = 14", "ans": 6, "explanation": "求括號裏的數：14 - 8 = 6。"}, {"num": 12, "type": "blank_sub", "prompt": "20 - (   ) = 6", "ans": 14, "explanation": "求被減數減去甚麼等於 6：20 - 6 = 14。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "6，8，10，(   )，14", "ans": 12, "explanation": "數列每次加 2（2 個一數），10 + 2 = 12。"}, {"num": 14, "type": "seq", "prompt": "16，(   )，14，13，12", "ans": 15, "explanation": "數列倒後數，每次減 1，16 - 1 = 15。"}, {"num": 15, "type": "seq", "prompt": "0，5，10，(   )，20", "ans": 15, "explanation": "數列每 5 個一數，10 + 5 = 15。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "約約有 2 枝鉛筆，媽媽再買了 6 枝給她，她現在共有鉛筆多少枝？", "ans": 8, "formula": "2 + 6 = 8", "counter": "枝", "unit": "枝鉛筆", "explanation": "把原有的鉛筆和媽媽買的合起來，用加法計算：2 + 6 = 8（枝）。"}, {"num": 17, "type": "word_problem", "prompt": "筆袋裏有 20 塊擦膠，小明借去了 2 塊，還剩下擦膠多少塊？", "ans": 18, "formula": "20 - 2 = 18", "counter": "塊", "unit": "塊擦膠", "explanation": "從原有的擦膠中減去借出的數量，用減法計算：20 - 2 = 18（塊）。"}, {"num": 18, "type": "word_problem", "prompt": "民生小學圖書館有故事書 8 本，同學借出了 6 本，書架上還有故事書多少本？", "ans": 2, "formula": "8 - 6 = 2", "counter": "本", "unit": "本故事書", "explanation": "原有的故事書減去借出的本數，用減法計算：8 - 6 = 2（本）。"}]}, {"day": 2, "title": "Day 2", "subtitle": "第 2 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_add", "prompt": "17 + 3 = ", "ans": 20, "explanation": "17 + 3 = 20"}, {"num": 2, "type": "calc_add", "prompt": "8 + 9 = ", "ans": 17, "explanation": "8 + 9 = 17"}, {"num": 3, "type": "calc_sub", "prompt": "6 - 1 = ", "ans": 5, "explanation": "6 - 1 = 5"}, {"num": 4, "type": "calc_sub", "prompt": "15 - 2 = ", "ans": 13, "explanation": "15 - 2 = 13"}, {"num": 5, "type": "calc_sub", "prompt": "15 - 4 = ", "ans": 11, "explanation": "15 - 4 = 11"}, {"num": 6, "type": "calc_add", "prompt": "4 + 12 = ", "ans": 16, "explanation": "4 + 12 = 16"}, {"num": 7, "type": "calc_add", "prompt": "4 + 11 = ", "ans": 15, "explanation": "4 + 11 = 15"}, {"num": 8, "type": "calc_sub", "prompt": "13 - 11 = ", "ans": 2, "explanation": "13 - 11 = 2"}], "section_b": [{"num": 9, "type": "compare", "prompt": "5 + 5 〇 11", "left_expr": "5 + 5", "right_expr": "11", "ans": "<", "explanation": "因為 5 + 5 = 10，而 10 < 11，所以填「<」。"}, {"num": 10, "type": "compare", "prompt": "12 - 6 〇 5", "left_expr": "12 - 6", "right_expr": "5", "ans": ">", "explanation": "因為 12 - 6 = 6，而 6 > 5，所以填「>」。"}, {"num": 11, "type": "blank_add", "prompt": "2 + (   ) = 9", "ans": 7, "explanation": "求括號裏的數：9 - 2 = 7。"}, {"num": 12, "type": "blank_sub", "prompt": "14 - (   ) = 7", "ans": 7, "explanation": "求被減數減去甚麼等於 7：14 - 7 = 7。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "8，10，(   )，14，16", "ans": 12, "explanation": "數列每次加 2（2 個一數），10 + 2 = 12。"}, {"num": 14, "type": "seq", "prompt": "18，16，14，(   )，10", "ans": 12, "explanation": "數列每次減 2，14 - 2 = 12。"}, {"num": 15, "type": "seq", "prompt": "0，5，10，(   )，20", "ans": 15, "explanation": "數列每 5 個一數，10 + 5 = 15。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "約約吃了 5 粒士多啤梨，弟弟吃了 5 粒，兩人共吃了士多啤梨多少粒？", "ans": 10, "formula": "5 + 5 = 10", "counter": "粒", "unit": "粒士多啤梨", "explanation": "把約約和弟弟吃的數量相加：5 + 5 = 10（粒）。"}, {"num": 17, "type": "word_problem", "prompt": "果籃裏有紅蘋果 16 個，青蘋果 8 個，紅蘋果比青蘋果多多少個？", "ans": 8, "formula": "16 - 8 = 8", "counter": "個", "unit": "個", "explanation": "求兩種數量的差，用減法計算：16 - 8 = 8（個）。"}, {"num": 18, "type": "word_problem", "prompt": "花園裏開了黃花 3 朵，紅花比黃花多 5 朵，紅花開了多少朵？", "ans": 8, "formula": "3 + 5 = 8", "counter": "朵", "unit": "朵紅花", "explanation": "比黃花多 5 朵，即在黃花數量上加上 5：3 + 5 = 8（朵）。"}]}, {"day": 3, "title": "Day 3", "subtitle": "第 3 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_sub", "prompt": "9 - 8 = ", "ans": 1, "explanation": "9 - 8 = 1"}, {"num": 2, "type": "calc_add", "prompt": "10 + 3 = ", "ans": 13, "explanation": "10 + 3 = 13"}, {"num": 3, "type": "calc_sub", "prompt": "9 - 4 = ", "ans": 5, "explanation": "9 - 4 = 5"}, {"num": 4, "type": "calc_add", "prompt": "1 + 9 = ", "ans": 10, "explanation": "1 + 9 = 10"}, {"num": 5, "type": "calc_add", "prompt": "5 + 13 = ", "ans": 18, "explanation": "5 + 13 = 18"}, {"num": 6, "type": "calc_add", "prompt": "12 + 2 = ", "ans": 14, "explanation": "12 + 2 = 14"}, {"num": 7, "type": "calc_sub", "prompt": "6 - 2 = ", "ans": 4, "explanation": "6 - 2 = 4"}, {"num": 8, "type": "calc_sub", "prompt": "19 - 4 = ", "ans": 15, "explanation": "19 - 4 = 15"}], "section_b": [{"num": 9, "type": "compare", "prompt": "6 + 8 〇 15", "left_expr": "6 + 8", "right_expr": "15", "ans": "<", "explanation": "因為 6 + 8 = 14，而 14 < 15，所以填「<」。"}, {"num": 10, "type": "compare", "prompt": "19 - 9 〇 11", "left_expr": "19 - 9", "right_expr": "11", "ans": "<", "explanation": "因為 19 - 9 = 10，而 10 < 11，所以填「<」。"}, {"num": 11, "type": "blank_add", "prompt": "4 + (   ) = 20", "ans": 16, "explanation": "求括號裏的數：20 - 4 = 16。"}, {"num": 12, "type": "blank_sub", "prompt": "17 - (   ) = 2", "ans": 15, "explanation": "求被減數減去甚麼等於 2：17 - 2 = 15。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "4，6，8，(   )，12", "ans": 10, "explanation": "數列每次加 2（2 個一數），8 + 2 = 10。"}, {"num": 14, "type": "seq", "prompt": "16，(   )，14，13，12", "ans": 15, "explanation": "數列倒後數，每次減 1，16 - 1 = 15。"}, {"num": 15, "type": "seq", "prompt": "5，8，(   )，14，17", "ans": 11, "explanation": "觀察前後規律，填入的數字是 11。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "學校校車上有小一生 11 人，到達民生書院時有 9 人下車，車上現在還有小一生多少人？", "ans": 2, "formula": "11 - 9 = 2", "counter": "人", "unit": "人", "explanation": "原有乘客減去下車人數：11 - 9 = 2（人）。"}, {"num": 17, "type": "word_problem", "prompt": "約約原有精美貼紙 9 張，送了 3 張給好朋友，她還有貼紙多少張？", "ans": 6, "formula": "9 - 3 = 6", "counter": "張", "unit": "張貼紙", "explanation": "送出後的剩餘數量用減法計算：9 - 3 = 6（張）。"}, {"num": 18, "type": "word_problem", "prompt": "雪櫃裏有鮮奶 11 盒，爸爸和約約喝了 2 盒，還剩下鮮奶多少盒？", "ans": 9, "formula": "11 - 2 = 9", "counter": "盒", "unit": "盒鮮奶", "explanation": "原有的盒數減去喝了的盒數：11 - 2 = 9（盒）。"}]}, {"day": 4, "title": "Day 4", "subtitle": "第 4 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_sub", "prompt": "8 - 3 = ", "ans": 5, "explanation": "8 - 3 = 5"}, {"num": 2, "type": "calc_sub", "prompt": "12 - 4 = ", "ans": 8, "explanation": "12 - 4 = 8"}, {"num": 3, "type": "calc_sub", "prompt": "13 - 5 = ", "ans": 8, "explanation": "13 - 5 = 8"}, {"num": 4, "type": "calc_add", "prompt": "17 + 2 = ", "ans": 19, "explanation": "17 + 2 = 19"}, {"num": 5, "type": "calc_sub", "prompt": "11 - 4 = ", "ans": 7, "explanation": "11 - 4 = 7"}, {"num": 6, "type": "calc_add", "prompt": "4 + 1 = ", "ans": 5, "explanation": "4 + 1 = 5"}, {"num": 7, "type": "calc_add", "prompt": "6 + 12 = ", "ans": 18, "explanation": "6 + 12 = 18"}, {"num": 8, "type": "calc_add", "prompt": "10 + 5 = ", "ans": 15, "explanation": "10 + 5 = 15"}], "section_b": [{"num": 9, "type": "compare", "prompt": "7 + 8 〇 16", "left_expr": "7 + 8", "right_expr": "16", "ans": "<", "explanation": "因為 7 + 8 = 15，而 15 < 16，所以填「<」。"}, {"num": 10, "type": "compare", "prompt": "20 - 4 〇 17", "left_expr": "20 - 4", "right_expr": "17", "ans": "<", "explanation": "因為 20 - 4 = 16，而 16 < 17，所以填「<」。"}, {"num": 11, "type": "blank_add", "prompt": "2 + (   ) = 17", "ans": 15, "explanation": "求括號裏的數：17 - 2 = 15。"}, {"num": 12, "type": "blank_sub", "prompt": "16 - (   ) = 14", "ans": 2, "explanation": "求被減數減去甚麼等於 14：16 - 14 = 2。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "6，8，10，(   )，14", "ans": 12, "explanation": "數列每次加 2（2 個一數），10 + 2 = 12。"}, {"num": 14, "type": "seq", "prompt": "18，16，14，(   )，10", "ans": 12, "explanation": "數列每次減 2，14 - 2 = 12。"}, {"num": 15, "type": "seq", "prompt": "3，6，(   )，12，15", "ans": 9, "explanation": "觀察前後規律，填入的數字是 9。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "玩具箱裏有小熊公仔 4 隻，小狗公仔 13 隻，兩種公仔共有多少隻？", "ans": 17, "formula": "4 + 13 = 17", "counter": "隻", "unit": "隻公仔", "explanation": "把兩種公仔合起來計算總數：4 + 13 = 17（隻）。"}, {"num": 17, "type": "word_problem", "prompt": "約約星期一完成了 8 頁進展評估，星期二完成了 6 頁，兩天共完成了評估多少頁？", "ans": 14, "formula": "8 + 6 = 14", "counter": "頁", "unit": "頁評估", "explanation": "計算兩天的總頁數，用加法：8 + 6 = 14（頁）。"}, {"num": 18, "type": "word_problem", "prompt": "小一體育課上，排隊的男生有 15 人，女生有 10 人，男生比女生多多少人？", "ans": 5, "formula": "15 - 10 = 5", "counter": "人", "unit": "人", "explanation": "比較男生和女生的差額：15 - 10 = 5（人）。"}]}, {"day": 5, "title": "Day 5", "subtitle": "第 5 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_add", "prompt": "9 + 4 = ", "ans": 13, "explanation": "9 + 4 = 13"}, {"num": 2, "type": "calc_sub", "prompt": "14 - 1 = ", "ans": 13, "explanation": "14 - 1 = 13"}, {"num": 3, "type": "calc_sub", "prompt": "12 - 1 = ", "ans": 11, "explanation": "12 - 1 = 11"}, {"num": 4, "type": "calc_sub", "prompt": "10 - 2 = ", "ans": 8, "explanation": "10 - 2 = 8"}, {"num": 5, "type": "calc_add", "prompt": "2 + 16 = ", "ans": 18, "explanation": "2 + 16 = 18"}, {"num": 6, "type": "calc_sub", "prompt": "8 - 6 = ", "ans": 2, "explanation": "8 - 6 = 2"}, {"num": 7, "type": "calc_add", "prompt": "1 + 10 = ", "ans": 11, "explanation": "1 + 10 = 11"}, {"num": 8, "type": "calc_add", "prompt": "4 + 3 = ", "ans": 7, "explanation": "4 + 3 = 7"}], "section_b": [{"num": 9, "type": "compare", "prompt": "9 + 5 〇 13", "left_expr": "9 + 5", "right_expr": "13", "ans": ">", "explanation": "因為 9 + 5 = 14，而 14 > 13，所以填「>」。"}, {"num": 10, "type": "compare", "prompt": "16 - 8 〇 8", "left_expr": "16 - 8", "right_expr": "8", "ans": "=", "explanation": "因為 16 - 8 = 8，而 8 = 8，所以填「=」。"}, {"num": 11, "type": "blank_add", "prompt": "4 + (   ) = 18", "ans": 14, "explanation": "求括號裏的數：18 - 4 = 14。"}, {"num": 12, "type": "blank_sub", "prompt": "10 - (   ) = 6", "ans": 4, "explanation": "求被減數減去甚麼等於 6：10 - 6 = 4。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "2，4，6，(   )，10", "ans": 8, "explanation": "數列每次加 2（2 個一數），6 + 2 = 8。"}, {"num": 14, "type": "seq", "prompt": "18，17，16，(   )，14", "ans": 15, "explanation": "數列倒後數，每次減 1，16 - 1 = 15。"}, {"num": 15, "type": "seq", "prompt": "0，5，10，(   )，20", "ans": 15, "explanation": "數列每 5 個一數，10 + 5 = 15。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "媽媽買了雞蛋 9 隻，做蛋糕用了 2 隻，還剩下雞蛋多少隻？", "ans": 7, "formula": "9 - 2 = 7", "counter": "隻", "unit": "隻雞蛋", "explanation": "用去了雞蛋要減去：9 - 2 = 7（隻）。"}, {"num": 17, "type": "word_problem", "prompt": "樹枝上停了麻雀 13 隻，飛走了 7 隻，樹枝上還有麻雀多少隻？", "ans": 6, "formula": "13 - 7 = 6", "counter": "隻", "unit": "隻麻雀", "explanation": "飛走了即減少了：13 - 7 = 6（隻）。"}, {"num": 18, "type": "word_problem", "prompt": "文具店裏，一把直尺賣 2 元，一個卷筆刀賣 18 元，買直尺和卷筆刀各一件共需付多少元？", "ans": 20, "formula": "2 + 18 = 20", "counter": "元", "unit": "元", "explanation": "兩件文具的售價相加：2 + 18 = 20（元）。"}]}, {"day": 6, "title": "Day 6", "subtitle": "第 6 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_sub", "prompt": "14 - 5 = ", "ans": 9, "explanation": "14 - 5 = 9"}, {"num": 2, "type": "calc_add", "prompt": "11 + 2 = ", "ans": 13, "explanation": "11 + 2 = 13"}, {"num": 3, "type": "calc_sub", "prompt": "19 - 9 = ", "ans": 10, "explanation": "19 - 9 = 10"}, {"num": 4, "type": "calc_add", "prompt": "2 + 5 = ", "ans": 7, "explanation": "2 + 5 = 7"}, {"num": 5, "type": "calc_sub", "prompt": "9 - 5 = ", "ans": 4, "explanation": "9 - 5 = 4"}, {"num": 6, "type": "calc_add", "prompt": "12 + 4 = ", "ans": 16, "explanation": "12 + 4 = 16"}, {"num": 7, "type": "calc_sub", "prompt": "6 - 2 = ", "ans": 4, "explanation": "6 - 2 = 4"}, {"num": 8, "type": "calc_add", "prompt": "2 + 9 = ", "ans": 11, "explanation": "2 + 9 = 11"}], "section_b": [{"num": 9, "type": "compare", "prompt": "3 + 8 〇 11", "left_expr": "3 + 8", "right_expr": "11", "ans": "=", "explanation": "因為 3 + 8 = 11，而 11 = 11，所以填「=」。"}, {"num": 10, "type": "compare", "prompt": "12 - 9 〇 2", "left_expr": "12 - 9", "right_expr": "2", "ans": ">", "explanation": "因為 12 - 9 = 3，而 3 > 2，所以填「>」。"}, {"num": 11, "type": "blank_add", "prompt": "6 + (   ) = 13", "ans": 7, "explanation": "求括號裏的數：13 - 6 = 7。"}, {"num": 12, "type": "blank_sub", "prompt": "10 - (   ) = 6", "ans": 4, "explanation": "求被減數減去甚麼等於 6：10 - 6 = 4。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "2，4，(   )，8，10", "ans": 6, "explanation": "數列每次加 2（2 個一數），4 + 2 = 6。"}, {"num": 14, "type": "seq", "prompt": "18，17，16，(   )，14", "ans": 15, "explanation": "數列倒後數，每次減 1，16 - 1 = 15。"}, {"num": 15, "type": "seq", "prompt": "0，5，(   )，15，20", "ans": 10, "explanation": "數列每 5 個一數，5 + 5 = 10。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "約約有彩色筆 8 枝，壞了 3 枝丟掉，現在她還有彩色筆多少枝？", "ans": 5, "formula": "8 - 3 = 5", "counter": "枝", "unit": "枝彩色筆", "explanation": "丟掉壞的數量：8 - 3 = 5（枝）。"}, {"num": 17, "type": "word_problem", "prompt": "餅乾盒內有朱古力餅 8 塊，曲奇餅 3 塊，盒內共有餅乾多少塊？", "ans": 11, "formula": "8 + 3 = 11", "counter": "塊", "unit": "塊餅乾", "explanation": "合算餅乾總數：8 + 3 = 11（塊）。"}, {"num": 18, "type": "word_problem", "prompt": "小息時，操場上有 2 個同學跳繩，有 13 個同學拍球，操場上共有同學多少個？", "ans": 15, "formula": "2 + 13 = 15", "counter": "個", "unit": "個同學", "explanation": "把跳繩和拍球的同學加起來：2 + 13 = 15（個）。"}]}, {"day": 7, "title": "Day 7", "subtitle": "第 7 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_add", "prompt": "4 + 9 = ", "ans": 13, "explanation": "4 + 9 = 13"}, {"num": 2, "type": "calc_sub", "prompt": "9 - 4 = ", "ans": 5, "explanation": "9 - 4 = 5"}, {"num": 3, "type": "calc_add", "prompt": "3 + 4 = ", "ans": 7, "explanation": "3 + 4 = 7"}, {"num": 4, "type": "calc_add", "prompt": "2 + 16 = ", "ans": 18, "explanation": "2 + 16 = 18"}, {"num": 5, "type": "calc_sub", "prompt": "12 - 9 = ", "ans": 3, "explanation": "12 - 9 = 3"}, {"num": 6, "type": "calc_sub", "prompt": "8 - 7 = ", "ans": 1, "explanation": "8 - 7 = 1"}, {"num": 7, "type": "calc_add", "prompt": "1 + 7 = ", "ans": 8, "explanation": "1 + 7 = 8"}, {"num": 8, "type": "calc_sub", "prompt": "7 - 6 = ", "ans": 1, "explanation": "7 - 6 = 1"}], "section_b": [{"num": 9, "type": "compare", "prompt": "3 + 5 〇 7", "left_expr": "3 + 5", "right_expr": "7", "ans": ">", "explanation": "因為 3 + 5 = 8，而 8 > 7，所以填「>」。"}, {"num": 10, "type": "compare", "prompt": "20 - 3 〇 18", "left_expr": "20 - 3", "right_expr": "18", "ans": "<", "explanation": "因為 20 - 3 = 17，而 17 < 18，所以填「<」。"}, {"num": 11, "type": "blank_add", "prompt": "2 + (   ) = 12", "ans": 10, "explanation": "求括號裏的數：12 - 2 = 10。"}, {"num": 12, "type": "blank_sub", "prompt": "14 - (   ) = 3", "ans": 11, "explanation": "求被減數減去甚麼等於 3：14 - 3 = 11。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "2，4，6，(   )，10", "ans": 8, "explanation": "數列每次加 2（2 個一數），6 + 2 = 8。"}, {"num": 14, "type": "seq", "prompt": "17，16，15，(   )，13", "ans": 14, "explanation": "數列倒後數，每次減 1，15 - 1 = 14。"}, {"num": 15, "type": "seq", "prompt": "1，4，(   )，10，13", "ans": 7, "explanation": "觀察前後規律，填入的數字是 7。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "約約早上摺了紙飛機 8 架，下午又摺了 2 架，她全天共摺了紙飛機多少架？", "ans": 10, "formula": "8 + 2 = 10", "counter": "架", "unit": "架紙飛機", "explanation": "計算全天摺出的總架數：8 + 2 = 10（架）。"}, {"num": 17, "type": "word_problem", "prompt": "魚缸裏養了金魚 10 條，黑摩利 5 條，魚缸裏共有魚多少條？", "ans": 15, "formula": "10 + 5 = 15", "counter": "條", "unit": "條魚", "explanation": "兩種魚的數量相加：10 + 5 = 15（條）。"}, {"num": 18, "type": "word_problem", "prompt": "一盒顏色筆有 16 枝，約約借出去了 6 枝，盒內還剩下顏色筆多少枝？", "ans": 10, "formula": "16 - 6 = 10", "counter": "枝", "unit": "枝顏色筆", "explanation": "借出減去：16 - 6 = 10（枝）。"}]}, {"day": 8, "title": "Day 8", "subtitle": "第 8 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_sub", "prompt": "20 - 4 = ", "ans": 16, "explanation": "20 - 4 = 16"}, {"num": 2, "type": "calc_add", "prompt": "2 + 10 = ", "ans": 12, "explanation": "2 + 10 = 12"}, {"num": 3, "type": "calc_add", "prompt": "5 + 2 = ", "ans": 7, "explanation": "5 + 2 = 7"}, {"num": 4, "type": "calc_add", "prompt": "3 + 7 = ", "ans": 10, "explanation": "3 + 7 = 10"}, {"num": 5, "type": "calc_add", "prompt": "4 + 1 = ", "ans": 5, "explanation": "4 + 1 = 5"}, {"num": 6, "type": "calc_sub", "prompt": "12 - 1 = ", "ans": 11, "explanation": "12 - 1 = 11"}, {"num": 7, "type": "calc_sub", "prompt": "16 - 9 = ", "ans": 7, "explanation": "16 - 9 = 7"}, {"num": 8, "type": "calc_sub", "prompt": "14 - 12 = ", "ans": 2, "explanation": "14 - 12 = 2"}], "section_b": [{"num": 9, "type": "compare", "prompt": "5 + 8 〇 12", "left_expr": "5 + 8", "right_expr": "12", "ans": ">", "explanation": "因為 5 + 8 = 13，而 13 > 12，所以填「>」。"}, {"num": 10, "type": "compare", "prompt": "14 - 5 〇 8", "left_expr": "14 - 5", "right_expr": "8", "ans": ">", "explanation": "因為 14 - 5 = 9，而 9 > 8，所以填「>」。"}, {"num": 11, "type": "blank_add", "prompt": "2 + (   ) = 13", "ans": 11, "explanation": "求括號裏的數：13 - 2 = 11。"}, {"num": 12, "type": "blank_sub", "prompt": "14 - (   ) = 7", "ans": 7, "explanation": "求被減數減去甚麼等於 7：14 - 7 = 7。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "8，10，12，(   )，16", "ans": 14, "explanation": "數列每次加 2（2 個一數），12 + 2 = 14。"}, {"num": 14, "type": "seq", "prompt": "20，18，16，(   )，12", "ans": 14, "explanation": "數列每次減 2，16 - 2 = 14。"}, {"num": 15, "type": "seq", "prompt": "0，5，(   )，15，20", "ans": 10, "explanation": "數列每 5 個一數，5 + 5 = 10。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "約約原有零用錢 19 元，在小食部買豆奶用了 10 元，她還剩下零用錢多少元？", "ans": 9, "formula": "19 - 10 = 9", "counter": "元", "unit": "元零用錢", "explanation": "買食物用去的錢減去：19 - 10 = 9（元）。"}, {"num": 17, "type": "word_problem", "prompt": "小敏畫了 7 顆星星，約約畫了 13 顆星星，兩人一共畫了星星多少顆？", "ans": 20, "formula": "7 + 13 = 20", "counter": "顆", "unit": "顆星星", "explanation": "兩人畫的星星總數用加法：7 + 13 = 20（顆）。"}, {"num": 18, "type": "word_problem", "prompt": "約約有一條長繩，剪去了 6 厘米後，還剩下 9 厘米，這條繩原本長多少厘米？", "ans": 15, "formula": "9 + 6 = 15", "counter": "厘米", "unit": "厘米", "explanation": "求原本的長度，把剩下的和剪去的合起來：9 + 6 = 15（厘米）。"}]}, {"day": 9, "title": "Day 9", "subtitle": "第 9 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_sub", "prompt": "13 - 4 = ", "ans": 9, "explanation": "13 - 4 = 9"}, {"num": 2, "type": "calc_add", "prompt": "11 + 5 = ", "ans": 16, "explanation": "11 + 5 = 16"}, {"num": 3, "type": "calc_sub", "prompt": "19 - 6 = ", "ans": 13, "explanation": "19 - 6 = 13"}, {"num": 4, "type": "calc_add", "prompt": "1 + 11 = ", "ans": 12, "explanation": "1 + 11 = 12"}, {"num": 5, "type": "calc_sub", "prompt": "17 - 15 = ", "ans": 2, "explanation": "17 - 15 = 2"}, {"num": 6, "type": "calc_add", "prompt": "3 + 11 = ", "ans": 14, "explanation": "3 + 11 = 14"}, {"num": 7, "type": "calc_add", "prompt": "5 + 13 = ", "ans": 18, "explanation": "5 + 13 = 18"}, {"num": 8, "type": "calc_sub", "prompt": "8 - 6 = ", "ans": 2, "explanation": "8 - 6 = 2"}], "section_b": [{"num": 9, "type": "compare", "prompt": "10 + 3 〇 13", "left_expr": "10 + 3", "right_expr": "13", "ans": "=", "explanation": "因為 10 + 3 = 13，而 13 = 13，所以填「=」。"}, {"num": 10, "type": "compare", "prompt": "19 - 8 〇 12", "left_expr": "19 - 8", "right_expr": "12", "ans": "<", "explanation": "因為 19 - 8 = 11，而 11 < 12，所以填「<」。"}, {"num": 11, "type": "blank_add", "prompt": "11 + (   ) = 18", "ans": 7, "explanation": "求括號裏的數：18 - 11 = 7。"}, {"num": 12, "type": "blank_sub", "prompt": "14 - (   ) = 9", "ans": 5, "explanation": "求被減數減去甚麼等於 9：14 - 9 = 5。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "6，8，(   )，12，14", "ans": 10, "explanation": "數列每次加 2（2 個一數），8 + 2 = 10。"}, {"num": 14, "type": "seq", "prompt": "20，18，16，(   )，12", "ans": 14, "explanation": "數列每次減 2，16 - 2 = 14。"}, {"num": 15, "type": "seq", "prompt": "5，8，(   )，14，17", "ans": 11, "explanation": "觀察前後規律，填入的數字是 11。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "課室第一排有課桌 16 張，第二排有課桌 3 張，這兩排共有課桌多少張？", "ans": 19, "formula": "16 + 3 = 19", "counter": "張", "unit": "張課桌", "explanation": "把兩排課桌加起來：16 + 3 = 19（張）。"}, {"num": 17, "type": "word_problem", "prompt": "盤子裏有小蛋糕 8 件，下午茶吃了 6 件，盤子裏還有小蛋糕多少件？", "ans": 2, "formula": "8 - 6 = 2", "counter": "件", "unit": "件小蛋糕", "explanation": "吃掉減去：8 - 6 = 2（件）。"}, {"num": 18, "type": "word_problem", "prompt": "約約集郵簿裏有香港郵票 9 枚，外國郵票 8 枚，共有郵票多少枚？", "ans": 17, "formula": "9 + 8 = 17", "counter": "枚", "unit": "枚郵票", "explanation": "兩種郵票相加：9 + 8 = 17（枚）。"}]}, {"day": 10, "title": "Day 10", "subtitle": "第 10 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_sub", "prompt": "14 - 13 = ", "ans": 1, "explanation": "14 - 13 = 1"}, {"num": 2, "type": "calc_add", "prompt": "3 + 6 = ", "ans": 9, "explanation": "3 + 6 = 9"}, {"num": 3, "type": "calc_sub", "prompt": "20 - 17 = ", "ans": 3, "explanation": "20 - 17 = 3"}, {"num": 4, "type": "calc_sub", "prompt": "8 - 6 = ", "ans": 2, "explanation": "8 - 6 = 2"}, {"num": 5, "type": "calc_add", "prompt": "3 + 6 = ", "ans": 9, "explanation": "3 + 6 = 9"}, {"num": 6, "type": "calc_add", "prompt": "13 + 2 = ", "ans": 15, "explanation": "13 + 2 = 15"}, {"num": 7, "type": "calc_add", "prompt": "10 + 6 = ", "ans": 16, "explanation": "10 + 6 = 16"}, {"num": 8, "type": "calc_sub", "prompt": "20 - 8 = ", "ans": 12, "explanation": "20 - 8 = 12"}], "section_b": [{"num": 9, "type": "compare", "prompt": "9 + 4 〇 12", "left_expr": "9 + 4", "right_expr": "12", "ans": ">", "explanation": "因為 9 + 4 = 13，而 13 > 12，所以填「>」。"}, {"num": 10, "type": "compare", "prompt": "19 - 4 〇 16", "left_expr": "19 - 4", "right_expr": "16", "ans": "<", "explanation": "因為 19 - 4 = 15，而 15 < 16，所以填「<」。"}, {"num": 11, "type": "blank_add", "prompt": "9 + (   ) = 12", "ans": 3, "explanation": "求括號裏的數：12 - 9 = 3。"}, {"num": 12, "type": "blank_sub", "prompt": "19 - (   ) = 13", "ans": 6, "explanation": "求被減數減去甚麼等於 13：19 - 13 = 6。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "10，12，(   )，16，18", "ans": 14, "explanation": "數列每次加 2（2 個一數），12 + 2 = 14。"}, {"num": 14, "type": "seq", "prompt": "19，18，(   )，16，15", "ans": 17, "explanation": "數列倒後數，每次減 1，18 - 1 = 17。"}, {"num": 15, "type": "seq", "prompt": "0，5，10，(   )，20", "ans": 15, "explanation": "數列每 5 個一數，10 + 5 = 15。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "停車場裏停了小汽車 14 輛，開走了 10 輛，現在停車場還有小汽車多少輛？", "ans": 4, "formula": "14 - 10 = 4", "counter": "輛", "unit": "輛小汽車", "explanation": "開走了即減少：14 - 10 = 4（輛）。"}, {"num": 17, "type": "word_problem", "prompt": "常識課分組，第一組有學生 12 人，第二組有學生 7 人，第二組比第一組少多少人？", "ans": 5, "formula": "12 - 7 = 5", "counter": "人", "unit": "人", "explanation": "求兩組人數差：12 - 7 = 5（人）。"}, {"num": 18, "type": "word_problem", "prompt": "約約在常規功課裏答對了 6 題，在加分題裏答對了 3 題，她共答對了多少題？", "ans": 9, "formula": "6 + 3 = 9", "counter": "題", "unit": "題", "explanation": "兩部分答對的題數相加：6 + 3 = 9（題）。"}]}, {"day": 11, "title": "Day 11", "subtitle": "第 11 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_sub", "prompt": "15 - 3 = ", "ans": 12, "explanation": "15 - 3 = 12"}, {"num": 2, "type": "calc_add", "prompt": "1 + 7 = ", "ans": 8, "explanation": "1 + 7 = 8"}, {"num": 3, "type": "calc_sub", "prompt": "7 - 5 = ", "ans": 2, "explanation": "7 - 5 = 2"}, {"num": 4, "type": "calc_add", "prompt": "5 + 6 = ", "ans": 11, "explanation": "5 + 6 = 11"}, {"num": 5, "type": "calc_add", "prompt": "7 + 2 = ", "ans": 9, "explanation": "7 + 2 = 9"}, {"num": 6, "type": "calc_sub", "prompt": "15 - 12 = ", "ans": 3, "explanation": "15 - 12 = 3"}, {"num": 7, "type": "calc_add", "prompt": "4 + 2 = ", "ans": 6, "explanation": "4 + 2 = 6"}, {"num": 8, "type": "calc_sub", "prompt": "17 - 14 = ", "ans": 3, "explanation": "17 - 14 = 3"}], "section_b": [{"num": 9, "type": "compare", "prompt": "9 + 8 〇 16", "left_expr": "9 + 8", "right_expr": "16", "ans": ">", "explanation": "因為 9 + 8 = 17，而 17 > 16，所以填「>」。"}, {"num": 10, "type": "compare", "prompt": "14 - 3 〇 10", "left_expr": "14 - 3", "right_expr": "10", "ans": ">", "explanation": "因為 14 - 3 = 11，而 11 > 10，所以填「>」。"}, {"num": 11, "type": "blank_add", "prompt": "7 + (   ) = 15", "ans": 8, "explanation": "求括號裏的數：15 - 7 = 8。"}, {"num": 12, "type": "blank_sub", "prompt": "19 - (   ) = 13", "ans": 6, "explanation": "求被減數減去甚麼等於 13：19 - 13 = 6。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "4，6，(   )，10，12", "ans": 8, "explanation": "數列每次加 2（2 個一數），6 + 2 = 8。"}, {"num": 14, "type": "seq", "prompt": "20，18，16，(   )，12", "ans": 14, "explanation": "數列每次減 2，16 - 2 = 14。"}, {"num": 15, "type": "seq", "prompt": "5，8，(   )，14，17", "ans": 11, "explanation": "觀察前後規律，填入的數字是 11。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "約約有 2 枝鉛筆，媽媽再買了 5 枝給她，她現在共有鉛筆多少枝？", "ans": 7, "formula": "2 + 5 = 7", "counter": "枝", "unit": "枝鉛筆", "explanation": "把原有的鉛筆和媽媽買的合起來，用加法計算：2 + 5 = 7（枝）。"}, {"num": 17, "type": "word_problem", "prompt": "筆袋裏有 20 塊擦膠，小明借去了 17 塊，還剩下擦膠多少塊？", "ans": 3, "formula": "20 - 17 = 3", "counter": "塊", "unit": "塊擦膠", "explanation": "從原有的擦膠中減去借出的數量，用減法計算：20 - 17 = 3（塊）。"}, {"num": 18, "type": "word_problem", "prompt": "民生小學圖書館有故事書 20 本，同學借出了 8 本，書架上還有故事書多少本？", "ans": 12, "formula": "20 - 8 = 12", "counter": "本", "unit": "本故事書", "explanation": "原有的故事書減去借出的本數，用減法計算：20 - 8 = 12（本）。"}]}, {"day": 12, "title": "Day 12", "subtitle": "第 12 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_sub", "prompt": "12 - 11 = ", "ans": 1, "explanation": "12 - 11 = 1"}, {"num": 2, "type": "calc_add", "prompt": "5 + 2 = ", "ans": 7, "explanation": "5 + 2 = 7"}, {"num": 3, "type": "calc_add", "prompt": "6 + 3 = ", "ans": 9, "explanation": "6 + 3 = 9"}, {"num": 4, "type": "calc_sub", "prompt": "17 - 2 = ", "ans": 15, "explanation": "17 - 2 = 15"}, {"num": 5, "type": "calc_add", "prompt": "5 + 4 = ", "ans": 9, "explanation": "5 + 4 = 9"}, {"num": 6, "type": "calc_sub", "prompt": "11 - 7 = ", "ans": 4, "explanation": "11 - 7 = 4"}, {"num": 7, "type": "calc_add", "prompt": "12 + 3 = ", "ans": 15, "explanation": "12 + 3 = 15"}, {"num": 8, "type": "calc_sub", "prompt": "14 - 11 = ", "ans": 3, "explanation": "14 - 11 = 3"}], "section_b": [{"num": 9, "type": "compare", "prompt": "4 + 6 〇 11", "left_expr": "4 + 6", "right_expr": "11", "ans": "<", "explanation": "因為 4 + 6 = 10，而 10 < 11，所以填「<」。"}, {"num": 10, "type": "compare", "prompt": "17 - 6 〇 11", "left_expr": "17 - 6", "right_expr": "11", "ans": "=", "explanation": "因為 17 - 6 = 11，而 11 = 11，所以填「=」。"}, {"num": 11, "type": "blank_add", "prompt": "12 + (   ) = 19", "ans": 7, "explanation": "求括號裏的數：19 - 12 = 7。"}, {"num": 12, "type": "blank_sub", "prompt": "10 - (   ) = 4", "ans": 6, "explanation": "求被減數減去甚麼等於 4：10 - 4 = 6。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "4，6，8，(   )，12", "ans": 10, "explanation": "數列每次加 2（2 個一數），8 + 2 = 10。"}, {"num": 14, "type": "seq", "prompt": "20，18，(   )，14，12", "ans": 16, "explanation": "數列每次減 2，18 - 2 = 16。"}, {"num": 15, "type": "seq", "prompt": "5，8，(   )，14，17", "ans": 11, "explanation": "觀察前後規律，填入的數字是 11。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "約約吃了 12 粒士多啤梨，弟弟吃了 6 粒，兩人共吃了士多啤梨多少粒？", "ans": 18, "formula": "12 + 6 = 18", "counter": "粒", "unit": "粒士多啤梨", "explanation": "把約約和弟弟吃的數量相加：12 + 6 = 18（粒）。"}, {"num": 17, "type": "word_problem", "prompt": "果籃裏有紅蘋果 14 個，青蘋果 12 個，紅蘋果比青蘋果多多少個？", "ans": 2, "formula": "14 - 12 = 2", "counter": "個", "unit": "個", "explanation": "求兩種數量的差，用減法計算：14 - 12 = 2（個）。"}, {"num": 18, "type": "word_problem", "prompt": "花園裏開了黃花 3 朵，紅花比黃花多 5 朵，紅花開了多少朵？", "ans": 8, "formula": "3 + 5 = 8", "counter": "朵", "unit": "朵紅花", "explanation": "比黃花多 5 朵，即在黃花數量上加上 5：3 + 5 = 8（朵）。"}]}, {"day": 13, "title": "Day 13", "subtitle": "第 13 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_sub", "prompt": "20 - 5 = ", "ans": 15, "explanation": "20 - 5 = 15"}, {"num": 2, "type": "calc_add", "prompt": "13 + 4 = ", "ans": 17, "explanation": "13 + 4 = 17"}, {"num": 3, "type": "calc_sub", "prompt": "10 - 2 = ", "ans": 8, "explanation": "10 - 2 = 8"}, {"num": 4, "type": "calc_add", "prompt": "6 + 11 = ", "ans": 17, "explanation": "6 + 11 = 17"}, {"num": 5, "type": "calc_sub", "prompt": "9 - 5 = ", "ans": 4, "explanation": "9 - 5 = 4"}, {"num": 6, "type": "calc_sub", "prompt": "20 - 3 = ", "ans": 17, "explanation": "20 - 3 = 17"}, {"num": 7, "type": "calc_add", "prompt": "7 + 10 = ", "ans": 17, "explanation": "7 + 10 = 17"}, {"num": 8, "type": "calc_add", "prompt": "17 + 3 = ", "ans": 20, "explanation": "17 + 3 = 20"}], "section_b": [{"num": 9, "type": "compare", "prompt": "7 + 5 〇 11", "left_expr": "7 + 5", "right_expr": "11", "ans": ">", "explanation": "因為 7 + 5 = 12，而 12 > 11，所以填「>」。"}, {"num": 10, "type": "compare", "prompt": "17 - 4 〇 12", "left_expr": "17 - 4", "right_expr": "12", "ans": ">", "explanation": "因為 17 - 4 = 13，而 13 > 12，所以填「>」。"}, {"num": 11, "type": "blank_add", "prompt": "6 + (   ) = 18", "ans": 12, "explanation": "求括號裏的數：18 - 6 = 12。"}, {"num": 12, "type": "blank_sub", "prompt": "10 - (   ) = 8", "ans": 2, "explanation": "求被減數減去甚麼等於 8：10 - 8 = 2。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "2，4，6，(   )，10", "ans": 8, "explanation": "數列每次加 2（2 個一數），6 + 2 = 8。"}, {"num": 14, "type": "seq", "prompt": "20，18，(   )，14，12", "ans": 16, "explanation": "數列每次減 2，18 - 2 = 16。"}, {"num": 15, "type": "seq", "prompt": "0，5，10，(   )，20", "ans": 15, "explanation": "數列每 5 個一數，10 + 5 = 15。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "學校校車上有小一生 15 人，到達民生書院時有 7 人下車，車上現在還有小一生多少人？", "ans": 8, "formula": "15 - 7 = 8", "counter": "人", "unit": "人", "explanation": "原有乘客減去下車人數：15 - 7 = 8（人）。"}, {"num": 17, "type": "word_problem", "prompt": "約約原有精美貼紙 14 張，送了 4 張給好朋友，她還有貼紙多少張？", "ans": 10, "formula": "14 - 4 = 10", "counter": "張", "unit": "張貼紙", "explanation": "送出後的剩餘數量用減法計算：14 - 4 = 10（張）。"}, {"num": 18, "type": "word_problem", "prompt": "雪櫃裏有鮮奶 14 盒，爸爸和約約喝了 3 盒，還剩下鮮奶多少盒？", "ans": 11, "formula": "14 - 3 = 11", "counter": "盒", "unit": "盒鮮奶", "explanation": "原有的盒數減去喝了的盒數：14 - 3 = 11（盒）。"}]}, {"day": 14, "title": "Day 14", "subtitle": "第 14 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_sub", "prompt": "13 - 10 = ", "ans": 3, "explanation": "13 - 10 = 3"}, {"num": 2, "type": "calc_add", "prompt": "1 + 4 = ", "ans": 5, "explanation": "1 + 4 = 5"}, {"num": 3, "type": "calc_sub", "prompt": "14 - 10 = ", "ans": 4, "explanation": "14 - 10 = 4"}, {"num": 4, "type": "calc_add", "prompt": "5 + 3 = ", "ans": 8, "explanation": "5 + 3 = 8"}, {"num": 5, "type": "calc_sub", "prompt": "12 - 9 = ", "ans": 3, "explanation": "12 - 9 = 3"}, {"num": 6, "type": "calc_add", "prompt": "5 + 12 = ", "ans": 17, "explanation": "5 + 12 = 17"}, {"num": 7, "type": "calc_add", "prompt": "1 + 5 = ", "ans": 6, "explanation": "1 + 5 = 6"}, {"num": 8, "type": "calc_sub", "prompt": "20 - 11 = ", "ans": 9, "explanation": "20 - 11 = 9"}], "section_b": [{"num": 9, "type": "compare", "prompt": "6 + 7 〇 12", "left_expr": "6 + 7", "right_expr": "12", "ans": ">", "explanation": "因為 6 + 7 = 13，而 13 > 12，所以填「>」。"}, {"num": 10, "type": "compare", "prompt": "16 - 4 〇 12", "left_expr": "16 - 4", "right_expr": "12", "ans": "=", "explanation": "因為 16 - 4 = 12，而 12 = 12，所以填「=」。"}, {"num": 11, "type": "blank_add", "prompt": "2 + (   ) = 18", "ans": 16, "explanation": "求括號裏的數：18 - 2 = 16。"}, {"num": 12, "type": "blank_sub", "prompt": "11 - (   ) = 5", "ans": 6, "explanation": "求被減數減去甚麼等於 5：11 - 5 = 6。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "6，8，10，(   )，14", "ans": 12, "explanation": "數列每次加 2（2 個一數），10 + 2 = 12。"}, {"num": 14, "type": "seq", "prompt": "18，16，(   )，12，10", "ans": 14, "explanation": "數列每次減 2，16 - 2 = 14。"}, {"num": 15, "type": "seq", "prompt": "7，10，(   )，16，19", "ans": 13, "explanation": "觀察前後規律，填入的數字是 13。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "玩具箱裏有小熊公仔 14 隻，小狗公仔 6 隻，兩種公仔共有多少隻？", "ans": 20, "formula": "14 + 6 = 20", "counter": "隻", "unit": "隻公仔", "explanation": "把兩種公仔合起來計算總數：14 + 6 = 20（隻）。"}, {"num": 17, "type": "word_problem", "prompt": "約約星期一完成了 12 頁進展評估，星期二完成了 4 頁，兩天共完成了評估多少頁？", "ans": 16, "formula": "12 + 4 = 16", "counter": "頁", "unit": "頁評估", "explanation": "計算兩天的總頁數，用加法：12 + 4 = 16（頁）。"}, {"num": 18, "type": "word_problem", "prompt": "小一體育課上，排隊的男生有 18 人，女生有 6 人，男生比女生多多少人？", "ans": 12, "formula": "18 - 6 = 12", "counter": "人", "unit": "人", "explanation": "比較男生和女生的差額：18 - 6 = 12（人）。"}]}, {"day": 15, "title": "Day 15", "subtitle": "第 15 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_sub", "prompt": "9 - 1 = ", "ans": 8, "explanation": "9 - 1 = 8"}, {"num": 2, "type": "calc_add", "prompt": "4 + 14 = ", "ans": 18, "explanation": "4 + 14 = 18"}, {"num": 3, "type": "calc_sub", "prompt": "20 - 19 = ", "ans": 1, "explanation": "20 - 19 = 1"}, {"num": 4, "type": "calc_sub", "prompt": "11 - 10 = ", "ans": 1, "explanation": "11 - 10 = 1"}, {"num": 5, "type": "calc_add", "prompt": "3 + 6 = ", "ans": 9, "explanation": "3 + 6 = 9"}, {"num": 6, "type": "calc_add", "prompt": "6 + 11 = ", "ans": 17, "explanation": "6 + 11 = 17"}, {"num": 7, "type": "calc_sub", "prompt": "15 - 1 = ", "ans": 14, "explanation": "15 - 1 = 14"}, {"num": 8, "type": "calc_add", "prompt": "13 + 3 = ", "ans": 16, "explanation": "13 + 3 = 16"}], "section_b": [{"num": 9, "type": "compare", "prompt": "6 + 6 〇 11", "left_expr": "6 + 6", "right_expr": "11", "ans": ">", "explanation": "因為 6 + 6 = 12，而 12 > 11，所以填「>」。"}, {"num": 10, "type": "compare", "prompt": "17 - 6 〇 11", "left_expr": "17 - 6", "right_expr": "11", "ans": "=", "explanation": "因為 17 - 6 = 11，而 11 = 11，所以填「=」。"}, {"num": 11, "type": "blank_add", "prompt": "16 + (   ) = 19", "ans": 3, "explanation": "求括號裏的數：19 - 16 = 3。"}, {"num": 12, "type": "blank_sub", "prompt": "20 - (   ) = 18", "ans": 2, "explanation": "求被減數減去甚麼等於 18：20 - 18 = 2。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "10，12，(   )，16，18", "ans": 14, "explanation": "數列每次加 2（2 個一數），12 + 2 = 14。"}, {"num": 14, "type": "seq", "prompt": "16，14，12，(   )，8", "ans": 10, "explanation": "數列每次減 2，12 - 2 = 10。"}, {"num": 15, "type": "seq", "prompt": "7，10，(   )，16，19", "ans": 13, "explanation": "觀察前後規律，填入的數字是 13。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "媽媽買了雞蛋 18 隻，做蛋糕用了 15 隻，還剩下雞蛋多少隻？", "ans": 3, "formula": "18 - 15 = 3", "counter": "隻", "unit": "隻雞蛋", "explanation": "用去了雞蛋要減去：18 - 15 = 3（隻）。"}, {"num": 17, "type": "word_problem", "prompt": "樹枝上停了麻雀 13 隻，飛走了 8 隻，樹枝上還有麻雀多少隻？", "ans": 5, "formula": "13 - 8 = 5", "counter": "隻", "unit": "隻麻雀", "explanation": "飛走了即減少了：13 - 8 = 5（隻）。"}, {"num": 18, "type": "word_problem", "prompt": "文具店裏，一把直尺賣 13 元，一個卷筆刀賣 2 元，買直尺和卷筆刀各一件共需付多少元？", "ans": 15, "formula": "13 + 2 = 15", "counter": "元", "unit": "元", "explanation": "兩件文具的售價相加：13 + 2 = 15（元）。"}]}, {"day": 16, "title": "Day 16", "subtitle": "第 16 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_add", "prompt": "4 + 2 = ", "ans": 6, "explanation": "4 + 2 = 6"}, {"num": 2, "type": "calc_sub", "prompt": "7 - 5 = ", "ans": 2, "explanation": "7 - 5 = 2"}, {"num": 3, "type": "calc_sub", "prompt": "17 - 14 = ", "ans": 3, "explanation": "17 - 14 = 3"}, {"num": 4, "type": "calc_sub", "prompt": "7 - 5 = ", "ans": 2, "explanation": "7 - 5 = 2"}, {"num": 5, "type": "calc_add", "prompt": "8 + 3 = ", "ans": 11, "explanation": "8 + 3 = 11"}, {"num": 6, "type": "calc_sub", "prompt": "12 - 7 = ", "ans": 5, "explanation": "12 - 7 = 5"}, {"num": 7, "type": "calc_add", "prompt": "6 + 8 = ", "ans": 14, "explanation": "6 + 8 = 14"}, {"num": 8, "type": "calc_add", "prompt": "12 + 1 = ", "ans": 13, "explanation": "12 + 1 = 13"}], "section_b": [{"num": 9, "type": "compare", "prompt": "3 + 9 〇 13", "left_expr": "3 + 9", "right_expr": "13", "ans": "<", "explanation": "因為 3 + 9 = 12，而 12 < 13，所以填「<」。"}, {"num": 10, "type": "compare", "prompt": "12 - 5 〇 6", "left_expr": "12 - 5", "right_expr": "6", "ans": ">", "explanation": "因為 12 - 5 = 7，而 7 > 6，所以填「>」。"}, {"num": 11, "type": "blank_add", "prompt": "2 + (   ) = 12", "ans": 10, "explanation": "求括號裏的數：12 - 2 = 10。"}, {"num": 12, "type": "blank_sub", "prompt": "19 - (   ) = 17", "ans": 2, "explanation": "求被減數減去甚麼等於 17：19 - 17 = 2。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "8，10，12，(   )，16", "ans": 14, "explanation": "數列每次加 2（2 個一數），12 + 2 = 14。"}, {"num": 14, "type": "seq", "prompt": "16，(   )，14，13，12", "ans": 15, "explanation": "數列倒後數，每次減 1，16 - 1 = 15。"}, {"num": 15, "type": "seq", "prompt": "5，8，(   )，14，17", "ans": 11, "explanation": "觀察前後規律，填入的數字是 11。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "約約有彩色筆 17 枝，壞了 10 枝丟掉，現在她還有彩色筆多少枝？", "ans": 7, "formula": "17 - 10 = 7", "counter": "枝", "unit": "枝彩色筆", "explanation": "丟掉壞的數量：17 - 10 = 7（枝）。"}, {"num": 17, "type": "word_problem", "prompt": "餅乾盒內有朱古力餅 4 塊，曲奇餅 16 塊，盒內共有餅乾多少塊？", "ans": 20, "formula": "4 + 16 = 20", "counter": "塊", "unit": "塊餅乾", "explanation": "合算餅乾總數：4 + 16 = 20（塊）。"}, {"num": 18, "type": "word_problem", "prompt": "小息時，操場上有 10 個同學跳繩，有 4 個同學拍球，操場上共有同學多少個？", "ans": 14, "formula": "10 + 4 = 14", "counter": "個", "unit": "個同學", "explanation": "把跳繩和拍球的同學加起來：10 + 4 = 14（個）。"}]}, {"day": 17, "title": "Day 17", "subtitle": "第 17 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_add", "prompt": "4 + 11 = ", "ans": 15, "explanation": "4 + 11 = 15"}, {"num": 2, "type": "calc_sub", "prompt": "17 - 9 = ", "ans": 8, "explanation": "17 - 9 = 8"}, {"num": 3, "type": "calc_sub", "prompt": "6 - 2 = ", "ans": 4, "explanation": "6 - 2 = 4"}, {"num": 4, "type": "calc_add", "prompt": "1 + 8 = ", "ans": 9, "explanation": "1 + 8 = 9"}, {"num": 5, "type": "calc_add", "prompt": "7 + 11 = ", "ans": 18, "explanation": "7 + 11 = 18"}, {"num": 6, "type": "calc_sub", "prompt": "14 - 4 = ", "ans": 10, "explanation": "14 - 4 = 10"}, {"num": 7, "type": "calc_add", "prompt": "7 + 3 = ", "ans": 10, "explanation": "7 + 3 = 10"}, {"num": 8, "type": "calc_sub", "prompt": "15 - 7 = ", "ans": 8, "explanation": "15 - 7 = 8"}], "section_b": [{"num": 9, "type": "compare", "prompt": "4 + 6 〇 9", "left_expr": "4 + 6", "right_expr": "9", "ans": ">", "explanation": "因為 4 + 6 = 10，而 10 > 9，所以填「>」。"}, {"num": 10, "type": "compare", "prompt": "15 - 9 〇 6", "left_expr": "15 - 9", "right_expr": "6", "ans": "=", "explanation": "因為 15 - 9 = 6，而 6 = 6，所以填「=」。"}, {"num": 11, "type": "blank_add", "prompt": "6 + (   ) = 12", "ans": 6, "explanation": "求括號裏的數：12 - 6 = 6。"}, {"num": 12, "type": "blank_sub", "prompt": "15 - (   ) = 4", "ans": 11, "explanation": "求被減數減去甚麼等於 4：15 - 4 = 11。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "2，4，(   )，8，10", "ans": 6, "explanation": "數列每次加 2（2 個一數），4 + 2 = 6。"}, {"num": 14, "type": "seq", "prompt": "15，14，13，(   )，11", "ans": 12, "explanation": "數列倒後數，每次減 1，13 - 1 = 12。"}, {"num": 15, "type": "seq", "prompt": "1，4，(   )，10，13", "ans": 7, "explanation": "觀察前後規律，填入的數字是 7。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "約約早上摺了紙飛機 3 架，下午又摺了 15 架，她全天共摺了紙飛機多少架？", "ans": 18, "formula": "3 + 15 = 18", "counter": "架", "unit": "架紙飛機", "explanation": "計算全天摺出的總架數：3 + 15 = 18（架）。"}, {"num": 17, "type": "word_problem", "prompt": "魚缸裏養了金魚 13 條，黑摩利 7 條，魚缸裏共有魚多少條？", "ans": 20, "formula": "13 + 7 = 20", "counter": "條", "unit": "條魚", "explanation": "兩種魚的數量相加：13 + 7 = 20（條）。"}, {"num": 18, "type": "word_problem", "prompt": "一盒顏色筆有 20 枝，約約借出去了 13 枝，盒內還剩下顏色筆多少枝？", "ans": 7, "formula": "20 - 13 = 7", "counter": "枝", "unit": "枝顏色筆", "explanation": "借出減去：20 - 13 = 7（枝）。"}]}, {"day": 18, "title": "Day 18", "subtitle": "第 18 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_add", "prompt": "2 + 9 = ", "ans": 11, "explanation": "2 + 9 = 11"}, {"num": 2, "type": "calc_add", "prompt": "6 + 5 = ", "ans": 11, "explanation": "6 + 5 = 11"}, {"num": 3, "type": "calc_sub", "prompt": "17 - 3 = ", "ans": 14, "explanation": "17 - 3 = 14"}, {"num": 4, "type": "calc_add", "prompt": "4 + 10 = ", "ans": 14, "explanation": "4 + 10 = 14"}, {"num": 5, "type": "calc_sub", "prompt": "11 - 2 = ", "ans": 9, "explanation": "11 - 2 = 9"}, {"num": 6, "type": "calc_sub", "prompt": "8 - 1 = ", "ans": 7, "explanation": "8 - 1 = 7"}, {"num": 7, "type": "calc_sub", "prompt": "18 - 2 = ", "ans": 16, "explanation": "18 - 2 = 16"}, {"num": 8, "type": "calc_add", "prompt": "8 + 1 = ", "ans": 9, "explanation": "8 + 1 = 9"}], "section_b": [{"num": 9, "type": "compare", "prompt": "8 + 4 〇 13", "left_expr": "8 + 4", "right_expr": "13", "ans": "<", "explanation": "因為 8 + 4 = 12，而 12 < 13，所以填「<」。"}, {"num": 10, "type": "compare", "prompt": "20 - 4 〇 16", "left_expr": "20 - 4", "right_expr": "16", "ans": "=", "explanation": "因為 20 - 4 = 16，而 16 = 16，所以填「=」。"}, {"num": 11, "type": "blank_add", "prompt": "8 + (   ) = 13", "ans": 5, "explanation": "求括號裏的數：13 - 8 = 5。"}, {"num": 12, "type": "blank_sub", "prompt": "18 - (   ) = 7", "ans": 11, "explanation": "求被減數減去甚麼等於 7：18 - 7 = 11。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "2，4，(   )，8，10", "ans": 6, "explanation": "數列每次加 2（2 個一數），4 + 2 = 6。"}, {"num": 14, "type": "seq", "prompt": "16，14，12，(   )，8", "ans": 10, "explanation": "數列每次減 2，12 - 2 = 10。"}, {"num": 15, "type": "seq", "prompt": "7，10，(   )，16，19", "ans": 13, "explanation": "觀察前後規律，填入的數字是 13。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "約約原有零用錢 16 元，在小食部買豆奶用了 8 元，她還剩下零用錢多少元？", "ans": 8, "formula": "16 - 8 = 8", "counter": "元", "unit": "元零用錢", "explanation": "買食物用去的錢減去：16 - 8 = 8（元）。"}, {"num": 17, "type": "word_problem", "prompt": "小敏畫了 3 顆星星，約約畫了 12 顆星星，兩人一共畫了星星多少顆？", "ans": 15, "formula": "3 + 12 = 15", "counter": "顆", "unit": "顆星星", "explanation": "兩人畫的星星總數用加法：3 + 12 = 15（顆）。"}, {"num": 18, "type": "word_problem", "prompt": "約約有一條長繩，剪去了 6 厘米後，還剩下 3 厘米，這條繩原本長多少厘米？", "ans": 9, "formula": "3 + 6 = 9", "counter": "厘米", "unit": "厘米", "explanation": "求原本的長度，把剩下的和剪去的合起來：3 + 6 = 9（厘米）。"}]}, {"day": 19, "title": "Day 19", "subtitle": "第 19 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_add", "prompt": "13 + 7 = ", "ans": 20, "explanation": "13 + 7 = 20"}, {"num": 2, "type": "calc_add", "prompt": "2 + 17 = ", "ans": 19, "explanation": "2 + 17 = 19"}, {"num": 3, "type": "calc_add", "prompt": "6 + 8 = ", "ans": 14, "explanation": "6 + 8 = 14"}, {"num": 4, "type": "calc_sub", "prompt": "17 - 14 = ", "ans": 3, "explanation": "17 - 14 = 3"}, {"num": 5, "type": "calc_sub", "prompt": "8 - 6 = ", "ans": 2, "explanation": "8 - 6 = 2"}, {"num": 6, "type": "calc_add", "prompt": "5 + 3 = ", "ans": 8, "explanation": "5 + 3 = 8"}, {"num": 7, "type": "calc_sub", "prompt": "9 - 1 = ", "ans": 8, "explanation": "9 - 1 = 8"}, {"num": 8, "type": "calc_sub", "prompt": "14 - 8 = ", "ans": 6, "explanation": "14 - 8 = 6"}], "section_b": [{"num": 9, "type": "compare", "prompt": "6 + 5 〇 10", "left_expr": "6 + 5", "right_expr": "10", "ans": ">", "explanation": "因為 6 + 5 = 11，而 11 > 10，所以填「>」。"}, {"num": 10, "type": "compare", "prompt": "19 - 4 〇 14", "left_expr": "19 - 4", "right_expr": "14", "ans": ">", "explanation": "因為 19 - 4 = 15，而 15 > 14，所以填「>」。"}, {"num": 11, "type": "blank_add", "prompt": "6 + (   ) = 9", "ans": 3, "explanation": "求括號裏的數：9 - 6 = 3。"}, {"num": 12, "type": "blank_sub", "prompt": "18 - (   ) = 9", "ans": 9, "explanation": "求被減數減去甚麼等於 9：18 - 9 = 9。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "6，8，(   )，12，14", "ans": 10, "explanation": "數列每次加 2（2 個一數），8 + 2 = 10。"}, {"num": 14, "type": "seq", "prompt": "19，18，17，(   )，15", "ans": 16, "explanation": "數列倒後數，每次減 1，17 - 1 = 16。"}, {"num": 15, "type": "seq", "prompt": "1，4，(   )，10，13", "ans": 7, "explanation": "觀察前後規律，填入的數字是 7。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "課室第一排有課桌 5 張，第二排有課桌 3 張，這兩排共有課桌多少張？", "ans": 8, "formula": "5 + 3 = 8", "counter": "張", "unit": "張課桌", "explanation": "把兩排課桌加起來：5 + 3 = 8（張）。"}, {"num": 17, "type": "word_problem", "prompt": "盤子裏有小蛋糕 10 件，下午茶吃了 7 件，盤子裏還有小蛋糕多少件？", "ans": 3, "formula": "10 - 7 = 3", "counter": "件", "unit": "件小蛋糕", "explanation": "吃掉減去：10 - 7 = 3（件）。"}, {"num": 18, "type": "word_problem", "prompt": "約約集郵簿裏有香港郵票 4 枚，外國郵票 5 枚，共有郵票多少枚？", "ans": 9, "formula": "4 + 5 = 9", "counter": "枚", "unit": "枚郵票", "explanation": "兩種郵票相加：4 + 5 = 9（枚）。"}]}, {"day": 20, "title": "Day 20", "subtitle": "第 20 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_add", "prompt": "8 + 6 = ", "ans": 14, "explanation": "8 + 6 = 14"}, {"num": 2, "type": "calc_sub", "prompt": "6 - 5 = ", "ans": 1, "explanation": "6 - 5 = 1"}, {"num": 3, "type": "calc_sub", "prompt": "18 - 2 = ", "ans": 16, "explanation": "18 - 2 = 16"}, {"num": 4, "type": "calc_add", "prompt": "3 + 5 = ", "ans": 8, "explanation": "3 + 5 = 8"}, {"num": 5, "type": "calc_add", "prompt": "2 + 7 = ", "ans": 9, "explanation": "2 + 7 = 9"}, {"num": 6, "type": "calc_sub", "prompt": "20 - 14 = ", "ans": 6, "explanation": "20 - 14 = 6"}, {"num": 7, "type": "calc_add", "prompt": "5 + 2 = ", "ans": 7, "explanation": "5 + 2 = 7"}, {"num": 8, "type": "calc_sub", "prompt": "10 - 9 = ", "ans": 1, "explanation": "10 - 9 = 1"}], "section_b": [{"num": 9, "type": "compare", "prompt": "5 + 8 〇 13", "left_expr": "5 + 8", "right_expr": "13", "ans": "=", "explanation": "因為 5 + 8 = 13，而 13 = 13，所以填「=」。"}, {"num": 10, "type": "compare", "prompt": "11 - 4 〇 8", "left_expr": "11 - 4", "right_expr": "8", "ans": "<", "explanation": "因為 11 - 4 = 7，而 7 < 8，所以填「<」。"}, {"num": 11, "type": "blank_add", "prompt": "14 + (   ) = 20", "ans": 6, "explanation": "求括號裏的數：20 - 14 = 6。"}, {"num": 12, "type": "blank_sub", "prompt": "17 - (   ) = 12", "ans": 5, "explanation": "求被減數減去甚麼等於 12：17 - 12 = 5。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "4，6，(   )，10，12", "ans": 8, "explanation": "數列每次加 2（2 個一數），6 + 2 = 8。"}, {"num": 14, "type": "seq", "prompt": "16，15，(   )，13，12", "ans": 14, "explanation": "數列倒後數，每次減 1，15 - 1 = 14。"}, {"num": 15, "type": "seq", "prompt": "3，6，(   )，12，15", "ans": 9, "explanation": "觀察前後規律，填入的數字是 9。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "停車場裏停了小汽車 11 輛，開走了 2 輛，現在停車場還有小汽車多少輛？", "ans": 9, "formula": "11 - 2 = 9", "counter": "輛", "unit": "輛小汽車", "explanation": "開走了即減少：11 - 2 = 9（輛）。"}, {"num": 17, "type": "word_problem", "prompt": "常識課分組，第一組有學生 8 人，第二組有學生 6 人，第二組比第一組少多少人？", "ans": 2, "formula": "8 - 6 = 2", "counter": "人", "unit": "人", "explanation": "求兩組人數差：8 - 6 = 2（人）。"}, {"num": 18, "type": "word_problem", "prompt": "約約在常規功課裏答對了 2 題，在加分題裏答對了 14 題，她共答對了多少題？", "ans": 16, "formula": "2 + 14 = 16", "counter": "題", "unit": "題", "explanation": "兩部分答對的題數相加：2 + 14 = 16（題）。"}]}, {"day": 21, "title": "Day 21", "subtitle": "第 21 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_add", "prompt": "1 + 5 = ", "ans": 6, "explanation": "1 + 5 = 6"}, {"num": 2, "type": "calc_sub", "prompt": "15 - 4 = ", "ans": 11, "explanation": "15 - 4 = 11"}, {"num": 3, "type": "calc_sub", "prompt": "13 - 3 = ", "ans": 10, "explanation": "13 - 3 = 10"}, {"num": 4, "type": "calc_sub", "prompt": "11 - 3 = ", "ans": 8, "explanation": "11 - 3 = 8"}, {"num": 5, "type": "calc_add", "prompt": "1 + 5 = ", "ans": 6, "explanation": "1 + 5 = 6"}, {"num": 6, "type": "calc_add", "prompt": "1 + 4 = ", "ans": 5, "explanation": "1 + 4 = 5"}, {"num": 7, "type": "calc_add", "prompt": "4 + 1 = ", "ans": 5, "explanation": "4 + 1 = 5"}, {"num": 8, "type": "calc_sub", "prompt": "6 - 2 = ", "ans": 4, "explanation": "6 - 2 = 4"}], "section_b": [{"num": 9, "type": "compare", "prompt": "9 + 7 〇 17", "left_expr": "9 + 7", "right_expr": "17", "ans": "<", "explanation": "因為 9 + 7 = 16，而 16 < 17，所以填「<」。"}, {"num": 10, "type": "compare", "prompt": "17 - 9 〇 7", "left_expr": "17 - 9", "right_expr": "7", "ans": ">", "explanation": "因為 17 - 9 = 8，而 8 > 7，所以填「>」。"}, {"num": 11, "type": "blank_add", "prompt": "16 + (   ) = 18", "ans": 2, "explanation": "求括號裏的數：18 - 16 = 2。"}, {"num": 12, "type": "blank_sub", "prompt": "14 - (   ) = 10", "ans": 4, "explanation": "求被減數減去甚麼等於 10：14 - 10 = 4。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "6，8，(   )，12，14", "ans": 10, "explanation": "數列每次加 2（2 個一數），8 + 2 = 10。"}, {"num": 14, "type": "seq", "prompt": "20，18，(   )，14，12", "ans": 16, "explanation": "數列每次減 2，18 - 2 = 16。"}, {"num": 15, "type": "seq", "prompt": "0，5，10，(   )，20", "ans": 15, "explanation": "數列每 5 個一數，10 + 5 = 15。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "約約有 2 枝鉛筆，媽媽再買了 7 枝給她，她現在共有鉛筆多少枝？", "ans": 9, "formula": "2 + 7 = 9", "counter": "枝", "unit": "枝鉛筆", "explanation": "把原有的鉛筆和媽媽買的合起來，用加法計算：2 + 7 = 9（枝）。"}, {"num": 17, "type": "word_problem", "prompt": "筆袋裏有 12 塊擦膠，小明借去了 6 塊，還剩下擦膠多少塊？", "ans": 6, "formula": "12 - 6 = 6", "counter": "塊", "unit": "塊擦膠", "explanation": "從原有的擦膠中減去借出的數量，用減法計算：12 - 6 = 6（塊）。"}, {"num": 18, "type": "word_problem", "prompt": "民生小學圖書館有故事書 13 本，同學借出了 8 本，書架上還有故事書多少本？", "ans": 5, "formula": "13 - 8 = 5", "counter": "本", "unit": "本故事書", "explanation": "原有的故事書減去借出的本數，用減法計算：13 - 8 = 5（本）。"}]}, {"day": 22, "title": "Day 22", "subtitle": "第 22 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_sub", "prompt": "16 - 5 = ", "ans": 11, "explanation": "16 - 5 = 11"}, {"num": 2, "type": "calc_add", "prompt": "7 + 4 = ", "ans": 11, "explanation": "7 + 4 = 11"}, {"num": 3, "type": "calc_add", "prompt": "9 + 8 = ", "ans": 17, "explanation": "9 + 8 = 17"}, {"num": 4, "type": "calc_sub", "prompt": "8 - 6 = ", "ans": 2, "explanation": "8 - 6 = 2"}, {"num": 5, "type": "calc_sub", "prompt": "10 - 6 = ", "ans": 4, "explanation": "10 - 6 = 4"}, {"num": 6, "type": "calc_sub", "prompt": "12 - 6 = ", "ans": 6, "explanation": "12 - 6 = 6"}, {"num": 7, "type": "calc_add", "prompt": "1 + 16 = ", "ans": 17, "explanation": "1 + 16 = 17"}, {"num": 8, "type": "calc_add", "prompt": "15 + 3 = ", "ans": 18, "explanation": "15 + 3 = 18"}], "section_b": [{"num": 9, "type": "compare", "prompt": "8 + 2 〇 9", "left_expr": "8 + 2", "right_expr": "9", "ans": ">", "explanation": "因為 8 + 2 = 10，而 10 > 9，所以填「>」。"}, {"num": 10, "type": "compare", "prompt": "13 - 4 〇 9", "left_expr": "13 - 4", "right_expr": "9", "ans": "=", "explanation": "因為 13 - 4 = 9，而 9 = 9，所以填「=」。"}, {"num": 11, "type": "blank_add", "prompt": "10 + (   ) = 12", "ans": 2, "explanation": "求括號裏的數：12 - 10 = 2。"}, {"num": 12, "type": "blank_sub", "prompt": "14 - (   ) = 8", "ans": 6, "explanation": "求被減數減去甚麼等於 8：14 - 8 = 6。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "4，6，(   )，10，12", "ans": 8, "explanation": "數列每次加 2（2 個一數），6 + 2 = 8。"}, {"num": 14, "type": "seq", "prompt": "16，14，12，(   )，8", "ans": 10, "explanation": "數列每次減 2，12 - 2 = 10。"}, {"num": 15, "type": "seq", "prompt": "7，10，(   )，16，19", "ans": 13, "explanation": "觀察前後規律，填入的數字是 13。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "約約吃了 7 粒士多啤梨，弟弟吃了 6 粒，兩人共吃了士多啤梨多少粒？", "ans": 13, "formula": "7 + 6 = 13", "counter": "粒", "unit": "粒士多啤梨", "explanation": "把約約和弟弟吃的數量相加：7 + 6 = 13（粒）。"}, {"num": 17, "type": "word_problem", "prompt": "果籃裏有紅蘋果 16 個，青蘋果 9 個，紅蘋果比青蘋果多多少個？", "ans": 7, "formula": "16 - 9 = 7", "counter": "個", "unit": "個", "explanation": "求兩種數量的差，用減法計算：16 - 9 = 7（個）。"}, {"num": 18, "type": "word_problem", "prompt": "花園裏開了黃花 2 朵，紅花比黃花多 13 朵，紅花開了多少朵？", "ans": 15, "formula": "2 + 13 = 15", "counter": "朵", "unit": "朵紅花", "explanation": "比黃花多 13 朵，即在黃花數量上加上 13：2 + 13 = 15（朵）。"}]}, {"day": 23, "title": "Day 23", "subtitle": "第 23 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_add", "prompt": "4 + 2 = ", "ans": 6, "explanation": "4 + 2 = 6"}, {"num": 2, "type": "calc_sub", "prompt": "8 - 2 = ", "ans": 6, "explanation": "8 - 2 = 6"}, {"num": 3, "type": "calc_sub", "prompt": "9 - 3 = ", "ans": 6, "explanation": "9 - 3 = 6"}, {"num": 4, "type": "calc_add", "prompt": "8 + 11 = ", "ans": 19, "explanation": "8 + 11 = 19"}, {"num": 5, "type": "calc_sub", "prompt": "14 - 12 = ", "ans": 2, "explanation": "14 - 12 = 2"}, {"num": 6, "type": "calc_add", "prompt": "2 + 18 = ", "ans": 20, "explanation": "2 + 18 = 20"}, {"num": 7, "type": "calc_add", "prompt": "7 + 2 = ", "ans": 9, "explanation": "7 + 2 = 9"}, {"num": 8, "type": "calc_sub", "prompt": "9 - 6 = ", "ans": 3, "explanation": "9 - 6 = 3"}], "section_b": [{"num": 9, "type": "compare", "prompt": "5 + 6 〇 12", "left_expr": "5 + 6", "right_expr": "12", "ans": "<", "explanation": "因為 5 + 6 = 11，而 11 < 12，所以填「<」。"}, {"num": 10, "type": "compare", "prompt": "13 - 7 〇 6", "left_expr": "13 - 7", "right_expr": "6", "ans": "=", "explanation": "因為 13 - 7 = 6，而 6 = 6，所以填「=」。"}, {"num": 11, "type": "blank_add", "prompt": "17 + (   ) = 19", "ans": 2, "explanation": "求括號裏的數：19 - 17 = 2。"}, {"num": 12, "type": "blank_sub", "prompt": "16 - (   ) = 5", "ans": 11, "explanation": "求被減數減去甚麼等於 5：16 - 5 = 11。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "4，6，8，(   )，12", "ans": 10, "explanation": "數列每次加 2（2 個一數），8 + 2 = 10。"}, {"num": 14, "type": "seq", "prompt": "19，18，(   )，16，15", "ans": 17, "explanation": "數列倒後數，每次減 1，18 - 1 = 17。"}, {"num": 15, "type": "seq", "prompt": "0，5，(   )，15，20", "ans": 10, "explanation": "數列每 5 個一數，5 + 5 = 10。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "學校校車上有小一生 13 人，到達民生書院時有 4 人下車，車上現在還有小一生多少人？", "ans": 9, "formula": "13 - 4 = 9", "counter": "人", "unit": "人", "explanation": "原有乘客減去下車人數：13 - 4 = 9（人）。"}, {"num": 17, "type": "word_problem", "prompt": "約約原有精美貼紙 12 張，送了 7 張給好朋友，她還有貼紙多少張？", "ans": 5, "formula": "12 - 7 = 5", "counter": "張", "unit": "張貼紙", "explanation": "送出後的剩餘數量用減法計算：12 - 7 = 5（張）。"}, {"num": 18, "type": "word_problem", "prompt": "雪櫃裏有鮮奶 16 盒，爸爸和約約喝了 9 盒，還剩下鮮奶多少盒？", "ans": 7, "formula": "16 - 9 = 7", "counter": "盒", "unit": "盒鮮奶", "explanation": "原有的盒數減去喝了的盒數：16 - 9 = 7（盒）。"}]}, {"day": 24, "title": "Day 24", "subtitle": "第 24 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_sub", "prompt": "18 - 9 = ", "ans": 9, "explanation": "18 - 9 = 9"}, {"num": 2, "type": "calc_sub", "prompt": "17 - 8 = ", "ans": 9, "explanation": "17 - 8 = 9"}, {"num": 3, "type": "calc_sub", "prompt": "16 - 8 = ", "ans": 8, "explanation": "16 - 8 = 8"}, {"num": 4, "type": "calc_sub", "prompt": "7 - 5 = ", "ans": 2, "explanation": "7 - 5 = 2"}, {"num": 5, "type": "calc_add", "prompt": "1 + 6 = ", "ans": 7, "explanation": "1 + 6 = 7"}, {"num": 6, "type": "calc_add", "prompt": "3 + 3 = ", "ans": 6, "explanation": "3 + 3 = 6"}, {"num": 7, "type": "calc_add", "prompt": "4 + 1 = ", "ans": 5, "explanation": "4 + 1 = 5"}, {"num": 8, "type": "calc_add", "prompt": "17 + 3 = ", "ans": 20, "explanation": "17 + 3 = 20"}], "section_b": [{"num": 9, "type": "compare", "prompt": "7 + 8 〇 16", "left_expr": "7 + 8", "right_expr": "16", "ans": "<", "explanation": "因為 7 + 8 = 15，而 15 < 16，所以填「<」。"}, {"num": 10, "type": "compare", "prompt": "19 - 4 〇 14", "left_expr": "19 - 4", "right_expr": "14", "ans": ">", "explanation": "因為 19 - 4 = 15，而 15 > 14，所以填「>」。"}, {"num": 11, "type": "blank_add", "prompt": "6 + (   ) = 9", "ans": 3, "explanation": "求括號裏的數：9 - 6 = 3。"}, {"num": 12, "type": "blank_sub", "prompt": "18 - (   ) = 13", "ans": 5, "explanation": "求被減數減去甚麼等於 13：18 - 13 = 5。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "6，8，(   )，12，14", "ans": 10, "explanation": "數列每次加 2（2 個一數），8 + 2 = 10。"}, {"num": 14, "type": "seq", "prompt": "16，14，12，(   )，8", "ans": 10, "explanation": "數列每次減 2，12 - 2 = 10。"}, {"num": 15, "type": "seq", "prompt": "3，6，(   )，12，15", "ans": 9, "explanation": "觀察前後規律，填入的數字是 9。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "玩具箱裏有小熊公仔 5 隻，小狗公仔 9 隻，兩種公仔共有多少隻？", "ans": 14, "formula": "5 + 9 = 14", "counter": "隻", "unit": "隻公仔", "explanation": "把兩種公仔合起來計算總數：5 + 9 = 14（隻）。"}, {"num": 17, "type": "word_problem", "prompt": "約約星期一完成了 6 頁進展評估，星期二完成了 3 頁，兩天共完成了評估多少頁？", "ans": 9, "formula": "6 + 3 = 9", "counter": "頁", "unit": "頁評估", "explanation": "計算兩天的總頁數，用加法：6 + 3 = 9（頁）。"}, {"num": 18, "type": "word_problem", "prompt": "小一體育課上，排隊的男生有 13 人，女生有 4 人，男生比女生多多少人？", "ans": 9, "formula": "13 - 4 = 9", "counter": "人", "unit": "人", "explanation": "比較男生和女生的差額：13 - 4 = 9（人）。"}]}, {"day": 25, "title": "Day 25", "subtitle": "第 25 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_add", "prompt": "6 + 14 = ", "ans": 20, "explanation": "6 + 14 = 20"}, {"num": 2, "type": "calc_sub", "prompt": "12 - 2 = ", "ans": 10, "explanation": "12 - 2 = 10"}, {"num": 3, "type": "calc_add", "prompt": "3 + 7 = ", "ans": 10, "explanation": "3 + 7 = 10"}, {"num": 4, "type": "calc_sub", "prompt": "11 - 4 = ", "ans": 7, "explanation": "11 - 4 = 7"}, {"num": 5, "type": "calc_sub", "prompt": "7 - 1 = ", "ans": 6, "explanation": "7 - 1 = 6"}, {"num": 6, "type": "calc_add", "prompt": "10 + 3 = ", "ans": 13, "explanation": "10 + 3 = 13"}, {"num": 7, "type": "calc_sub", "prompt": "17 - 12 = ", "ans": 5, "explanation": "17 - 12 = 5"}, {"num": 8, "type": "calc_add", "prompt": "2 + 8 = ", "ans": 10, "explanation": "2 + 8 = 10"}], "section_b": [{"num": 9, "type": "compare", "prompt": "6 + 9 〇 16", "left_expr": "6 + 9", "right_expr": "16", "ans": "<", "explanation": "因為 6 + 9 = 15，而 15 < 16，所以填「<」。"}, {"num": 10, "type": "compare", "prompt": "15 - 8 〇 8", "left_expr": "15 - 8", "right_expr": "8", "ans": "<", "explanation": "因為 15 - 8 = 7，而 7 < 8，所以填「<」。"}, {"num": 11, "type": "blank_add", "prompt": "4 + (   ) = 11", "ans": 7, "explanation": "求括號裏的數：11 - 4 = 7。"}, {"num": 12, "type": "blank_sub", "prompt": "20 - (   ) = 5", "ans": 15, "explanation": "求被減數減去甚麼等於 5：20 - 5 = 15。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "8，10，(   )，14，16", "ans": 12, "explanation": "數列每次加 2（2 個一數），10 + 2 = 12。"}, {"num": 14, "type": "seq", "prompt": "20，18，16，(   )，12", "ans": 14, "explanation": "數列每次減 2，16 - 2 = 14。"}, {"num": 15, "type": "seq", "prompt": "5，8，(   )，14，17", "ans": 11, "explanation": "觀察前後規律，填入的數字是 11。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "媽媽買了雞蛋 17 隻，做蛋糕用了 5 隻，還剩下雞蛋多少隻？", "ans": 12, "formula": "17 - 5 = 12", "counter": "隻", "unit": "隻雞蛋", "explanation": "用去了雞蛋要減去：17 - 5 = 12（隻）。"}, {"num": 17, "type": "word_problem", "prompt": "樹枝上停了麻雀 20 隻，飛走了 9 隻，樹枝上還有麻雀多少隻？", "ans": 11, "formula": "20 - 9 = 11", "counter": "隻", "unit": "隻麻雀", "explanation": "飛走了即減少了：20 - 9 = 11（隻）。"}, {"num": 18, "type": "word_problem", "prompt": "文具店裏，一把直尺賣 7 元，一個卷筆刀賣 2 元，買直尺和卷筆刀各一件共需付多少元？", "ans": 9, "formula": "7 + 2 = 9", "counter": "元", "unit": "元", "explanation": "兩件文具的售價相加：7 + 2 = 9（元）。"}]}, {"day": 26, "title": "Day 26", "subtitle": "第 26 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_sub", "prompt": "14 - 3 = ", "ans": 11, "explanation": "14 - 3 = 11"}, {"num": 2, "type": "calc_add", "prompt": "3 + 6 = ", "ans": 9, "explanation": "3 + 6 = 9"}, {"num": 3, "type": "calc_add", "prompt": "14 + 1 = ", "ans": 15, "explanation": "14 + 1 = 15"}, {"num": 4, "type": "calc_add", "prompt": "12 + 8 = ", "ans": 20, "explanation": "12 + 8 = 20"}, {"num": 5, "type": "calc_add", "prompt": "10 + 6 = ", "ans": 16, "explanation": "10 + 6 = 16"}, {"num": 6, "type": "calc_sub", "prompt": "14 - 4 = ", "ans": 10, "explanation": "14 - 4 = 10"}, {"num": 7, "type": "calc_sub", "prompt": "8 - 7 = ", "ans": 1, "explanation": "8 - 7 = 1"}, {"num": 8, "type": "calc_sub", "prompt": "9 - 3 = ", "ans": 6, "explanation": "9 - 3 = 6"}], "section_b": [{"num": 9, "type": "compare", "prompt": "10 + 2 〇 11", "left_expr": "10 + 2", "right_expr": "11", "ans": ">", "explanation": "因為 10 + 2 = 12，而 12 > 11，所以填「>」。"}, {"num": 10, "type": "compare", "prompt": "19 - 7 〇 11", "left_expr": "19 - 7", "right_expr": "11", "ans": ">", "explanation": "因為 19 - 7 = 12，而 12 > 11，所以填「>」。"}, {"num": 11, "type": "blank_add", "prompt": "10 + (   ) = 15", "ans": 5, "explanation": "求括號裏的數：15 - 10 = 5。"}, {"num": 12, "type": "blank_sub", "prompt": "11 - (   ) = 2", "ans": 9, "explanation": "求被減數減去甚麼等於 2：11 - 2 = 9。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "6，8，10，(   )，14", "ans": 12, "explanation": "數列每次加 2（2 個一數），10 + 2 = 12。"}, {"num": 14, "type": "seq", "prompt": "19，(   )，17，16，15", "ans": 18, "explanation": "數列倒後數，每次減 1，19 - 1 = 18。"}, {"num": 15, "type": "seq", "prompt": "3，6，(   )，12，15", "ans": 9, "explanation": "觀察前後規律，填入的數字是 9。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "約約有彩色筆 15 枝，壞了 13 枝丟掉，現在她還有彩色筆多少枝？", "ans": 2, "formula": "15 - 13 = 2", "counter": "枝", "unit": "枝彩色筆", "explanation": "丟掉壞的數量：15 - 13 = 2（枝）。"}, {"num": 17, "type": "word_problem", "prompt": "餅乾盒內有朱古力餅 5 塊，曲奇餅 4 塊，盒內共有餅乾多少塊？", "ans": 9, "formula": "5 + 4 = 9", "counter": "塊", "unit": "塊餅乾", "explanation": "合算餅乾總數：5 + 4 = 9（塊）。"}, {"num": 18, "type": "word_problem", "prompt": "小息時，操場上有 13 個同學跳繩，有 2 個同學拍球，操場上共有同學多少個？", "ans": 15, "formula": "13 + 2 = 15", "counter": "個", "unit": "個同學", "explanation": "把跳繩和拍球的同學加起來：13 + 2 = 15（個）。"}]}, {"day": 27, "title": "Day 27", "subtitle": "第 27 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_sub", "prompt": "19 - 9 = ", "ans": 10, "explanation": "19 - 9 = 10"}, {"num": 2, "type": "calc_sub", "prompt": "20 - 18 = ", "ans": 2, "explanation": "20 - 18 = 2"}, {"num": 3, "type": "calc_add", "prompt": "8 + 6 = ", "ans": 14, "explanation": "8 + 6 = 14"}, {"num": 4, "type": "calc_sub", "prompt": "13 - 1 = ", "ans": 12, "explanation": "13 - 1 = 12"}, {"num": 5, "type": "calc_add", "prompt": "9 + 4 = ", "ans": 13, "explanation": "9 + 4 = 13"}, {"num": 6, "type": "calc_sub", "prompt": "14 - 11 = ", "ans": 3, "explanation": "14 - 11 = 3"}, {"num": 7, "type": "calc_add", "prompt": "10 + 9 = ", "ans": 19, "explanation": "10 + 9 = 19"}, {"num": 8, "type": "calc_add", "prompt": "2 + 5 = ", "ans": 7, "explanation": "2 + 5 = 7"}], "section_b": [{"num": 9, "type": "compare", "prompt": "5 + 7 〇 12", "left_expr": "5 + 7", "right_expr": "12", "ans": "=", "explanation": "因為 5 + 7 = 12，而 12 = 12，所以填「=」。"}, {"num": 10, "type": "compare", "prompt": "14 - 6 〇 7", "left_expr": "14 - 6", "right_expr": "7", "ans": ">", "explanation": "因為 14 - 6 = 8，而 8 > 7，所以填「>」。"}, {"num": 11, "type": "blank_add", "prompt": "3 + (   ) = 13", "ans": 10, "explanation": "求括號裏的數：13 - 3 = 10。"}, {"num": 12, "type": "blank_sub", "prompt": "17 - (   ) = 5", "ans": 12, "explanation": "求被減數減去甚麼等於 5：17 - 5 = 12。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "2，4，6，(   )，10", "ans": 8, "explanation": "數列每次加 2（2 個一數），6 + 2 = 8。"}, {"num": 14, "type": "seq", "prompt": "16，(   )，14，13，12", "ans": 15, "explanation": "數列倒後數，每次減 1，16 - 1 = 15。"}, {"num": 15, "type": "seq", "prompt": "7，10，(   )，16，19", "ans": 13, "explanation": "觀察前後規律，填入的數字是 13。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "約約早上摺了紙飛機 2 架，下午又摺了 7 架，她全天共摺了紙飛機多少架？", "ans": 9, "formula": "2 + 7 = 9", "counter": "架", "unit": "架紙飛機", "explanation": "計算全天摺出的總架數：2 + 7 = 9（架）。"}, {"num": 17, "type": "word_problem", "prompt": "魚缸裏養了金魚 2 條，黑摩利 8 條，魚缸裏共有魚多少條？", "ans": 10, "formula": "2 + 8 = 10", "counter": "條", "unit": "條魚", "explanation": "兩種魚的數量相加：2 + 8 = 10（條）。"}, {"num": 18, "type": "word_problem", "prompt": "一盒顏色筆有 9 枝，約約借出去了 4 枝，盒內還剩下顏色筆多少枝？", "ans": 5, "formula": "9 - 4 = 5", "counter": "枝", "unit": "枝顏色筆", "explanation": "借出減去：9 - 4 = 5（枝）。"}]}, {"day": 28, "title": "Day 28", "subtitle": "第 28 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_sub", "prompt": "16 - 4 = ", "ans": 12, "explanation": "16 - 4 = 12"}, {"num": 2, "type": "calc_sub", "prompt": "12 - 9 = ", "ans": 3, "explanation": "12 - 9 = 3"}, {"num": 3, "type": "calc_add", "prompt": "8 + 10 = ", "ans": 18, "explanation": "8 + 10 = 18"}, {"num": 4, "type": "calc_add", "prompt": "3 + 12 = ", "ans": 15, "explanation": "3 + 12 = 15"}, {"num": 5, "type": "calc_sub", "prompt": "6 - 5 = ", "ans": 1, "explanation": "6 - 5 = 1"}, {"num": 6, "type": "calc_sub", "prompt": "20 - 15 = ", "ans": 5, "explanation": "20 - 15 = 5"}, {"num": 7, "type": "calc_add", "prompt": "1 + 12 = ", "ans": 13, "explanation": "1 + 12 = 13"}, {"num": 8, "type": "calc_add", "prompt": "2 + 13 = ", "ans": 15, "explanation": "2 + 13 = 15"}], "section_b": [{"num": 9, "type": "compare", "prompt": "8 + 8 〇 16", "left_expr": "8 + 8", "right_expr": "16", "ans": "=", "explanation": "因為 8 + 8 = 16，而 16 = 16，所以填「=」。"}, {"num": 10, "type": "compare", "prompt": "18 - 9 〇 10", "left_expr": "18 - 9", "right_expr": "10", "ans": "<", "explanation": "因為 18 - 9 = 9，而 9 < 10，所以填「<」。"}, {"num": 11, "type": "blank_add", "prompt": "9 + (   ) = 20", "ans": 11, "explanation": "求括號裏的數：20 - 9 = 11。"}, {"num": 12, "type": "blank_sub", "prompt": "12 - (   ) = 9", "ans": 3, "explanation": "求被減數減去甚麼等於 9：12 - 9 = 3。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "8，10，12，(   )，16", "ans": 14, "explanation": "數列每次加 2（2 個一數），12 + 2 = 14。"}, {"num": 14, "type": "seq", "prompt": "19，(   )，17，16，15", "ans": 18, "explanation": "數列倒後數，每次減 1，19 - 1 = 18。"}, {"num": 15, "type": "seq", "prompt": "0，5，(   )，15，20", "ans": 10, "explanation": "數列每 5 個一數，5 + 5 = 10。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "約約原有零用錢 13 元，在小食部買豆奶用了 2 元，她還剩下零用錢多少元？", "ans": 11, "formula": "13 - 2 = 11", "counter": "元", "unit": "元零用錢", "explanation": "買食物用去的錢減去：13 - 2 = 11（元）。"}, {"num": 17, "type": "word_problem", "prompt": "小敏畫了 12 顆星星，約約畫了 4 顆星星，兩人一共畫了星星多少顆？", "ans": 16, "formula": "12 + 4 = 16", "counter": "顆", "unit": "顆星星", "explanation": "兩人畫的星星總數用加法：12 + 4 = 16（顆）。"}, {"num": 18, "type": "word_problem", "prompt": "約約有一條長繩，剪去了 2 厘米後，還剩下 12 厘米，這條繩原本長多少厘米？", "ans": 14, "formula": "12 + 2 = 14", "counter": "厘米", "unit": "厘米", "explanation": "求原本的長度，把剩下的和剪去的合起來：12 + 2 = 14（厘米）。"}]}, {"day": 29, "title": "Day 29", "subtitle": "第 29 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_sub", "prompt": "6 - 5 = ", "ans": 1, "explanation": "6 - 5 = 1"}, {"num": 2, "type": "calc_sub", "prompt": "14 - 13 = ", "ans": 1, "explanation": "14 - 13 = 1"}, {"num": 3, "type": "calc_add", "prompt": "5 + 1 = ", "ans": 6, "explanation": "5 + 1 = 6"}, {"num": 4, "type": "calc_sub", "prompt": "12 - 1 = ", "ans": 11, "explanation": "12 - 1 = 11"}, {"num": 5, "type": "calc_add", "prompt": "10 + 2 = ", "ans": 12, "explanation": "10 + 2 = 12"}, {"num": 6, "type": "calc_sub", "prompt": "18 - 4 = ", "ans": 14, "explanation": "18 - 4 = 14"}, {"num": 7, "type": "calc_add", "prompt": "5 + 3 = ", "ans": 8, "explanation": "5 + 3 = 8"}, {"num": 8, "type": "calc_add", "prompt": "8 + 12 = ", "ans": 20, "explanation": "8 + 12 = 20"}], "section_b": [{"num": 9, "type": "compare", "prompt": "7 + 9 〇 15", "left_expr": "7 + 9", "right_expr": "15", "ans": ">", "explanation": "因為 7 + 9 = 16，而 16 > 15，所以填「>」。"}, {"num": 10, "type": "compare", "prompt": "15 - 5 〇 9", "left_expr": "15 - 5", "right_expr": "9", "ans": ">", "explanation": "因為 15 - 5 = 10，而 10 > 9，所以填「>」。"}, {"num": 11, "type": "blank_add", "prompt": "10 + (   ) = 16", "ans": 6, "explanation": "求括號裏的數：16 - 10 = 6。"}, {"num": 12, "type": "blank_sub", "prompt": "15 - (   ) = 11", "ans": 4, "explanation": "求被減數減去甚麼等於 11：15 - 11 = 4。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "6，8，10，(   )，14", "ans": 12, "explanation": "數列每次加 2（2 個一數），10 + 2 = 12。"}, {"num": 14, "type": "seq", "prompt": "20，18，16，(   )，12", "ans": 14, "explanation": "數列每次減 2，16 - 2 = 14。"}, {"num": 15, "type": "seq", "prompt": "0，5，(   )，15，20", "ans": 10, "explanation": "數列每 5 個一數，5 + 5 = 10。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "課室第一排有課桌 5 張，第二排有課桌 2 張，這兩排共有課桌多少張？", "ans": 7, "formula": "5 + 2 = 7", "counter": "張", "unit": "張課桌", "explanation": "把兩排課桌加起來：5 + 2 = 7（張）。"}, {"num": 17, "type": "word_problem", "prompt": "盤子裏有小蛋糕 14 件，下午茶吃了 6 件，盤子裏還有小蛋糕多少件？", "ans": 8, "formula": "14 - 6 = 8", "counter": "件", "unit": "件小蛋糕", "explanation": "吃掉減去：14 - 6 = 8（件）。"}, {"num": 18, "type": "word_problem", "prompt": "約約集郵簿裏有香港郵票 9 枚，外國郵票 11 枚，共有郵票多少枚？", "ans": 20, "formula": "9 + 11 = 20", "counter": "枚", "unit": "枚郵票", "explanation": "兩種郵票相加：9 + 11 = 20（枚）。"}]}, {"day": 30, "title": "Day 30", "subtitle": "第 30 天 · 20以內加減運算與香港小一應用題", "section_a": [{"num": 1, "type": "calc_add", "prompt": "12 + 4 = ", "ans": 16, "explanation": "12 + 4 = 16"}, {"num": 2, "type": "calc_add", "prompt": "13 + 4 = ", "ans": 17, "explanation": "13 + 4 = 17"}, {"num": 3, "type": "calc_add", "prompt": "4 + 4 = ", "ans": 8, "explanation": "4 + 4 = 8"}, {"num": 4, "type": "calc_add", "prompt": "5 + 2 = ", "ans": 7, "explanation": "5 + 2 = 7"}, {"num": 5, "type": "calc_sub", "prompt": "17 - 6 = ", "ans": 11, "explanation": "17 - 6 = 11"}, {"num": 6, "type": "calc_sub", "prompt": "9 - 5 = ", "ans": 4, "explanation": "9 - 5 = 4"}, {"num": 7, "type": "calc_sub", "prompt": "10 - 3 = ", "ans": 7, "explanation": "10 - 3 = 7"}, {"num": 8, "type": "calc_sub", "prompt": "16 - 8 = ", "ans": 8, "explanation": "16 - 8 = 8"}], "section_b": [{"num": 9, "type": "compare", "prompt": "9 + 2 〇 12", "left_expr": "9 + 2", "right_expr": "12", "ans": "<", "explanation": "因為 9 + 2 = 11，而 11 < 12，所以填「<」。"}, {"num": 10, "type": "compare", "prompt": "19 - 7 〇 13", "left_expr": "19 - 7", "right_expr": "13", "ans": "<", "explanation": "因為 19 - 7 = 12，而 12 < 13，所以填「<」。"}, {"num": 11, "type": "blank_add", "prompt": "5 + (   ) = 18", "ans": 13, "explanation": "求括號裏的數：18 - 5 = 13。"}, {"num": 12, "type": "blank_sub", "prompt": "15 - (   ) = 6", "ans": 9, "explanation": "求被減數減去甚麼等於 6：15 - 6 = 9。"}], "section_c": [{"num": 13, "type": "seq", "prompt": "2，4，6，(   )，10", "ans": 8, "explanation": "數列每次加 2（2 個一數），6 + 2 = 8。"}, {"num": 14, "type": "seq", "prompt": "15，14，13，(   )，11", "ans": 12, "explanation": "數列倒後數，每次減 1，13 - 1 = 12。"}, {"num": 15, "type": "seq", "prompt": "3，6，(   )，12，15", "ans": 9, "explanation": "觀察前後規律，填入的數字是 9。"}], "section_d": [{"num": 16, "type": "word_problem", "prompt": "停車場裏停了小汽車 16 輛，開走了 12 輛，現在停車場還有小汽車多少輛？", "ans": 4, "formula": "16 - 12 = 4", "counter": "輛", "unit": "輛小汽車", "explanation": "開走了即減少：16 - 12 = 4（輛）。"}, {"num": 17, "type": "word_problem", "prompt": "常識課分組，第一組有學生 19 人，第二組有學生 3 人，第二組比第一組少多少人？", "ans": 16, "formula": "19 - 3 = 16", "counter": "人", "unit": "人", "explanation": "求兩組人數差：19 - 3 = 16（人）。"}, {"num": 18, "type": "word_problem", "prompt": "約約在常規功課裏答對了 11 題，在加分題裏答對了 2 題，她共答對了多少題？", "ans": 13, "formula": "11 + 2 = 13", "counter": "題", "unit": "題", "explanation": "兩部分答對的題數相加：11 + 2 = 13（題）。"}]}];
+  const emathsQuestions = [{"num": 1, "part": "Part A · Numbers & Counting (Ex. 1–2)", "input_type": "number", "prompt": "Write the number <strong>fourteen</strong> in numerals:", "ans": 14, "explanation": "'Fourteen' = 14."}, {"num": 2, "part": "Part A · Numbers & Counting (Ex. 1–2)", "input_type": "number", "prompt": "What number comes <strong>just after</strong> 17?", "ans": 18, "explanation": "Counting on by 1 from 17 gives 18."}, {"num": 3, "part": "Part A · Numbers & Counting (Ex. 1–2)", "input_type": "number", "prompt": "What number comes <strong>between</strong> 11 and 13?", "ans": 12, "explanation": "11, 12, 13 — 12 is between 11 and 13."}, {"num": 4, "part": "Part A · Numbers & Counting (Ex. 1–2)", "input_type": "select", "options": [">", "<", "="], "prompt": "Compare: 16 〇 19", "ans": "<", "explanation": "16 is smaller than 19, so 16 < 19."}, {"num": 5, "part": "Part A · Numbers & Counting (Ex. 1–2)", "input_type": "select", "options": [">", "<", "="], "prompt": "Compare: 9 + 4 〇 12", "ans": ">", "explanation": "9 + 4 = 13, and 13 is greater than 12 (13 > 12)."}, {"num": 6, "part": "Part B · Addition & Subtraction (Ex. 3–4)", "input_type": "number", "prompt": "Find the sum of 7 and 8: 7 + 8 = ", "ans": 15, "explanation": "Sum means add: 7 + 8 = 15."}, {"num": 7, "part": "Part B · Addition & Subtraction (Ex. 3–4)", "input_type": "number", "prompt": "Subtract 6 from 15: 15 − 6 = ", "ans": 9, "explanation": "15 take away 6 leaves 9."}, {"num": 8, "part": "Part B · Addition & Subtraction (Ex. 3–4)", "input_type": "number", "prompt": "Fill in the missing number: 8 + (   ) = 14", "ans": 6, "explanation": "14 − 8 = 6."}, {"num": 9, "part": "Part B · Addition & Subtraction (Ex. 3–4)", "input_type": "number", "prompt": "Yueyue has 9 stickers. Her mum gives her 5 more. How many stickers does she have <strong>altogether</strong>?", "ans": 14, "explanation": "'Altogether' means addition: 9 + 5 = 14."}, {"num": 10, "part": "Part B · Addition & Subtraction (Ex. 3–4)", "input_type": "number", "prompt": "There are 16 apples in a basket. 7 apples are eaten. How many apples are <strong>left</strong>?", "ans": 9, "explanation": "'Left' means subtraction: 16 − 7 = 9."}, {"num": 11, "part": "Part B · Addition & Subtraction (Ex. 3–4)", "input_type": "number", "prompt": "Class 1A has 12 boys and 6 girls. How many <strong>more</strong> boys than girls are there?", "ans": 6, "explanation": "Find the difference: 12 − 6 = 6."}, {"num": 12, "part": "Part C · Basic 2D Shapes (Ex. 5)", "input_type": "select", "options": ["Circle", "Triangle", "Square", "Rectangle"], "svg": "<svg width=\"56\" height=\"56\" viewBox=\"0 0 60 60\" style=\"vertical-align:middle;\"><polygon points=\"30,6 54,52 6,52\" fill=\"#dbeafe\" stroke=\"#1a56db\" stroke-width=\"3\"/></svg>", "prompt": "What shape is this?", "ans": "Triangle", "explanation": "It has 3 straight sides and 3 corners, so it is a Triangle."}, {"num": 13, "part": "Part C · Basic 2D Shapes (Ex. 5)", "input_type": "select", "options": ["Circle", "Triangle", "Square", "Rectangle"], "svg": "<svg width=\"56\" height=\"56\" viewBox=\"0 0 60 60\" style=\"vertical-align:middle;\"><rect x=\"8\" y=\"8\" width=\"44\" height=\"44\" fill=\"#dcfce7\" stroke=\"#0e9f6e\" stroke-width=\"3\"/></svg>", "prompt": "It has 4 equal sides. What shape is this?", "ans": "Square", "explanation": "A shape with 4 equal sides and 4 right angles is a Square."}, {"num": 14, "part": "Part C · Basic 2D Shapes (Ex. 5)", "input_type": "select", "options": ["Circle", "Triangle", "Square", "Rectangle"], "svg": "<svg width=\"72\" height=\"52\" viewBox=\"0 0 80 56\" style=\"vertical-align:middle;\"><rect x=\"6\" y=\"10\" width=\"68\" height=\"36\" fill=\"#fef3c7\" stroke=\"#d97706\" stroke-width=\"3\"/></svg>", "prompt": "What shape is this?", "ans": "Rectangle", "explanation": "It has 4 sides with opposite sides equal (2 long, 2 short): Rectangle."}, {"num": 15, "part": "Part C · Basic 2D Shapes (Ex. 5)", "input_type": "select", "options": ["Circle", "Triangle", "Square", "Rectangle"], "svg": "<svg width=\"56\" height=\"56\" viewBox=\"0 0 60 60\" style=\"vertical-align:middle;\"><circle cx=\"30\" cy=\"30\" r=\"23\" fill=\"#fce7f3\" stroke=\"#db2777\" stroke-width=\"3\"/></svg>", "prompt": "It has 1 curved side and 0 corners. What shape is this?", "ans": "Circle", "explanation": "A round shape with no corners is a Circle."}];
+  let currentDayIndex = 0; // 0-based: 0 = Day 1
+
+  // LocalStorage progress helper
+  function getDayProgressKey(dayNum) {
+    return `yy_math_day_${dayNum}_score`;
+  }
+
+  // Initialize Day Selector Chips
+  function renderDayChips() {
+    const container = document.getElementById("dayScrollContainer");
+    container.innerHTML = "";
+    allDays.forEach((d, idx) => {
+      const chip = document.createElement("button");
+      chip.className = "day-chip" + (idx === currentDayIndex ? " active" : "");
+      chip.id = `dayChip_${d.day}`;
+
+      const savedScore = localStorage.getItem(getDayProgressKey(d.day));
+      if (savedScore !== null) {
+        chip.classList.add("completed");
+        chip.innerHTML = `<span>Day ${d.day}</span> <small style="opacity:0.85; font-size:0.75rem;">(${savedScore}分)</small>`;
+      } else {
+        chip.innerHTML = `<span>Day ${d.day}</span>`;
+      }
+
+      chip.onclick = () => selectDay(idx);
+      container.appendChild(chip);
+    });
+  }
+
+  function selectDay(index) {
+    if (index < 0 || index >= allDays.length) return;
+    currentDayIndex = index;
+    const currentDay = allDays[currentDayIndex];
+
+    // Update active chip
+    document.querySelectorAll(".day-chip").forEach((c, idx) => {
+      if (idx === currentDayIndex) {
+        c.classList.add("active");
+        c.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+      } else {
+        c.classList.remove("active");
+      }
+    });
+
+    // Update Banner & Labels
+    document.getElementById("currentDayDisplay").innerText = `Day ${currentDay.day}`;
+    document.getElementById("bannerDayTitle").innerText = `Day ${currentDay.day} 練習`;
+    document.getElementById("bannerDaySubtitle").innerText = currentDay.subtitle;
+    document.getElementById("printDayLabel").innerText = `Day ${currentDay.day}`;
+    document.getElementById("floatingDayLabel").innerText = `Day ${currentDay.day}`;
+    document.getElementById("printAnswerKeyTitle").innerText = `民生書院小學 · 小一數學每日精練【Day ${currentDay.day} 參考答案】`;
+
+    // Check completion status from storage
+    const savedScore = localStorage.getItem(getDayProgressKey(currentDay.day));
+    const statusEl = document.getElementById("dayCompletionStatus");
+    if (savedScore !== null) {
+      statusEl.innerText = `已完成：${savedScore} / 100 分`;
+      statusEl.style.background = "rgba(16, 185, 129, 0.4)";
+    } else {
+      statusEl.innerText = "未作答";
+      statusEl.style.background = "rgba(255, 255, 255, 0.2)";
+    }
+
+    // Hide score banner on day change
+    document.getElementById("scoreBanner").classList.remove("show");
+    document.getElementById("headerScore").innerText = "____ / 100 分";
+
+    // Render Questions for active day
+    renderActiveDayQuestions(currentDay);
+    updateAnsweredCount();
+  }
+
+  function navigateDay(offset) {
+    const target = currentDayIndex + offset;
+    if (target >= 0 && target < allDays.length) {
+      selectDay(target);
+    }
+  }
+
+  function renderActiveDayQuestions(dayData) {
+    const container = document.getElementById("questionsContainer");
+    let html = "";
+
+    // SECTION A
+    html += `
+    <section class="section-card">
+      <div class="section-heading">
+        <span>甲部：直接計算題（共 8 題）</span>
+        <span style="font-size: 0.9rem; font-weight: normal; color: var(--text-muted);">每題 5 分</span>
+      </div>
+      <div class="grid-2col">`;
+    dayData.section_a.forEach(item => {
+      html += `
+        <div class="question-item" id="q_card_${item.num}">
+          <div class="q-prompt">
+            <span class="q-num">${item.num}.</span>
+            <span>${item.prompt}</span>
+            <input type="number" id="ans_${item.num}" min="0" max="99" inputmode="numeric" pattern="[0-9]*" placeholder="?">
+            <span class="badge-status" id="badge_${item.num}"></span>
+          </div>
+          <div class="hint-box" id="hint_${item.num}">
+            💡 <strong>解析：</strong>${item.explanation}
+          </div>
+        </div>`;
+    });
+    html += `</div></section>`;
+
+    // SECTION B
+    html += `
+    <section class="section-card">
+      <div class="section-heading">
+        <span>乙部：比較與填空題（共 4 題）</span>
+        <span style="font-size: 0.9rem; font-weight: normal; color: var(--text-muted);">每題 5 分</span>
+      </div>
+      <div class="grid-2col">`;
+    dayData.section_b.forEach(item => {
+      if (item.type === "compare") {
+        html += `
+        <div class="question-item" id="q_card_${item.num}">
+          <div class="q-prompt">
+            <span class="q-num">${item.num}.</span>
+            <span>${item.left_expr}</span>
+            <select id="ans_${item.num}">
+              <option value="">選</option>
+              <option value=">">&gt;</option>
+              <option value="<">&lt;</option>
+              <option value="=">=</option>
+            </select>
+            <span>${item.right_expr}</span>
+            <span class="badge-status" id="badge_${item.num}"></span>
+          </div>
+          <div class="hint-box" id="hint_${item.num}">
+            💡 <strong>解析：</strong>${item.explanation}
+          </div>
+        </div>`;
+      } else {
+        const parts = item.prompt.split('(   )');
+        html += `
+        <div class="question-item" id="q_card_${item.num}">
+          <div class="q-prompt">
+            <span class="q-num">${item.num}.</span>
+            <span>${parts[0]}</span>
+            <input type="number" id="ans_${item.num}" min="0" max="99" inputmode="numeric" pattern="[0-9]*" placeholder="?">
+            <span>${parts[1] || ''}</span>
+            <span class="badge-status" id="badge_${item.num}"></span>
+          </div>
+          <div class="hint-box" id="hint_${item.num}">
+            💡 <strong>解析：</strong>${item.explanation}
+          </div>
+        </div>`;
+      }
+    });
+    html += `</div></section>`;
+
+    // SECTION C
+    html += `
+    <section class="section-card">
+      <div class="section-heading">
+        <span>丙部：數列規律題（共 3 題）</span>
+        <span style="font-size: 0.9rem; font-weight: normal; color: var(--text-muted);">每題 5 分</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 14px;">`;
+    dayData.section_c.forEach(item => {
+      const parts = item.prompt.split('(   )');
+      html += `
+        <div class="question-item" id="q_card_${item.num}">
+          <div class="q-prompt">
+            <span class="q-num">${item.num}.</span>
+            <span>${parts[0]}</span>
+            <input type="number" id="ans_${item.num}" min="0" max="99" inputmode="numeric" pattern="[0-9]*" placeholder="?">
+            <span>${parts[1] || ''}</span>
+            <span class="badge-status" id="badge_${item.num}"></span>
+          </div>
+          <div class="hint-box" id="hint_${item.num}">
+            💡 <strong>解析：</strong>${item.explanation}
+          </div>
+        </div>`;
+    });
+    html += `</div></section>`;
+
+    // SECTION D
+    html += `
+    <section class="section-card">
+      <div class="section-heading">
+        <span>丁部：香港小一應用題（共 3 題）</span>
+        <span style="font-size: 0.9rem; font-weight: normal; color: var(--text-muted);">每題 8.3 分 (算式與答案各佔分)</span>
+      </div>
+      <div>`;
+    dayData.section_d.forEach(item => {
+      html += `
+        <div class="word-problem-card" id="q_card_${item.num}">
+          <div class="wp-prompt">
+            <strong>${item.num}.</strong> ${item.prompt}
+          </div>
+          <div class="wp-working-box"></div>
+          <div class="wp-working-row">
+            <div>算式：<input type="text" id="formula_${item.num}" placeholder="例如 8 + 7"></div>
+            <div>結果：<input type="number" id="ans_${item.num}" inputmode="numeric" pattern="[0-9]*" style="width: 85px;" placeholder="?"> （${item.counter}）</div>
+            <span class="badge-status" id="badge_${item.num}"></span>
+          </div>
+          <div class="hint-box" id="hint_${item.num}">
+            💡 <strong>標準解答：</strong>算式為 <code>${item.formula}</code>，答：共有/剩下 ${item.ans} ${item.counter}。<br>
+            <em>${item.explanation}</em>
+          </div>
+        </div>`;
+    });
+    html += `</div></section>`;
+
+    container.innerHTML = html;
+
+    // Render Answer Key Table
+    const tbody = document.getElementById("answerKeyTableBody");
+    let tableHtml = "";
+    const allQ = [...dayData.section_a, ...dayData.section_b, ...dayData.section_c, ...dayData.section_d];
+    allQ.forEach(q => {
+      tableHtml += `
+      <tr>
+        <td style="padding: 7pt; text-align: center; font-weight: 700;">第 ${q.num} 題</td>
+        <td style="padding: 7pt; text-align: center; font-weight: 800; color: #1e429f;">${q.ans}</td>
+        <td style="padding: 7pt;">${q.formula || q.explanation}</td>
+      </tr>`;
+    });
+    tbody.innerHTML = tableHtml;
+
+    // Attach listeners for input tracking
+    container.querySelectorAll('input, select').forEach(el => {
+      el.addEventListener('input', updateAnsweredCount);
+      el.addEventListener('change', updateAnsweredCount);
+    });
+  }
+
+  // Timer logic
+  let timerInterval = null;
+  let secondsElapsed = 0;
+  let isTimerRunning = false;
+
+  function toggleTimer() {
+    const btn = document.getElementById("timerBtn");
+    if (isTimerRunning) {
+      clearInterval(timerInterval);
+      isTimerRunning = false;
+      btn.innerText = "繼續計時";
+    } else {
+      isTimerRunning = true;
+      btn.innerText = "暫停計時";
+      timerInterval = setInterval(() => {
+        secondsElapsed++;
+        const mins = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
+        const secs = String(secondsElapsed % 60).padStart(2, '0');
+        document.getElementById("timerDisplay").innerText = `⏱️ ${mins}:${secs}`;
+      }, 1000);
+    }
+  }
+
+  // Auto-advance to next input on Enter (iPad keyboard 'Next' / 'Done')
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      const activeEl = document.activeElement;
+      if (activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'SELECT')) {
+        const inputs = Array.from(document.querySelectorAll('#questionsContainer input[type="number"], #questionsContainer input[type="text"], #questionsContainer select'));
+        const curIdx = inputs.indexOf(activeEl);
+        if (curIdx >= 0 && curIdx < inputs.length - 1) {
+          e.preventDefault();
+          inputs[curIdx + 1].focus();
+        } else if (curIdx === inputs.length - 1) {
+          checkAnswers();
+        }
+      }
+    }
+  });
+
+  // Track answered questions in real-time
+  function updateAnsweredCount() {
+    const currentDay = allDays[currentDayIndex];
+    const allQ = [...currentDay.section_a, ...currentDay.section_b, ...currentDay.section_c, ...currentDay.section_d];
+    let answered = 0;
+    allQ.forEach(q => {
+      const inputEl = document.getElementById(`ans_${q.num}`);
+      if (inputEl && inputEl.value.trim() !== "") {
+        answered++;
+      }
+    });
+    const badge = document.getElementById("answeredCount");
+    if (badge) badge.innerText = answered;
+  }
+
+  function checkAnswers() {
+    const currentDay = allDays[currentDayIndex];
+    const allQ = [...currentDay.section_a, ...currentDay.section_b, ...currentDay.section_c, ...currentDay.section_d];
+    let correctCount = 0;
+    const totalCount = allQ.length;
+
+    allQ.forEach(q => {
+      const inputEl = document.getElementById(`ans_${q.num}`);
+      const cardEl = document.getElementById(`q_card_${q.num}`);
+      const badgeEl = document.getElementById(`badge_${q.num}`);
+      const hintEl = document.getElementById(`hint_${q.num}`);
+
+      if (!inputEl) return;
+
+      const userVal = String(inputEl.value).trim();
+      const expectedVal = String(q.ans).trim();
+
+      const isCorrect = (userVal.toLowerCase() === expectedVal.toLowerCase());
+
+      cardEl.classList.remove("correct", "incorrect");
+      badgeEl.classList.remove("correct", "incorrect");
+      hintEl.classList.remove("show");
+
+      if (isCorrect) {
+        correctCount++;
+        cardEl.classList.add("correct");
+        badgeEl.classList.add("correct");
+        badgeEl.innerText = "✓ 正確";
+      } else {
+        cardEl.classList.add("incorrect");
+        badgeEl.classList.add("incorrect");
+        badgeEl.innerText = "✕ 錯誤";
+        hintEl.classList.add("show");
+      }
+    });
+
+    // Score calculation
+    const banner = document.getElementById("scoreBanner");
+    const scoreValEl = document.getElementById("scoreValue");
+    const scorePctEl = document.getElementById("scorePercent");
+    const scoreMsgEl = document.getElementById("scoreMsg");
+    const headerScoreEl = document.getElementById("headerScore");
+
+    const percentage = Math.round((correctCount / totalCount) * 100);
+    scoreValEl.innerText = `${correctCount} / ${totalCount}`;
+    scorePctEl.innerText = `${percentage}%`;
+    headerScoreEl.innerText = `${percentage} / 100 分`;
+
+    // Save to LocalStorage
+    localStorage.setItem(getDayProgressKey(currentDay.day), percentage);
+    renderDayChips();
+
+    const statusEl = document.getElementById("dayCompletionStatus");
+    statusEl.innerText = `已完成：${percentage} / 100 分`;
+    statusEl.style.background = "rgba(16, 185, 129, 0.4)";
+
+    const student = document.getElementById("studentName").value || "約約";
+    if (percentage === 100) {
+      scoreMsgEl.innerText = `🌟 太棒了${student}！全部答對，表現優異！`;
+    } else if (percentage >= 80) {
+      scoreMsgEl.innerText = `👏 ${student}做得很好！仔細閱讀錯誤題目的解析，明天會更棒！`;
+    } else {
+      scoreMsgEl.innerText = `💪 ${student}繼續加油！多做練習，掌握加減法的小秘訣！`;
+    }
+
+    banner.classList.add("show");
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function resetForm() {
+    if (!confirm(`確定要重新開始做 Day ${allDays[currentDayIndex].day} 的題目嗎？所有已填寫的答案會被清除。`)) return;
+    const currentDay = allDays[currentDayIndex];
+    const allQ = [...currentDay.section_a, ...currentDay.section_b, ...currentDay.section_c, ...currentDay.section_d];
+    allQ.forEach(q => {
+      const inputEl = document.getElementById(`ans_${q.num}`);
+      const formulaEl = document.getElementById(`formula_${q.num}`);
+      const cardEl = document.getElementById(`q_card_${q.num}`);
+      const badgeEl = document.getElementById(`badge_${q.num}`);
+      const hintEl = document.getElementById(`hint_${q.num}`);
+
+      if (inputEl) inputEl.value = "";
+      if (formulaEl) formulaEl.value = "";
+      if (cardEl) cardEl.classList.remove("correct", "incorrect");
+      if (badgeEl) {
+        badgeEl.innerText = "";
+        badgeEl.classList.remove("correct", "incorrect");
+      }
+      if (hintEl) hintEl.classList.remove("show");
+    });
+    document.getElementById("scoreBanner").classList.remove("show");
+    document.getElementById("headerScore").innerText = "____ / 100 分";
+    updateAnsweredCount();
+  }
+
+  function preparePrint() {
+    const currentDay = allDays[currentDayIndex];
+    const includeAnswers = confirm(`列印 Day ${currentDay.day} 練習紙時，是否同時在最後一頁附加【參考答案】？\n\n按「確定」：附加答案頁\n按「取消」：僅列印試卷供學生做題`);
+    const ansSheet = document.getElementById("answerKeySheet");
+    if (includeAnswers) {
+      ansSheet.classList.add("print-enabled");
+    } else {
+      ansSheet.classList.remove("print-enabled");
+    }
+    window.print();
+  }
+
+  // Math Mode Switcher (Chinese Math vs Emaths Ex. 1-5)
+  function switchMathMode(mode) {
+    const btnCn = document.getElementById("tabBtnCn");
+    const btnEm = document.getElementById("tabBtnEmaths");
+    const viewDrills = document.getElementById("drillsView");
+    const viewEm = document.getElementById("emathsView");
+    const floatBar = document.getElementById("tabletFloatingBar");
+
+    if (mode === "emaths") {
+      btnCn.classList.remove("active");
+      btnEm.classList.add("active");
+      viewDrills.classList.remove("active");
+      viewEm.classList.add("active");
+      if (floatBar) floatBar.style.display = "none";
+      renderEmaths();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      btnEm.classList.remove("active");
+      btnCn.classList.add("active");
+      viewEm.classList.remove("active");
+      viewDrills.classList.add("active");
+      if (floatBar) floatBar.style.display = "";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }
+
+  function renderEmaths() {
+    const container = document.getElementById("emathsContainer");
+    if (!container) return;
+
+    const saved = localStorage.getItem("yy_emaths_ex1_5_score");
+    const statusEl = document.getElementById("emathsCompletionStatus");
+    if (saved !== null && statusEl) {
+      statusEl.innerText = `Best / Last: ${saved}分`;
+      statusEl.style.background = "rgba(255,255,255,0.28)";
+    }
+
+    if (container.dataset.rendered === "1") return;
+    const parts = [];
+    const byPart = {};
+    emathsQuestions.forEach(q => {
+      if (!byPart[q.part]) {
+        byPart[q.part] = [];
+        parts.push(q.part);
+      }
+      byPart[q.part].push(q);
+    });
+
+    let html = "";
+    parts.forEach(partName => {
+      const qs = byPart[partName];
+      html += `
+      <section class="section-card">
+        <div class="section-heading">
+          <span>${partName}</span>
+          <span style="font-size:0.9rem; font-weight:normal; color:var(--text-muted);">${qs.length} questions</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:14px;">`;
+      qs.forEach(q => {
+        const svgBlock = q.svg ? `<div style="margin:6px 0;">${q.svg}</div>` : "";
+        let control = "";
+        if (q.input_type === "select") {
+          const opts = q.options.map(o => `<option value="${o}">${o}</option>`).join("");
+          control = `<select id="em_ans_${q.num}" style="width:auto; min-width:110px; padding:0 10px;"><option value="">Select</option>${opts}</select>`;
+        } else {
+          control = `<input type="number" id="em_ans_${q.num}" min="0" max="99" inputmode="numeric" pattern="[0-9]*" placeholder="?">`;
+        }
+        html += `
+          <div class="question-item" id="em_card_${q.num}">
+            <div class="q-prompt" style="flex-wrap:wrap;">
+              <span class="q-num">${q.num}.</span>
+              <span>${q.prompt}</span>
+              ${svgBlock}
+              ${control}
+              <span class="badge-status" id="em_badge_${q.num}"></span>
+            </div>
+            <div class="hint-box" id="em_hint_${q.num}">
+              💡 <strong>Explanation:</strong> ${q.explanation}
+            </div>
+          </div>`;
+      });
+      html += `</div></section>`;
+    });
+
+    container.innerHTML = html;
+    container.dataset.rendered = "1";
+  }
+
+  function checkEmathsAnswers() {
+    let correctCount = 0;
+    emathsQuestions.forEach(q => {
+      const inputEl = document.getElementById(`em_ans_${q.num}`);
+      const cardEl = document.getElementById(`em_card_${q.num}`);
+      const badgeEl = document.getElementById(`em_badge_${q.num}`);
+      const hintEl = document.getElementById(`em_hint_${q.num}`);
+
+      const val = inputEl ? inputEl.value.trim() : "";
+      const isCorrect = q.input_type === "number"
+        ? (val !== "" && parseInt(val, 10) === q.ans)
+        : (val === q.ans);
+
+      cardEl.classList.remove("correct", "incorrect");
+      badgeEl.classList.remove("correct", "incorrect");
+
+      if (isCorrect) {
+        correctCount++;
+        cardEl.classList.add("correct");
+        badgeEl.classList.add("correct");
+        badgeEl.innerText = "✓ Correct";
+        hintEl.classList.remove("show");
+      } else {
+        cardEl.classList.add("incorrect");
+        badgeEl.classList.add("incorrect");
+        badgeEl.innerText = `✗ Ans: ${q.ans}`;
+        hintEl.classList.add("show");
+      }
+    });
+
+    const total = emathsQuestions.length;
+    const pct = Math.round((correctCount / total) * 100);
+    localStorage.setItem("yy_emaths_ex1_5_score", pct);
+
+    const statusEl = document.getElementById("emathsCompletionStatus");
+    if (statusEl) {
+      statusEl.innerText = `Done · ${pct}分`;
+      statusEl.style.background = "rgba(255,255,255,0.28)";
+    }
+    document.getElementById("emathsScoreValue").innerText = `${correctCount} / ${total}`;
+    document.getElementById("emathsScorePercent").innerText = `${pct}%`;
+    document.getElementById("emathsScoreMsg").innerText = pct === 100
+      ? "🏆 Perfect 100%! Ready for Emaths Ex. 1–5!"
+      : `Good job! Review the highlighted explanations (${correctCount}/${total}).`;
+    document.getElementById("emathsScoreBanner").classList.add("show");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function resetEmaths() {
+    if (!confirm("Reset all Emaths Ex. 1–5 answers?")) return;
+    emathsQuestions.forEach(q => {
+      const inputEl = document.getElementById(`em_ans_${q.num}`);
+      const cardEl = document.getElementById(`em_card_${q.num}`);
+      const badgeEl = document.getElementById(`em_badge_${q.num}`);
+      const hintEl = document.getElementById(`em_hint_${q.num}`);
+      if (inputEl) inputEl.value = "";
+      if (cardEl) cardEl.classList.remove("correct", "incorrect");
+      if (badgeEl) {
+        badgeEl.innerText = "";
+        badgeEl.classList.remove("correct", "incorrect");
+      }
+      if (hintEl) hintEl.classList.remove("show");
+    });
+    document.getElementById("emathsScoreBanner").classList.remove("show");
+  }
+
+  // Initial Load
+  window.addEventListener('DOMContentLoaded', () => {
+    renderDayChips();
+    selectDay(0); // Start at Day 1
+  });
+</script>
+</body>
+</html>

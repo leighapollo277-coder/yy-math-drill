@@ -1,0 +1,16 @@
+{
+  "name": "民生書院小學 · 小一學習總覽",
+  "short_name": "小一主頁",
+  "start_url": "/yy-math-drill/",
+  "scope": "/yy-math-drill/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#1e40af",
+  "icons": [
+    {
+      "src": "assets/icons/hub.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

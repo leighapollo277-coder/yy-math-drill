@@ -1,0 +1,16 @@
+{
+  "name": "約約數學每日精練",
+  "short_name": "約約數學",
+  "start_url": "/yy-math-drill/math/",
+  "scope": "/yy-math-drill/math/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#047857",
+  "icons": [
+    {
+      "src": "../assets/icons/math.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

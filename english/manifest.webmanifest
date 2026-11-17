@@ -1,0 +1,16 @@
+{
+  "name": "約約英文溫習庫",
+  "short_name": "約約英文",
+  "start_url": "/yy-math-drill/english/",
+  "scope": "/yy-math-drill/english/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#be123c",
+  "icons": [
+    {
+      "src": "../assets/icons/english.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

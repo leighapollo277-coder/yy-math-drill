@@ -1,0 +1,16 @@
+{
+  "name": "約約中文溫習庫",
+  "short_name": "約約中文",
+  "start_url": "/yy-math-drill/chinese/",
+  "scope": "/yy-math-drill/chinese/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#1d4ed8",
+  "icons": [
+    {
+      "src": "../assets/icons/chinese.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

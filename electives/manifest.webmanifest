@@ -1,0 +1,16 @@
+{
+  "name": "約約專科溫習庫",
+  "short_name": "約約專科",
+  "start_url": "/yy-math-drill/electives/",
+  "scope": "/yy-math-drill/electives/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#b45309",
+  "icons": [
+    {
+      "src": "../assets/icons/electives.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

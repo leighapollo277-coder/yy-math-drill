@@ -86,9 +86,10 @@
     font-family: inherit;
   }
   .exam-card.jump-highlight {
-    border: 2px solid var(--primary) !important;
-    box-shadow: 0 0 0 5px rgba(30, 64, 175, 0.16) !important;
-    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    border: 2.5px solid var(--primary) !important;
+    background: #fefce8 !important;
+    box-shadow: 0 0 0 6px rgba(30, 64, 175, 0.22) !important;
+    transition: box-shadow 0.4s ease, border-color 0.4s ease, background-color 0.4s ease;
   }
   @media screen and (max-width: 520px) {
     .page-title { font-size: 1.85rem; }
@@ -417,9 +418,11 @@ function highlightExamFromHash() {
   if (!target) return;
   const details = target.querySelector("details.exam-files-toggle");
   if (details) details.open = true;
-  target.scrollIntoView({ behavior: "smooth", block: "center" });
   target.classList.add("jump-highlight");
-  setTimeout(() => target.classList.remove("jump-highlight"), 3500);
+  setTimeout(() => {
+    target.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, 80);
+  setTimeout(() => target.classList.remove("jump-highlight"), 8000);
 }
 window.addEventListener("DOMContentLoaded", () => {
   filterAndSortVault();

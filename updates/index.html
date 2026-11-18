@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>民生書院小學 · 檔案上傳與分類紀錄</title>
+<style>
+  :root { --primary: #334155; --bg: #f1f5f9; --card: #ffffff; --border: #e2e8f0; --text: #0f172a; --muted: #64748b; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang TC", "Microsoft JhengHei", sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 14px 12px 40px; }
+  .container { max-width: 840px; margin: 0 auto; }
+  .top-bar { background: #ffffff; border: 1px solid var(--border); border-top: 5px solid #1e40af; border-radius: 16px; padding: 18px 20px; margin-bottom: 18px; }
+  .home-btn { display: inline-flex; align-items: center; gap: 6px; background: #eef2ff; color: #1e40af; padding: 8px 14px; border-radius: 10px; font-weight: 800; font-size: 0.95rem; text-decoration: none; }
+  .page-title { font-size: 1.65rem; font-weight: 900; color: #1e40af; margin-top: 10px; }
+  .log-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
+  .log-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
+  .log-date { font-size: 0.85rem; font-weight: 800; color: #1e40af; background: #eef2ff; padding: 2px 10px; border-radius: 8px; }
+  .log-dest { font-size: 0.85rem; font-weight: 700; color: #0f766e; background: #ccfbf1; padding: 2px 10px; border-radius: 8px; }
+  .log-title { font-size: 1.05rem; font-weight: 800; color: var(--text); }
+  .rename-note { font-size: 0.86rem; color: var(--muted); margin-top: 4px; word-break: break-all; }
+  .preview-btn { background: #1e40af; color: #ffffff; border: none; border-radius: 8px; padding: 6px 14px; font-weight: 700; font-size: 0.88rem; cursor: pointer; font-family: inherit; }
+
+  .drive-modal-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.85);
+    z-index: 99999;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  .drive-modal-backdrop.show { display: flex; }
+  .drive-modal-box {
+    background: #ffffff;
+    border-radius: 14px;
+    width: 100%;
+    max-width: 920px;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+  }
+  .drive-modal-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-bottom: 1px solid #e2e8f0;
+    background: #f8fafc;
+    flex-wrap: wrap;
+  }
+  .drive-modal-title { font-weight: 800; font-size: 0.95rem; color: #0f172a; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 55vw; }
+  .drive-modal-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+  .drive-ext-btn {
+    background: #dbeafe; color: #1e40af; padding: 6px 12px; border-radius: 8px;
+    font-size: 0.82rem; font-weight: 800; text-decoration: none;
+  }
+  .drive-close-btn {
+    background: #e2e8f0; color: #0f172a; border: none; border-radius: 8px;
+    padding: 6px 12px; font-size: 0.85rem; font-weight: 800; cursor: pointer;
+  }
+  .drive-modal-frame { flex: 1; width: 100%; border: none; background: #1e293b; }
+
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="top-bar">
+    <a class="home-btn" href="../">🏠 主頁</a>
+    <h1 class="page-title">📋 檔案上傳與分類紀錄 (43 份)</h1>
+  </header>
+      <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-18 15:44</span>
+        <span class="log-dest">📘 中文科 · 閱讀及應用</span>
+      </div>
+      <div class="log-title">P1 1st term 中文溫習紙</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-P1 1st term 中文溫習紙.pdf</code> → <strong>顯示名稱：</strong>P1 1st term 中文溫習紙</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1laXsK_rT8MJj-IUhxpo0lfEA2gET4HWQ/view" data-title="P1 1st term 中文溫習紙" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-17 22:56</span>
+        <span class="log-dest">📕 英文科 · Reading &amp; Usage</span>
+      </div>
+      <div class="log-title">2024 P1 1st term Eng R&amp;U exam</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-2024 P1 1st term Eng R&amp;U exam.pdf</code> → <strong>顯示名稱：</strong>2024 P1 1st term Eng R&amp;U exam</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/12QTnEg-Rl4p7MKVcqu4IO7ShPJdAF0VB/view" data-title="2024 P1 1st term Eng R&amp;U exam" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-17 22:56</span>
+        <span class="log-dest">📕 英文科 · Readers Quiz &amp; Listening</span>
+      </div>
+      <div class="log-title">2024 P1 1st term Rdr exam</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-2024 P1 1st term Rdr exam.pdf</code> → <strong>顯示名稱：</strong>2024 P1 1st term Rdr exam</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1A0bK9P4eYHHvMXrSZ7KfqHzip-KEDyvm/view" data-title="2024 P1 1st term Rdr exam" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-17 22:56</span>
+        <span class="log-dest">🧮 數學科 · 數學 (中文)</span>
+      </div>
+      <div class="log-title">2024 P1 1st term 數學考試</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-2024 P1 1st term 數學考試.pdf</code> → <strong>顯示名稱：</strong>2024 P1 1st term 數學考試</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1DcbBeA-P4ILLCAqjBu705LD_hChQ_OfJ/view" data-title="2024 P1 1st term 數學考試" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-17 22:56</span>
+        <span class="log-dest">🧮 數學科 · 英數 (Emaths)</span>
+      </div>
+      <div class="log-title">2024 P1 1st term Emath exam</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-2024 P1 1st term Emath exam.pdf</code> → <strong>顯示名稱：</strong>2024 P1 1st term Emath exam</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1QX5exZ_D1QU6Q3e9gbt8FISPXhnVR9LJ/view" data-title="2024 P1 1st term Emath exam" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-16 11:14</span>
+        <span class="log-dest">📘 中文科 · 溫習試卷庫</span>
+      </div>
+      <div class="log-title">練習四</div>
+      <div class="rename-note">📄 <strong>原檔名：</strong><code>練習四.pdf</code>（未改名）</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1dzQIhZSmwEkF0RPiimroAG_6orsu-xBr/view" data-title="練習四" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-16 11:14</span>
+        <span class="log-dest">📘 中文科 · 溫習試卷庫</span>
+      </div>
+      <div class="log-title">練習2</div>
+      <div class="rename-note">📄 <strong>原檔名：</strong><code>練習2.pdf</code>（未改名）</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1EbupSFO3MheXzZwu4NCvb_p-HjBoz17C/view" data-title="練習2" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-16 11:14</span>
+        <span class="log-dest">📘 中文科 · 溫習試卷庫</span>
+      </div>
+      <div class="log-title">練習三</div>
+      <div class="rename-note">📄 <strong>原檔名：</strong><code>練習三.pdf</code>（未改名）</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1Rbsjb1kEd7ETKfSRAXBX7ucsOau4Tmf8/view" data-title="練習三" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-16 11:14</span>
+        <span class="log-dest">📘 中文科 · 溫習試卷庫</span>
+      </div>
+      <div class="log-title">練習1</div>
+      <div class="rename-note">📄 <strong>原檔名：</strong><code>練習1.pdf</code>（未改名）</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1wkHGC9NF1lnEvA4AE7yNv5XYJDg-Wj5e/view" data-title="練習1" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-16 10:54</span>
+        <span class="log-dest">📘 中文科 · 閱讀及應用</span>
+      </div>
+      <div class="log-title">P1 中文語練</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-P1 中文語練.pdf</code> → <strong>顯示名稱：</strong>P1 中文語練</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1cbrdLsD4A2rA8Jq5JB0gYHalPzo-zKpC/view" data-title="P1 中文語練" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-16 10:54</span>
+        <span class="log-dest">📕 英文科 · 溫習試卷庫</span>
+      </div>
+      <div class="log-title">P1 SE</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-P1 SE.pdf</code> → <strong>顯示名稱：</strong>P1 SE</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1HL0GMX_xOZLK8jXDJeCgq7o19RKlHyBi/view" data-title="P1 SE" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-16 10:54</span>
+        <span class="log-dest">🧮 數學科 · 英數 (Emaths)</span>
+      </div>
+      <div class="log-title">P1 Emaths</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-P1 Emaths.pdf</code> → <strong>顯示名稱：</strong>P1 Emaths</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1JjRR3CEnS3e15QQLKO1lC88mT8SagdVq/view" data-title="P1 Emaths" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-16 10:54</span>
+        <span class="log-dest">🧮 數學科 · 數學 (中文)</span>
+      </div>
+      <div class="log-title">P1 數綜</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-P1 數綜.pdf</code> → <strong>顯示名稱：</strong>P1 數綜</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1lys8pnfkrWVnEAU7TzV7kVSQlgqisp3i/view" data-title="P1 數綜" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-16 10:06</span>
+        <span class="log-dest">📕 英文科 · English Speaking</span>
+      </div>
+      <div class="log-title">P1 Eng Speaking Notes</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-P1 Eng Speaking Notes.pdf</code> → <strong>顯示名稱：</strong>P1 Eng Speaking Notes</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1IDnacfEnxxllPxctWJKG165xeJzZeQTH/view" data-title="P1 Eng Speaking Notes" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-14 19:35</span>
+        <span class="log-dest">📘 中文科 · 閱讀及應用</span>
+      </div>
+      <div class="log-title">P1 詞練上</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-P1 詞練上.pdf</code> → <strong>顯示名稱：</strong>P1 詞練上</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1cuy-yBA5fgagpVyKM-bx6ie4f61lsaO0/view" data-title="P1 詞練上" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-14 19:35</span>
+        <span class="log-dest">📘 中文科 · 閱讀及應用</span>
+      </div>
+      <div class="log-title">P1語練part 3(連答案)</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-P1語練part 3(連答案).pdf</code> → <strong>顯示名稱：</strong>P1語練part 3(連答案)</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1HPnNDwkVS4cvydKZec4GF5xQV8S55Xg5/view" data-title="P1語練part 3(連答案)" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-14 19:35</span>
+        <span class="log-dest">📘 中文科 · 閱讀及應用</span>
+      </div>
+      <div class="log-title">P1 語練part 2 (連答案)</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-P1 語練part 2 (連答案).pdf</code> → <strong>顯示名稱：</strong>P1 語練part 2 (連答案)</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/12s-36R0oCgWxkJMoYk9-2AxN2M5yWwqV/view" data-title="P1 語練part 2 (連答案)" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-14 19:35</span>
+        <span class="log-dest">📘 中文科 · 閱讀及應用</span>
+      </div>
+      <div class="log-title">P1 語練1(連答案)</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-P1 語練1(連答案).pdf</code> → <strong>顯示名稱：</strong>P1 語練1(連答案)</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1i_QVTdJq9XZAYEN4zDM4dGDG1SlkBEpp/view" data-title="P1 語練1(連答案)" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-14 19:35</span>
+        <span class="log-dest">📘 中文科 · 閱讀及應用</span>
+      </div>
+      <div class="log-title">P1 Direct 中文1st term L2</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-P1 Direct 中文1st term L2.pdf</code> → <strong>顯示名稱：</strong>P1 Direct 中文1st term L2</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1_zydnOzK44EFDy2keukj7Jzg3q86F-n_/view" data-title="P1 Direct 中文1st term L2" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-14 19:35</span>
+        <span class="log-dest">📘 中文科 · 閱讀及應用</span>
+      </div>
+      <div class="log-title">P1 中文默書</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-P1 中文默書.pdf</code> → <strong>顯示名稱：</strong>P1 中文默書</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/17S_iEHw1fUdeVtJakusC8dw9wshNJZR3/view" data-title="P1 中文默書" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-14 19:35</span>
+        <span class="log-dest">📕 英文科 · Reading &amp; Usage</span>
+      </div>
+      <div class="log-title">P1 SE part 2</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-P1 SE part 2.pdf</code> → <strong>顯示名稱：</strong>P1 SE part 2</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1nOkfHIjJNnx3OdnKVarW4nfXfvfORRt5/view" data-title="P1 SE part 2" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-14 19:35</span>
+        <span class="log-dest">📕 英文科 · Reading &amp; Usage</span>
+      </div>
+      <div class="log-title">P2 SE part 1</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-P2 SE part 1.pdf</code> → <strong>顯示名稱：</strong>P2 SE part 1</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1B61lNblC7Wn675ZlYLoNeLMTDvy_I-tX/view" data-title="P2 SE part 1" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-14 19:35</span>
+        <span class="log-dest">📕 英文科 · Readers Quiz &amp; Listening</span>
+      </div>
+      <div class="log-title">P1 Dictation</div>
+      <div class="rename-note">📄 <strong>原檔名：</strong><code>P1 Dictation.pdf</code>（未改名）</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1WP3tGPXnB0CYamBkBlMShjxtFH0LAnQN/view" data-title="P1 Dictation" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-14 19:35</span>
+        <span class="log-dest">🧮 數學科 · 數學 (中文)</span>
+      </div>
+      <div class="log-title">P1 數學評估</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-P1 數學評估.pdf</code> → <strong>顯示名稱：</strong>P1 數學評估</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1ctIF3HvazimXivqmWIgj3cnVBc8mqP0a/view" data-title="P1 數學評估" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-14 19:35</span>
+        <span class="log-dest">🧮 數學科 · 數學 (中文)</span>
+      </div>
+      <div class="log-title">P1進評1</div>
+      <div class="rename-note">📄 <strong>原檔名：</strong><code>P1進評1.pdf</code>（未改名）</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1tu3Jmr55gncH5RZoK1t2AC1QZP-4bZGk/view" data-title="P1進評1" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-14 19:35</span>
+        <span class="log-dest">🧮 數學科 · 數學 (中文)</span>
+      </div>
+      <div class="log-title">P1 數綜合練習</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-P1 數綜合練習.pdf</code> → <strong>顯示名稱：</strong>P1 數綜合練習</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1_PQM9A68lnMmAGhsn0ZyjP6BGeZLaR3p/view" data-title="P1 數綜合練習" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-14 17:55</span>
+        <span class="log-dest">📘 中文科 · 閱讀及應用</span>
+      </div>
+      <div class="log-title">量詞填充題</div>
+      <div class="rename-note">📄 <strong>原檔名：</strong><code>量詞填充題.pdf</code>（未改名）</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1eskYPZhsn9VOOv1fP85CmFlTKnBjNooW/view" data-title="量詞填充題" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-07 15:05</span>
+        <span class="log-dest">📕 英文科 · Reading &amp; Usage</span>
+      </div>
+      <div class="log-title">P1 Direct Eng L8</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-P1 Direct Eng L8.pdf</code> → <strong>顯示名稱：</strong>P1 Direct Eng L8</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1WhBya7Nd7Eq2_Co7ZMDZk6axWwT4MP1m/view" data-title="P1 Direct Eng L8" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-07 10:27</span>
+        <span class="log-dest">📘 中文科 · 閱讀及應用</span>
+      </div>
+      <div class="log-title">P1 第一課 供詞填充</div>
+      <div class="rename-note">📄 <strong>原檔名：</strong><code>P1 第一課 供詞填充.pdf</code>（未改名）</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1K3-iBS3Zlgfd4ozwrX2geazRZz_ZtE8o/view" data-title="P1 第一課 供詞填充" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-07 10:27</span>
+        <span class="log-dest">📘 中文科 · 閱讀及應用</span>
+      </div>
+      <div class="log-title">P1 第五課供詞填充</div>
+      <div class="rename-note">📄 <strong>原檔名：</strong><code>P1 第五課供詞填充.pdf</code>（未改名）</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1bkAJiNJXn5QJ4G7hVgMP-a0Td4Dz3mHw/view" data-title="P1 第五課供詞填充" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-07 10:27</span>
+        <span class="log-dest">📘 中文科 · 閱讀及應用</span>
+      </div>
+      <div class="log-title">P1 第八課供詞填充</div>
+      <div class="rename-note">📄 <strong>原檔名：</strong><code>P1 第八課供詞填充.pdf</code>（未改名）</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1_7siW83e9kfzi7CYYc8X6-VixDSJXFNV/view" data-title="P1 第八課供詞填充" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-07 10:27</span>
+        <span class="log-dest">📘 中文科 · 閱讀及應用</span>
+      </div>
+      <div class="log-title">P1 第十二課 供詞填充</div>
+      <div class="rename-note">📄 <strong>原檔名：</strong><code>P1 第十二課 供詞填充.pdf</code>（未改名）</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1SsB977-x5hKL8Hzi02bBCRVccPc6g4qx/view" data-title="P1 第十二課 供詞填充" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-07 10:27</span>
+        <span class="log-dest">📘 中文科 · 閱讀及應用</span>
+      </div>
+      <div class="log-title">P1 第十五課 供詞填充</div>
+      <div class="rename-note">📄 <strong>原檔名：</strong><code>P1 第十五課 供詞填充.pdf</code>（未改名）</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1fvzd809AlbTvGin-__in_DZ0Mpy8GxIM/view" data-title="P1 第十五課 供詞填充" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-05 14:08</span>
+        <span class="log-dest">📘 中文科 · 中文寫作</span>
+      </div>
+      <div class="log-title">2024 P1 1st term 中文寫作卷</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-2024 P1 1st term 中文寫作卷.pdf</code> → <strong>顯示名稱：</strong>2024 P1 1st term 中文寫作卷</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1zibVH_U6qcRRceyPmhwF2dxcnlvRcern/view" data-title="2024 P1 1st term 中文寫作卷" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-05 14:08</span>
+        <span class="log-dest">📘 中文科 · 閱讀及應用</span>
+      </div>
+      <div class="log-title">2022 P1 1st term 中文考試</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-2022 P1 1st term 中文考試.pdf</code> → <strong>顯示名稱：</strong>2022 P1 1st term 中文考試</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1VVqBJIg2JiOjqFbE_wiGjb3384kBAGjG/view" data-title="2022 P1 1st term 中文考試" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-05 14:08</span>
+        <span class="log-dest">📘 中文科 · 閱讀及應用</span>
+      </div>
+      <div class="log-title">2024 P1 1st term 中文考試</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-2024 P1 1st term 中文考試.pdf</code> → <strong>顯示名稱：</strong>2024 P1 1st term 中文考試</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1kfb2kYlMquvKkbfIxTBDq4k61bFqyHXU/view" data-title="2024 P1 1st term 中文考試" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-05 14:08</span>
+        <span class="log-dest">📕 英文科 · Writing</span>
+      </div>
+      <div class="log-title">2024 P1 1st term Eng Writing Exam</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-2024 P1 1st term Eng Writing Exam.pdf</code> → <strong>顯示名稱：</strong>2024 P1 1st term Eng Writing Exam</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1BKQfpQUyjnsDMchmMZ2sOl8PTDxe7RvM/view" data-title="2024 P1 1st term Eng Writing Exam" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-05 14:08</span>
+        <span class="log-dest">📙 專科與人文 · 聖經筆試</span>
+      </div>
+      <div class="log-title">2024 P1 1st term 聖經考試</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-2024 P1 1st term 聖經考試.pdf</code> → <strong>顯示名稱：</strong>2024 P1 1st term 聖經考試</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1HPw10qsv1b5zxXhLRdtkHAE2vBbGrdfQ/view" data-title="2024 P1 1st term 聖經考試" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-05 14:08</span>
+        <span class="log-dest">📙 專科與人文 · 音樂筆試</span>
+      </div>
+      <div class="log-title">2024 P1 1st term 音樂考試</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-2024 P1 1st term 音樂考試.pdf</code> → <strong>顯示名稱：</strong>2024 P1 1st term 音樂考試</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1-hhyUp4m-jTUjMKrtrbDLXn265--c4Ui/view" data-title="2024 P1 1st term 音樂考試" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-05 14:08</span>
+        <span class="log-dest">📙 專科與人文 · 普通話筆試</span>
+      </div>
+      <div class="log-title">2024 P1 1st term 普通話考試</div>
+      <div class="rename-note">✏️ <strong>原檔名：</strong><code>QuizAI-2024 P1 1st term 普通話考試.pdf</code> → <strong>顯示名稱：</strong>2024 P1 1st term 普通話考試</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1ZYTk1rTa4hcy9bbB3y4fyq-iJMJ15fQt/view" data-title="2024 P1 1st term 普通話考試" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-11-05 14:07</span>
+        <span class="log-dest">📘 中文科 · 閱讀及應用</span>
+      </div>
+      <div class="log-title">P.1 Chinese Exam</div>
+      <div class="rename-note">📄 <strong>原檔名：</strong><code>P.1 Chinese Exam.pdf</code>（未改名）</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1jr2jaNqt2PI3rlisxKuoRMU40c-CCesc/view" data-title="P.1 Chinese Exam" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-10-22 18:47</span>
+        <span class="log-dest">📕 英文科 · 溫習試卷庫</span>
+      </div>
+      <div class="log-title">P1 Eng Assessment</div>
+      <div class="rename-note">📄 <strong>原檔名：</strong><code>P1 Eng Assessment.pdf</code>（未改名）</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1Ad2U8KvLiKdJ5_npmbV8paprG5llLk-z/view" data-title="P1 Eng Assessment" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+    <div class="log-card">
+      <div class="log-head">
+        <span class="log-date">🕒 2026-10-22 18:47</span>
+        <span class="log-dest">🧮 數學科 · 數學 (中文)</span>
+      </div>
+      <div class="log-title">P1 Math Assessment</div>
+      <div class="rename-note">📄 <strong>原檔名：</strong><code>P1 Math Assessment.pdf</code>（未改名）</div>
+      <div style="margin-top:8px;">
+        <button type="button" class="preview-btn" data-url="https://drive.google.com/file/d/1xxzyzgU72HHOI_bqTezOXkCvFSNt7gnk/view" data-title="P1 Math Assessment" onclick="openDrivePreviewFromEl(this)">網頁內預覽 👁️</button>
+      </div>
+    </div>
+</div>
+
+<div class="drive-modal-backdrop no-print" id="driveModalBackdrop" onclick="closeDrivePreview()">
+  <div class="drive-modal-box" onclick="event.stopPropagation()">
+    <div class="drive-modal-head">
+      <span class="drive-modal-title" id="driveModalTitle">預覽檔案</span>
+      <div class="drive-modal-actions">
+        <a class="drive-ext-btn" id="driveModalExtLink" href="#" target="_blank" rel="noopener">↗ 在 Drive 開啟</a>
+        <button class="drive-close-btn" onclick="closeDrivePreview()">✕ 關閉</button>
+      </div>
+    </div>
+    <iframe class="drive-modal-frame" id="driveModalFrame" src="about:blank" allow="autoplay"></iframe>
+  </div>
+</div>
+
+<script>
+
+  function openDrivePreviewFromEl(el) {
+    openDrivePreview(el.getAttribute("data-url"), el.getAttribute("data-title"));
+  }
+  function openDrivePreview(viewUrl, title) {
+    const previewUrl = viewUrl.replace(/\/view(\?.*)?$/, "/preview");
+    document.getElementById("driveModalTitle").innerText = title || "預覽檔案";
+    document.getElementById("driveModalExtLink").href = viewUrl;
+    document.getElementById("driveModalFrame").src = previewUrl;
+    document.getElementById("driveModalBackdrop").classList.add("show");
+    document.body.style.overflow = "hidden";
+  }
+  function closeDrivePreview() {
+    document.getElementById("driveModalBackdrop").classList.remove("show");
+    document.getElementById("driveModalFrame").src = "about:blank";
+    document.body.style.overflow = "";
+  }
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeDrivePreview();
+  });
+
+</script>
+</body>
+</html>

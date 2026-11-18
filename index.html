@@ -84,7 +84,7 @@
   }
   .cal-hero-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
   .cal-school-badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; }
-  .cal-hero-title { font-size: 1.38rem; font-weight: 800; line-height: 1.3; }
+  .cal-hero-title { font-size: 1.75rem; font-weight: 900; line-height: 1.28; letter-spacing: -0.01em; }
   .cal-hero-actions { display: flex; gap: 8px; flex-wrap: wrap; }
   .btn-hero {
     background: #ffffff;
@@ -214,7 +214,7 @@
     .countdown-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
     .cd-days-num { font-size: 1.4rem; }
     .cal-hero-card { padding: 14px; }
-    .cal-hero-title { font-size: 1.12rem; }
+    .cal-hero-title { font-size: 1.32rem; }
     .qr-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
     .qr-svg-wrap svg { width: 110px; height: 110px; }
   }
@@ -288,6 +288,7 @@
           <h1 class="cal-hero-title">2026–2027 小一上學期模擬考試時間表及範圍</h1>
         </div>
         <div class="cal-hero-actions no-print">
+          <a href="updates/" class="btn-hero" style="text-decoration:none;">📋 更新紀錄</a>
           <button type="button" class="btn-hero" data-url="https://drive.google.com/file/d/1BGjsKOeVmFgcSRG6nD2H1qvkjYNRFUjx/view" data-title="2026–2027 小一上學期模擬考試時間表及範圍 (原裝通告)" onclick="openDrivePreviewFromEl(this)">🖼️ 原裝通告</button>
           <button class="btn-hero" onclick="printTimetable()">🖨️ 列印時間表</button>
         </div>
@@ -322,15 +323,6 @@
         </tbody>
       </table>
     </section>
-
-    <!-- Math Primary CTA -->
-    <a href="math/" class="hero-math-cta no-print">
-      <div>
-        <div class="cta-title">🧮 立即做數學練習 (Day 1–30 + Emaths)</div>
-        <div class="cta-sub">點擊直接進入小一每日精練與 11/12 英文數學溫習</div>
-      </div>
-      <span class="cta-arrow">開始 ▶</span>
-    </a>
 
     <!-- Subject Shortcuts -->
     <nav class="subject-grid no-print">

@@ -12,7 +12,8 @@
 <style>
   :root {
     --primary: #1d4ed8;
-    --bg: #f8fafc;
+    --bg: #eff6ff;
+    --banner-bg: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
     --card: #ffffff;
     --border: #e2e8f0;
     --text: #0f172a;
@@ -28,31 +29,68 @@
   }
   .container { max-width: 820px; margin: 0 auto; }
   .top-bar {
-    background: var(--card);
+    background: var(--banner-bg);
     border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 14px 16px;
-    margin-bottom: 16px;
+    border-top: 5px solid var(--primary);
+    border-radius: 16px;
+    padding: 18px 20px;
+    margin-bottom: 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.05);
   }
   .home-btn {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: #eef2ff;
-    color: #1e40af;
+    background: #ffffff;
+    color: var(--primary);
+    border: 1px solid var(--border);
     padding: 8px 14px;
     border-radius: 10px;
     font-weight: 800;
     font-size: 0.95rem;
     text-decoration: none;
   }
-  .page-title { font-size: 1.2rem; font-weight: 800; color: var(--primary); margin-top: 6px; }
-  .section-title { font-size: 1.08rem; font-weight: 800; margin: 18px 0 10px; color: var(--text); }
+  .page-title { font-size: 1.68rem; font-weight: 900; color: var(--primary); margin-top: 10px; letter-spacing: -0.01em; }
+  .section-title { font-size: 1.12rem; font-weight: 800; margin: 20px 0 10px; color: var(--text); }
+  .exam-files-toggle {
+    margin-top: 10px;
+    border-top: 1px dashed var(--border);
+    padding-top: 8px;
+  }
+  .exam-files-toggle summary {
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--primary);
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: var(--bg);
+  }
+  .electronic-drill-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #047857 0%, #059669 100%);
+    color: #ffffff;
+    padding: 16px 20px;
+    border-radius: 14px;
+    text-decoration: none;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 12px rgba(4, 120, 87, 0.22);
+  }
+  .electronic-drill-title { font-size: 1.15rem; font-weight: 800; }
+  .electronic-drill-sub { font-size: 0.86rem; opacity: 0.92; }
+  .electronic-drill-btn { background: rgba(255,255,255,0.22); padding: 8px 14px; border-radius: 10px; font-weight: 800; flex-shrink: 0; }
   .exam-card {
     background: var(--card);
     border: 1px solid var(--border);
@@ -160,7 +198,7 @@
   <header class="top-bar">
     <div>
       <a class="home-btn" href="../">🏠 主頁</a>
-      <div class="page-title">📘 中文科 · 溫習重點與試卷庫</div>
+      <h1 class="page-title">📘 中文科 · 溫習重點與試卷庫</h1>
     </div>
   </header>
 
@@ -178,7 +216,12 @@
         <span class="exam-subj-title">閱讀及應用</span>
       </div>
       <div class="exam-scope">① 一上第 1 冊第 1, 5, 8 課及第 2 冊第 12, 14 課（共 5 課）<br>② 課文詞語練習 P.1, 4–7<br>③ 語文知識練習 P.1, 4–7, 11–12, 23–24, 29, 32–34<br>④ 已有知識</div>
-      <div class="pdf-list" style="margin-top:10px;">
+      <details class="exam-files-toggle">
+        <summary>📂 顯示相關練習 (17 份)</summary>
+        <div class="pdf-list" style="margin-top:8px;">
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1jr2jaNqt2PI3rlisxKuoRMU40c-CCesc/view" data-title="P.1 Chinese Exam" onclick="openDrivePreviewFromEl(this)"><span>📄 P.1 Chinese Exam</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1VVqBJIg2JiOjqFbE_wiGjb3384kBAGjG/view" data-title="2022 P1 1st term 中文考試" onclick="openDrivePreviewFromEl(this)"><span>📄 2022 P1 1st term 中文考試</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1kfb2kYlMquvKkbfIxTBDq4k61bFqyHXU/view" data-title="2024 P1 1st term 中文考試" onclick="openDrivePreviewFromEl(this)"><span>📄 2024 P1 1st term 中文考試</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
       <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1K3-iBS3Zlgfd4ozwrX2geazRZz_ZtE8o/view" data-title="P1 第一課 供詞填充" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 第一課 供詞填充</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
       <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1bkAJiNJXn5QJ4G7hVgMP-a0Td4Dz3mHw/view" data-title="P1 第五課供詞填充" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 第五課供詞填充</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
       <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1_7siW83e9kfzi7CYYc8X6-VixDSJXFNV/view" data-title="P1 第八課供詞填充" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 第八課供詞填充</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
@@ -189,8 +232,12 @@
       <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1HPnNDwkVS4cvydKZec4GF5xQV8S55Xg5/view" data-title="P1語練part 3(連答案)" onclick="openDrivePreviewFromEl(this)"><span>📄 P1語練part 3(連答案)</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
       <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/12s-36R0oCgWxkJMoYk9-2AxN2M5yWwqV/view" data-title="P1 語練part 2 (連答案)" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 語練part 2 (連答案)</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
       <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1i_QVTdJq9XZAYEN4zDM4dGDG1SlkBEpp/view" data-title="P1 語練1(連答案)" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 語練1(連答案)</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1_zydnOzK44EFDy2keukj7Jzg3q86F-n_/view" data-title="P1 Direct 中文1st term L2" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 Direct 中文1st term L2</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/17S_iEHw1fUdeVtJakusC8dw9wshNJZR3/view" data-title="P1 中文默書" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 中文默書</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
       <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1cbrdLsD4A2rA8Jq5JB0gYHalPzo-zKpC/view" data-title="P1 中文語練" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 中文語練</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
-      </div>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1laXsK_rT8MJj-IUhxpo0lfEA2gET4HWQ/view" data-title="P1 1st term 中文溫習紙" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 1st term 中文溫習紙</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+        </div>
+      </details>
     </div>
     <div class="exam-card">
       <div class="exam-card-header">
@@ -205,9 +252,12 @@
         <span class="exam-subj-title">中文寫作</span>
       </div>
       <div class="exam-scope">① 寫作練習二至四<br>② 寫作工作紙一至三<br>③ 語文知識練習 P.42–46</div>
-      <div class="pdf-list" style="margin-top:10px;">
+      <details class="exam-files-toggle">
+        <summary>📂 顯示相關練習 (1 份)</summary>
+        <div class="pdf-list" style="margin-top:8px;">
       <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1zibVH_U6qcRRceyPmhwF2dxcnlvRcern/view" data-title="2024 P1 1st term 中文寫作卷" onclick="openDrivePreviewFromEl(this)"><span>📄 2024 P1 1st term 中文寫作卷</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
-      </div>
+        </div>
+      </details>
     </div>
 
   <h2 class="section-title">📂 溫習試卷及工作紙庫 (22 份)</h2>
@@ -216,10 +266,22 @@
   </div>
   <div class="pdf-list">
       <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1jr2jaNqt2PI3rlisxKuoRMU40c-CCesc/view" data-title="P.1 Chinese Exam" onclick="openDrivePreviewFromEl(this)"><span>📄 P.1 Chinese Exam</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1zibVH_U6qcRRceyPmhwF2dxcnlvRcern/view" data-title="2024 P1 1st term 中文寫作卷" onclick="openDrivePreviewFromEl(this)"><span>📄 2024 P1 1st term 中文寫作卷</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
       <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1VVqBJIg2JiOjqFbE_wiGjb3384kBAGjG/view" data-title="2022 P1 1st term 中文考試" onclick="openDrivePreviewFromEl(this)"><span>📄 2022 P1 1st term 中文考試</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
       <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1kfb2kYlMquvKkbfIxTBDq4k61bFqyHXU/view" data-title="2024 P1 1st term 中文考試" onclick="openDrivePreviewFromEl(this)"><span>📄 2024 P1 1st term 中文考試</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1K3-iBS3Zlgfd4ozwrX2geazRZz_ZtE8o/view" data-title="P1 第一課 供詞填充" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 第一課 供詞填充</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1bkAJiNJXn5QJ4G7hVgMP-a0Td4Dz3mHw/view" data-title="P1 第五課供詞填充" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 第五課供詞填充</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1_7siW83e9kfzi7CYYc8X6-VixDSJXFNV/view" data-title="P1 第八課供詞填充" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 第八課供詞填充</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1SsB977-x5hKL8Hzi02bBCRVccPc6g4qx/view" data-title="P1 第十二課 供詞填充" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 第十二課 供詞填充</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1fvzd809AlbTvGin-__in_DZ0Mpy8GxIM/view" data-title="P1 第十五課 供詞填充" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 第十五課 供詞填充</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1eskYPZhsn9VOOv1fP85CmFlTKnBjNooW/view" data-title="量詞填充題" onclick="openDrivePreviewFromEl(this)"><span>📄 量詞填充題</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1cuy-yBA5fgagpVyKM-bx6ie4f61lsaO0/view" data-title="P1 詞練上" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 詞練上</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1HPnNDwkVS4cvydKZec4GF5xQV8S55Xg5/view" data-title="P1語練part 3(連答案)" onclick="openDrivePreviewFromEl(this)"><span>📄 P1語練part 3(連答案)</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/12s-36R0oCgWxkJMoYk9-2AxN2M5yWwqV/view" data-title="P1 語練part 2 (連答案)" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 語練part 2 (連答案)</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1i_QVTdJq9XZAYEN4zDM4dGDG1SlkBEpp/view" data-title="P1 語練1(連答案)" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 語練1(連答案)</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
       <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1_zydnOzK44EFDy2keukj7Jzg3q86F-n_/view" data-title="P1 Direct 中文1st term L2" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 Direct 中文1st term L2</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
       <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/17S_iEHw1fUdeVtJakusC8dw9wshNJZR3/view" data-title="P1 中文默書" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 中文默書</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1cbrdLsD4A2rA8Jq5JB0gYHalPzo-zKpC/view" data-title="P1 中文語練" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 中文語練</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
       <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1dzQIhZSmwEkF0RPiimroAG_6orsu-xBr/view" data-title="練習四" onclick="openDrivePreviewFromEl(this)"><span>📄 練習四</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
       <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1EbupSFO3MheXzZwu4NCvb_p-HjBoz17C/view" data-title="練習2" onclick="openDrivePreviewFromEl(this)"><span>📄 練習2</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
       <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1Rbsjb1kEd7ETKfSRAXBX7ucsOau4Tmf8/view" data-title="練習三" onclick="openDrivePreviewFromEl(this)"><span>📄 練習三</span><span class="pdf-badge">網頁內預覽 👁️</span></button>

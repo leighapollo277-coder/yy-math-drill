@@ -84,7 +84,7 @@
   }
   .cal-hero-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
   .cal-school-badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; }
-  .cal-hero-title { font-size: 1.75rem; font-weight: 900; line-height: 1.28; letter-spacing: -0.01em; }
+  .cal-hero-title { font-size: 2.6rem; font-weight: 900; line-height: 1.24; letter-spacing: -0.02em; }
   .cal-hero-actions { display: flex; gap: 8px; flex-wrap: wrap; }
   .btn-hero {
     background: #ffffff;
@@ -214,7 +214,7 @@
     .countdown-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
     .cd-days-num { font-size: 1.4rem; }
     .cal-hero-card { padding: 14px; }
-    .cal-hero-title { font-size: 1.32rem; }
+    .cal-hero-title { font-size: 1.95rem; }
     .qr-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
     .qr-svg-wrap svg { width: 110px; height: 110px; }
   }
@@ -298,6 +298,26 @@
       </div>
     </div>
 
+    <!-- Subject Shortcuts (placed before countdowns) -->
+    <nav class="subject-grid no-print" style="margin-top: 14px;">
+      <a class="subj-tile" href="math/">
+        <span class="subj-tile-title">🧮 數學科 Math</span>
+        <span class="subj-tile-sub">每日精練 + Emaths Ex.1–5</span>
+      </a>
+      <a class="subj-tile" href="chinese/">
+        <span class="subj-tile-title">📘 中文科 Chinese</span>
+        <span class="subj-tile-sub">考試範圍與 Google Drive 試卷</span>
+      </a>
+      <a class="subj-tile" href="english/">
+        <span class="subj-tile-title">📕 英文科 English</span>
+        <span class="subj-tile-sub">Usage、Writing 與試卷庫</span>
+      </a>
+      <a class="subj-tile" href="electives/">
+        <span class="subj-tile-title">📙 專科與人文</span>
+        <span class="subj-tile-sub">普通話、聖經、音樂、人文</span>
+      </a>
+    </nav>
+
     <div class="countdown-grid no-print" id="countdownGrid"></div>
 
     <!-- At-a-Glance One-View Timetable -->
@@ -324,26 +344,6 @@
       </table>
     </section>
 
-    <!-- Subject Shortcuts -->
-    <nav class="subject-grid no-print">
-      <a class="subj-tile" href="math/">
-        <span class="subj-tile-title">🧮 數學科 Math</span>
-        <span class="subj-tile-sub">每日精練 + Emaths Ex.1–5</span>
-      </a>
-      <a class="subj-tile" href="chinese/">
-        <span class="subj-tile-title">📘 中文科 Chinese</span>
-        <span class="subj-tile-sub">考試範圍與 Google Drive 試卷</span>
-      </a>
-      <a class="subj-tile" href="english/">
-        <span class="subj-tile-title">📕 英文科 English</span>
-        <span class="subj-tile-sub">Usage、Writing 與試卷庫</span>
-      </a>
-      <a class="subj-tile" href="electives/">
-        <span class="subj-tile-title">📙 專科與人文</span>
-        <span class="subj-tile-sub">普通話、聖經、音樂、人文</span>
-      </a>
-    </nav>
-
     <div class="cal-filter-bar no-print">
       <button class="cal-filter-btn active" onclick="filterCalSubject('all', this)">全部日程 (All)</button>
       <button class="cal-filter-btn" onclick="filterCalSubject('math', this)">📗 數學 / 英數</button>
@@ -355,58 +355,63 @@
 
     <div class="timetable-section cal-group" data-subj="early" id="cal-section-oral">
       <div class="timetable-heading"><span>1️⃣ 提前考試科目（第一堂或隨堂進行考核）</span><span>19/11 – 04/12</span></div>
-      <div class="exam-card cal-item" data-subj="early chinese"><div class="exam-card-header"><span class="exam-date-badge">📅 19/11 – 04/12</span><span class="exam-subj-title">普通話口試</span></div><ul class="exam-scope-list"><li>第一堂或隨堂進行考核。</li></ul></div>
-      <div class="exam-card cal-item" data-subj="early english"><div class="exam-card-header"><span class="exam-date-badge">📅 26/11 – 04/12</span><span class="exam-subj-title">English Speaking</span></div><ul class="exam-scope-list"><li>第一堂或隨堂進行考核。</li></ul></div>
-      <div class="exam-card cal-item" data-subj="early chinese"><div class="exam-card-header"><span class="exam-date-badge">📅 27/11 – 04/12</span><span class="exam-subj-title">中文說話</span></div><ul class="exam-scope-list"><li>第一堂或隨堂進行考核。</li></ul></div>
-      <div class="exam-card cal-item" data-subj="early music"><div class="exam-card-header"><span class="exam-date-badge">📅 23/11 – 04/12</span><span class="exam-subj-title">唱歌考試</span></div><ul class="exam-scope-list"><li><strong>範圍：</strong>選唱 P.18《學跳舞》或 P.20《One Little Finger》。</li></ul></div>
+      <div class="exam-card cal-item" style="cursor:pointer;" onclick="window.location='electives/#exam-0'" data-subj="early chinese"><div class="exam-card-header"><span class="exam-date-badge">📅 19/11 – 04/12</span><span class="exam-subj-title">普通話口試 ▶</span></div><ul class="exam-scope-list"><li>第一堂或隨堂進行考核。</li></ul></div>
+      <div class="exam-card cal-item" style="cursor:pointer;" onclick="window.location='english/#exam-0'" data-subj="early english"><div class="exam-card-header"><span class="exam-date-badge">📅 26/11 – 04/12</span><span class="exam-subj-title">English Speaking ▶</span></div><ul class="exam-scope-list"><li>第一堂或隨堂進行考核。</li></ul></div>
+      <div class="exam-card cal-item" style="cursor:pointer;" onclick="window.location='chinese/#exam-0'" data-subj="early chinese"><div class="exam-card-header"><span class="exam-date-badge">📅 27/11 – 04/12</span><span class="exam-subj-title">中文說話 ▶</span></div><ul class="exam-scope-list"><li>第一堂或隨堂進行考核。</li></ul></div>
+      <div class="exam-card cal-item" style="cursor:pointer;" onclick="window.location='electives/#exam-1'" data-subj="early music"><div class="exam-card-header"><span class="exam-date-badge">📅 23/11 – 04/12</span><span class="exam-subj-title">唱歌考試 ▶</span></div><ul class="exam-scope-list"><li><strong>範圍：</strong>選唱 P.18《學跳舞》或 P.20《One Little Finger》。</li></ul></div>
     </div>
 
     <div class="timetable-section cal-group" data-subj="early" id="cal-section-written">
       <div class="timetable-heading"><span>2️⃣ 提前筆試科目</span><span>23/11 – 30/11</span></div>
-      <div class="exam-card cal-item" data-subj="early chinese"><div class="exam-card-header"><span class="exam-date-badge">📅 23/11 (一)</span><span class="exam-subj-title">普通話筆試</span></div><ul class="exam-scope-list"><li><strong>範圍：</strong>一上第 1–5 課及粵普對譯。</li></ul></div>
-      <div class="exam-card cal-item" data-subj="early"><div class="exam-card-header"><span class="exam-date-badge">📅 27/11 (五)</span><span class="exam-subj-title">聖經</span></div><ul class="exam-scope-list"><li><strong>範圍：</strong>一上第 1–7 課。</li></ul></div>
-      <div class="exam-card cal-item" data-subj="early music"><div class="exam-card-header"><span class="exam-date-badge">📅 30/11 (一)</span><span class="exam-subj-title">音樂筆試</span></div><ul class="exam-scope-list"><li><strong>範圍：</strong>一上第 1–9 課 (P.2–38)。</li></ul></div>
+      <div class="exam-card cal-item" style="cursor:pointer;" onclick="window.location='electives/#exam-2'" data-subj="early chinese"><div class="exam-card-header"><span class="exam-date-badge">📅 23/11 (一)</span><span class="exam-subj-title">普通話筆試 ▶</span></div><ul class="exam-scope-list"><li><strong>範圍：</strong>一上第 1–5 課及粵普對譯。</li></ul></div>
+      <div class="exam-card cal-item" style="cursor:pointer;" onclick="window.location='electives/#exam-3'" data-subj="early"><div class="exam-card-header"><span class="exam-date-badge">📅 27/11 (五)</span><span class="exam-subj-title">聖經 ▶</span></div><ul class="exam-scope-list"><li><strong>範圍：</strong>一上第 1–7 課。</li></ul></div>
+      <div class="exam-card cal-item" style="cursor:pointer;" onclick="window.location='electives/#exam-4'" data-subj="early music"><div class="exam-card-header"><span class="exam-date-badge">📅 30/11 (一)</span><span class="exam-subj-title">音樂筆試 ▶</span></div><ul class="exam-scope-list"><li><strong>範圍：</strong>一上第 1–9 課 (P.2–38)。</li></ul></div>
     </div>
 
     <div class="timetable-section cal-group" data-subj="main">
       <div class="timetable-heading"><span>3️⃣ 模擬考試主日程</span><span>07/12 (一) – 14/12 (一)</span></div>
-      <div class="exam-card cal-item" data-subj="chinese" id="cal-item-0712">
-        <div class="exam-card-header"><span class="exam-date-badge">📅 07/12 (一)</span><span class="exam-subj-title">中文科 · 閱讀及應用 / 中文聆聽</span></div>
+      <div class="exam-card cal-item" style="cursor:pointer;" onclick="window.location='chinese/#exam-1'" data-subj="chinese" id="cal-item-0712">
+        <div class="exam-card-header"><span class="exam-date-badge">📅 07/12 (一)</span><span class="exam-subj-title">中文科 · 閱讀及應用 / 中文聆聽 ▶</span></div>
         <ul class="exam-scope-list">
           <li><strong>閱讀及應用：</strong>① 一上第 1 冊第 1, 5, 8 課及第 2 冊第 12, 14 課（共五課） ② 課文詞語練習 P.1, 4–7 ③ 語文知識練習 P.1, 4–7, 11–12, 23–24, 29, 32–34 ④ 已有知識</li>
           <li><strong>中文聆聽：</strong>隨堂進行 (//)</li>
         </ul>
-        <a class="quick-link-btn no-print" href="chinese/">📘 打開中文試卷庫 ▶</a>
+        <a class="quick-link-btn no-print" href="chinese/#exam-1" onclick="event.stopPropagation()">📘 打開中文試卷庫 ▶</a>
       </div>
-      <div class="exam-card cal-item" data-subj="english" id="cal-item-0812">
-        <div class="exam-card-header"><span class="exam-date-badge">📅 08/12 (二)</span><span class="exam-subj-title">英文科 · Reading &amp; Usage / Writing</span></div>
+      <div class="exam-card cal-item" style="cursor:pointer;" onclick="window.location='english/#exam-1'" data-subj="english" id="cal-item-0812">
+        <div class="exam-card-header"><span class="exam-date-badge">📅 08/12 (二)</span><span class="exam-subj-title">英文科 · Reading &amp; Usage / Writing ▶</span></div>
         <ul class="exam-scope-list">
           <li><strong>Reading &amp; Usage：</strong>① LH Book 2 Unit 1 (P.6–14), Unit 2 (P.20–28), Unit 3 (P.34–42) ② SE Ch3, 4, 6, 9 (P.17), 10, 14 ③ Comprehension</li>
           <li><strong>Writing：</strong>① Wr. Task 1–2 ② Wr. Notes 1–8</li>
         </ul>
-        <a class="quick-link-btn no-print" href="english/">📕 打開英文試卷庫 ▶</a>
+        <a class="quick-link-btn no-print" href="english/#exam-1" onclick="event.stopPropagation()">📕 打開英文試卷庫 ▶</a>
       </div>
-      <div class="exam-card cal-item" data-subj="humanities chinese" id="cal-item-1012">
-        <div class="exam-card-header"><span class="exam-date-badge">📅 10/12 (四)</span><span class="exam-subj-title">人文科 / 中文寫作</span></div>
+      <div class="exam-card cal-item" style="cursor:pointer;" onclick="window.location='chinese/#exam-3'" data-subj="humanities chinese" id="cal-item-1012">
+        <div class="exam-card-header"><span class="exam-date-badge">📅 10/12 (四)</span><span class="exam-subj-title">人文科 / 中文寫作 ▶</span></div>
         <ul class="exam-scope-list">
           <li><strong>人文科：</strong>一上第 1, 2, 3, 5 課</li>
           <li><strong>中文寫作：</strong>① 寫作練習二至四 ② 寫作工作紙一至三 ③ 語文知識練習 P.42–46</li>
         </ul>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;">
+          <a class="quick-link-btn no-print" href="electives/#exam-5" onclick="event.stopPropagation()">📙 人文科 ▶</a>
+          <a class="quick-link-btn no-print" href="chinese/#exam-3" onclick="event.stopPropagation()">📘 中文寫作 ▶</a>
+        </div>
       </div>
-      <div class="exam-card cal-item" data-subj="math" id="cal-item-1112">
-        <div class="exam-card-header"><span class="exam-date-badge">📅 11/12 (五)</span><span class="exam-subj-title">數學科 (中文) / 英數 (Emaths)</span></div>
+      <div class="exam-card cal-item" style="cursor:pointer;" onclick="window.location='math/#exam-0'" data-subj="math" id="cal-item-1112">
+        <div class="exam-card-header"><span class="exam-date-badge">📅 11/12 (五)</span><span class="exam-subj-title">數學科 (中文) / 英數 (Emaths) ▶</span></div>
         <ul class="exam-scope-list">
           <li><strong>數學 (中文)：</strong>一上 A 第 1 課至一上 B 第 12 課及已有知識</li>
           <li><strong>英數 (Emaths)：</strong>① Emaths Ex.1–5 ② Previous Knowledge</li>
         </ul>
-        <a class="quick-link-btn no-print" href="math/">🧮 立即前往數學 &amp; Emaths 練習 ▶</a>
+        <a class="quick-link-btn no-print" href="math/#exam-0" onclick="event.stopPropagation()">🧮 立即前往數學 &amp; Emaths 練習 ▶</a>
       </div>
-      <div class="exam-card cal-item" data-subj="english" id="cal-item-1412">
-        <div class="exam-card-header"><span class="exam-date-badge">📅 14/12 (一)</span><span class="exam-subj-title">英文科 · Readers Quiz / Listening</span></div>
+      <div class="exam-card cal-item" style="cursor:pointer;" onclick="window.location='english/#exam-3'" data-subj="english" id="cal-item-1412">
+        <div class="exam-card-header"><span class="exam-date-badge">📅 14/12 (一)</span><span class="exam-subj-title">英文科 · Readers Quiz / Listening ▶</span></div>
         <ul class="exam-scope-list">
           <li><strong>Readers Quiz：</strong>① The Noisy Day (Content + Vocab) ② Vocab WS 1 ③ Phonics WS 1 &amp; 2 (Short &amp; Long Vowels)</li>
           <li><strong>Listening：</strong>隨堂進行 (//)</li>
         </ul>
+        <a class="quick-link-btn no-print" href="english/#exam-3" onclick="event.stopPropagation()">📕 前往 Readers Quiz 練習 ▶</a>
       </div>
     </div>
   </div>

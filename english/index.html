@@ -55,8 +55,42 @@
     font-size: 0.95rem;
     text-decoration: none;
   }
-  .page-title { font-size: 1.68rem; font-weight: 900; color: var(--primary); margin-top: 10px; letter-spacing: -0.01em; }
-  .section-title { font-size: 1.12rem; font-weight: 800; margin: 20px 0 10px; color: var(--text); }
+  .page-title { font-size: 2.5rem; font-weight: 900; color: var(--primary); margin-top: 10px; letter-spacing: -0.02em; line-height: 1.22; }
+  .section-title { font-size: 1.68rem; font-weight: 900; margin: 24px 0 12px; color: var(--text); }
+  .vault-toolbar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .vault-input {
+    flex: 1 1 200px;
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 0.92rem;
+    background: #ffffff;
+    font-family: inherit;
+  }
+  .vault-select {
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 0.9rem;
+    background: #ffffff;
+    font-weight: 700;
+    color: var(--text);
+    font-family: inherit;
+  }
+  .exam-card.jump-highlight {
+    border: 2px solid var(--primary) !important;
+    box-shadow: 0 0 0 5px rgba(30, 64, 175, 0.16) !important;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  @media screen and (max-width: 520px) {
+    .page-title { font-size: 1.85rem; }
+    .section-title { font-size: 1.35rem; }
+  }
   .exam-files-toggle {
     margin-top: 10px;
     border-top: 1px dashed var(--border);
@@ -203,7 +237,7 @@
   </header>
 
   <h2 class="section-title">📅 本學期模擬考試範圍</h2>
-    <div class="exam-card">
+    <div class="exam-card" id="exam-0">
       <div class="exam-card-header">
         <span class="exam-date-badge">📅 26/11 – 04/12 (隨堂)</span>
         <span class="exam-subj-title">English Speaking</span>
@@ -212,11 +246,11 @@
       <details class="exam-files-toggle">
         <summary>📂 顯示相關練習 (1 份)</summary>
         <div class="pdf-list" style="margin-top:8px;">
-      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1IDnacfEnxxllPxctWJKG165xeJzZeQTH/view" data-title="P1 Eng Speaking Notes" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 Eng Speaking Notes</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1IDnacfEnxxllPxctWJKG165xeJzZeQTH/view" data-title="P1 Eng Speaking Notes" data-date="2026-11-16_1006" data-exam="English Speaking" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 Eng Speaking Notes</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
         </div>
       </details>
     </div>
-    <div class="exam-card">
+    <div class="exam-card" id="exam-1">
       <div class="exam-card-header">
         <span class="exam-date-badge">📅 08/12 (二)</span>
         <span class="exam-subj-title">Reading & Usage</span>
@@ -225,14 +259,14 @@
       <details class="exam-files-toggle">
         <summary>📂 顯示相關練習 (4 份)</summary>
         <div class="pdf-list" style="margin-top:8px;">
-      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1WhBya7Nd7Eq2_Co7ZMDZk6axWwT4MP1m/view" data-title="P1 Direct Eng L8" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 Direct Eng L8</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
-      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1nOkfHIjJNnx3OdnKVarW4nfXfvfORRt5/view" data-title="P1 SE part 2" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 SE part 2</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
-      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1B61lNblC7Wn675ZlYLoNeLMTDvy_I-tX/view" data-title="P2 SE part 1" onclick="openDrivePreviewFromEl(this)"><span>📄 P2 SE part 1</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
-      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/12QTnEg-Rl4p7MKVcqu4IO7ShPJdAF0VB/view" data-title="2024 P1 1st term Eng R&amp;U exam" onclick="openDrivePreviewFromEl(this)"><span>📄 2024 P1 1st term Eng R&amp;U exam</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1WhBya7Nd7Eq2_Co7ZMDZk6axWwT4MP1m/view" data-title="P1 Direct Eng L8" data-date="2026-11-07_1505" data-exam="Reading &amp; Usage" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 Direct Eng L8</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1nOkfHIjJNnx3OdnKVarW4nfXfvfORRt5/view" data-title="P1 SE part 2" data-date="2026-11-14_1935" data-exam="Reading &amp; Usage" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 SE part 2</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1B61lNblC7Wn675ZlYLoNeLMTDvy_I-tX/view" data-title="P2 SE part 1" data-date="2026-11-14_1935" data-exam="Reading &amp; Usage" onclick="openDrivePreviewFromEl(this)"><span>📄 P2 SE part 1</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/12QTnEg-Rl4p7MKVcqu4IO7ShPJdAF0VB/view" data-title="2024 P1 1st term Eng R&amp;U exam" data-date="2026-11-17_2256" data-exam="Reading &amp; Usage" onclick="openDrivePreviewFromEl(this)"><span>📄 2024 P1 1st term Eng R&amp;U exam</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
         </div>
       </details>
     </div>
-    <div class="exam-card">
+    <div class="exam-card" id="exam-2">
       <div class="exam-card-header">
         <span class="exam-date-badge">📅 08/12 (二)</span>
         <span class="exam-subj-title">Writing</span>
@@ -241,11 +275,11 @@
       <details class="exam-files-toggle">
         <summary>📂 顯示相關練習 (1 份)</summary>
         <div class="pdf-list" style="margin-top:8px;">
-      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1BKQfpQUyjnsDMchmMZ2sOl8PTDxe7RvM/view" data-title="2024 P1 1st term Eng Writing Exam" onclick="openDrivePreviewFromEl(this)"><span>📄 2024 P1 1st term Eng Writing Exam</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1BKQfpQUyjnsDMchmMZ2sOl8PTDxe7RvM/view" data-title="2024 P1 1st term Eng Writing Exam" data-date="2026-11-05_1408" data-exam="Writing" onclick="openDrivePreviewFromEl(this)"><span>📄 2024 P1 1st term Eng Writing Exam</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
         </div>
       </details>
     </div>
-    <div class="exam-card">
+    <div class="exam-card" id="exam-3">
       <div class="exam-card-header">
         <span class="exam-date-badge">📅 14/12 (一)</span>
         <span class="exam-subj-title">Readers Quiz & Listening</span>
@@ -254,28 +288,45 @@
       <details class="exam-files-toggle">
         <summary>📂 顯示相關練習 (2 份)</summary>
         <div class="pdf-list" style="margin-top:8px;">
-      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1WP3tGPXnB0CYamBkBlMShjxtFH0LAnQN/view" data-title="P1 Dictation" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 Dictation</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
-      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1A0bK9P4eYHHvMXrSZ7KfqHzip-KEDyvm/view" data-title="2024 P1 1st term Rdr exam" onclick="openDrivePreviewFromEl(this)"><span>📄 2024 P1 1st term Rdr exam</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1WP3tGPXnB0CYamBkBlMShjxtFH0LAnQN/view" data-title="P1 Dictation" data-date="2026-11-14_1935" data-exam="Readers Quiz &amp; Listening" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 Dictation</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1A0bK9P4eYHHvMXrSZ7KfqHzip-KEDyvm/view" data-title="2024 P1 1st term Rdr exam" data-date="2026-11-17_2256" data-exam="Readers Quiz &amp; Listening" onclick="openDrivePreviewFromEl(this)"><span>📄 2024 P1 1st term Rdr exam</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
         </div>
       </details>
     </div>
 
-  <h2 class="section-title">📂 溫習試卷及工作紙庫 (10 份)</h2>
+  <h2 class="section-title">📂 全部溫習試卷及工作紙庫 (10 份)</h2>
   <div class="auth-note">
     🔐 <strong>存取提示</strong>：所有試卷存放於私人 Google Drive。請確保 iPad / 手機 Safari 已登入授權的家庭 Google 帳戶，點擊即可在新分頁開啟。
   </div>
-  <div class="pdf-list">
-      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1Ad2U8KvLiKdJ5_npmbV8paprG5llLk-z/view" data-title="P1 Eng Assessment" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 Eng Assessment</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
-      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1BKQfpQUyjnsDMchmMZ2sOl8PTDxe7RvM/view" data-title="2024 P1 1st term Eng Writing Exam" onclick="openDrivePreviewFromEl(this)"><span>📄 2024 P1 1st term Eng Writing Exam</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
-      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1WhBya7Nd7Eq2_Co7ZMDZk6axWwT4MP1m/view" data-title="P1 Direct Eng L8" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 Direct Eng L8</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
-      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1nOkfHIjJNnx3OdnKVarW4nfXfvfORRt5/view" data-title="P1 SE part 2" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 SE part 2</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
-      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1B61lNblC7Wn675ZlYLoNeLMTDvy_I-tX/view" data-title="P2 SE part 1" onclick="openDrivePreviewFromEl(this)"><span>📄 P2 SE part 1</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
-      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1WP3tGPXnB0CYamBkBlMShjxtFH0LAnQN/view" data-title="P1 Dictation" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 Dictation</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
-      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1IDnacfEnxxllPxctWJKG165xeJzZeQTH/view" data-title="P1 Eng Speaking Notes" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 Eng Speaking Notes</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
-      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1HL0GMX_xOZLK8jXDJeCgq7o19RKlHyBi/view" data-title="P1 SE" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 SE</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
-      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/12QTnEg-Rl4p7MKVcqu4IO7ShPJdAF0VB/view" data-title="2024 P1 1st term Eng R&amp;U exam" onclick="openDrivePreviewFromEl(this)"><span>📄 2024 P1 1st term Eng R&amp;U exam</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
-      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1A0bK9P4eYHHvMXrSZ7KfqHzip-KEDyvm/view" data-title="2024 P1 1st term Rdr exam" onclick="openDrivePreviewFromEl(this)"><span>📄 2024 P1 1st term Rdr exam</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+  <div class="vault-toolbar">
+      <input type="search" id="vaultSearch" class="vault-input" placeholder="🔍 搜尋試卷名稱..." oninput="filterAndSortVault()">
+      <select id="vaultExamFilter" class="vault-select" onchange="filterAndSortVault()">
+        <option value="all">全部考試範圍</option>
+        <option value="English Speaking">English Speaking</option>
+        <option value="Reading &amp; Usage">Reading &amp; Usage</option>
+        <option value="Writing">Writing</option>
+        <option value="Readers Quiz &amp; Listening">Readers Quiz &amp; Listening</option>
+      </select>
+      <select id="vaultSort" class="vault-select" onchange="filterAndSortVault()">
+        <option value="date-desc">最新日期優先</option>
+        <option value="date-asc">最舊日期優先</option>
+        <option value="title-asc">名稱 A–Z</option>
+        <option value="title-desc">名稱 Z–A</option>
+      </select>
     </div>
+    <div class="pdf-list" id="vaultPdfList">
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1Ad2U8KvLiKdJ5_npmbV8paprG5llLk-z/view" data-title="P1 Eng Assessment" data-date="2026-10-22_1847" data-exam="其他" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 Eng Assessment</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1BKQfpQUyjnsDMchmMZ2sOl8PTDxe7RvM/view" data-title="2024 P1 1st term Eng Writing Exam" data-date="2026-11-05_1408" data-exam="Writing" onclick="openDrivePreviewFromEl(this)"><span>📄 2024 P1 1st term Eng Writing Exam</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1WhBya7Nd7Eq2_Co7ZMDZk6axWwT4MP1m/view" data-title="P1 Direct Eng L8" data-date="2026-11-07_1505" data-exam="Reading &amp; Usage" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 Direct Eng L8</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1nOkfHIjJNnx3OdnKVarW4nfXfvfORRt5/view" data-title="P1 SE part 2" data-date="2026-11-14_1935" data-exam="Reading &amp; Usage" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 SE part 2</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1B61lNblC7Wn675ZlYLoNeLMTDvy_I-tX/view" data-title="P2 SE part 1" data-date="2026-11-14_1935" data-exam="Reading &amp; Usage" onclick="openDrivePreviewFromEl(this)"><span>📄 P2 SE part 1</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1WP3tGPXnB0CYamBkBlMShjxtFH0LAnQN/view" data-title="P1 Dictation" data-date="2026-11-14_1935" data-exam="Readers Quiz &amp; Listening" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 Dictation</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1IDnacfEnxxllPxctWJKG165xeJzZeQTH/view" data-title="P1 Eng Speaking Notes" data-date="2026-11-16_1006" data-exam="English Speaking" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 Eng Speaking Notes</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1HL0GMX_xOZLK8jXDJeCgq7o19RKlHyBi/view" data-title="P1 SE" data-date="2026-11-16_1054" data-exam="其他" onclick="openDrivePreviewFromEl(this)"><span>📄 P1 SE</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/12QTnEg-Rl4p7MKVcqu4IO7ShPJdAF0VB/view" data-title="2024 P1 1st term Eng R&amp;U exam" data-date="2026-11-17_2256" data-exam="Reading &amp; Usage" onclick="openDrivePreviewFromEl(this)"><span>📄 2024 P1 1st term Eng R&amp;U exam</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+      <button type="button" class="pdf-item" style="width:100%; text-align:left; cursor:pointer; font-family:inherit;" data-url="https://drive.google.com/file/d/1A0bK9P4eYHHvMXrSZ7KfqHzip-KEDyvm/view" data-title="2024 P1 1st term Rdr exam" data-date="2026-11-17_2256" data-exam="Readers Quiz &amp; Listening" onclick="openDrivePreviewFromEl(this)"><span>📄 2024 P1 1st term Rdr exam</span><span class="pdf-badge">網頁內預覽 👁️</span></button>
+    </div>
+    <div id="vaultEmptyMatch" class="empty-state" style="display:none; margin-top:10px;">沒有符合篩選條件的試卷。</div>
 </div>
 
 <div class="drive-modal-backdrop no-print" id="driveModalBackdrop" onclick="closeDrivePreview()">
@@ -313,6 +364,50 @@
     if (e.key === "Escape") closeDrivePreview();
   });
 
+function filterAndSortVault() {
+  const list = document.getElementById("vaultPdfList");
+  if (!list) return;
+  const q = (document.getElementById("vaultSearch")?.value || "").trim().toLowerCase();
+  const exam = document.getElementById("vaultExamFilter")?.value || "all";
+  const sortMode = document.getElementById("vaultSort")?.value || "date-desc";
+  const items = Array.from(list.querySelectorAll(".pdf-item"));
+
+  items.sort((a, b) => {
+    if (sortMode === "date-asc") return (a.dataset.date || "").localeCompare(b.dataset.date || "");
+    if (sortMode === "title-asc") return (a.dataset.title || "").localeCompare(b.dataset.title || "", "zh-Hant");
+    if (sortMode === "title-desc") return (b.dataset.title || "").localeCompare(a.dataset.title || "", "zh-Hant");
+    return (b.dataset.date || "").localeCompare(a.dataset.date || "");
+  });
+
+  let visible = 0;
+  items.forEach((el) => {
+    const titleMatch = !q || (el.dataset.title || "").toLowerCase().includes(q);
+    const examMatch = exam === "all" || (el.dataset.exam || "") === exam;
+    const show = titleMatch && examMatch;
+    el.style.display = show ? "" : "none";
+    if (show) visible++;
+    list.appendChild(el);
+  });
+  const emptyEl = document.getElementById("vaultEmptyMatch");
+  if (emptyEl) emptyEl.style.display = visible === 0 ? "block" : "none";
+}
+
+function highlightExamFromHash() {
+  const hash = window.location.hash;
+  if (!hash || !hash.startsWith("#exam-")) return;
+  const target = document.querySelector(hash);
+  if (!target) return;
+  const details = target.querySelector("details.exam-files-toggle");
+  if (details) details.open = true;
+  target.scrollIntoView({ behavior: "smooth", block: "center" });
+  target.classList.add("jump-highlight");
+  setTimeout(() => target.classList.remove("jump-highlight"), 3500);
+}
+window.addEventListener("DOMContentLoaded", () => {
+  filterAndSortVault();
+  highlightExamFromHash();
+});
+window.addEventListener("hashchange", highlightExamFromHash);
 </script>
 </body>
 </html>

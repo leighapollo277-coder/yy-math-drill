@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="約約專科">
@@ -230,8 +233,11 @@
 <body>
 <div class="container">
   <header class="top-bar">
-    <div>
-      <a class="home-btn" href="../">🏠 主頁</a>
+    <div style="width:100%;">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap;">
+        <a class="home-btn" href="../">🏠 主頁</a>
+        <button type="button" class="home-btn" style="cursor:pointer; font-family:inherit;" onclick="forceHardRefresh()">🔄 重新整理</button>
+      </div>
       <h1 class="page-title">📙 專科與人文 · 普通話 / 聖經 / 音樂 / 人文</h1>
     </div>
   </header>
@@ -351,6 +357,11 @@
 
 <script>
 
+  function forceHardRefresh() {
+    const u = new URL(window.location.href);
+    u.searchParams.set("_r", String(Date.now()));
+    window.location.replace(u.toString());
+  }
   function openDrivePreviewFromEl(el) {
     openDrivePreview(el.getAttribute("data-url"), el.getAttribute("data-title"));
   }
